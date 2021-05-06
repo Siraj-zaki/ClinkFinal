@@ -18,10 +18,26 @@ import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
 import { connect } from 'react-redux';
 import { ToastContainer, toast } from "react-toastify";
+import { getProduct } from "./../Service/service";
+
 class AddingToCart extends React.Component {
     state = {
         hearttoggler: false,
         counter: 0,
+        product:[],
+        productfilter:[],
+    }
+    async componentDidMount() {
+        window.scrollTo(0, 0)
+        try {
+            let product1 = await getProduct();
+         
+            this.setState({product:product1?.data?.result})
+            this.setState({productfilter:product1?.data?.result})
+          } catch (error) {
+            console.log(error?.data);
+            console.log(error?.response?.data?.message);
+          }
     }
     emptyCart = () => {
         // if (this.props.user?.id === true) {
@@ -251,14 +267,16 @@ class AddingToCart extends React.Component {
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
-                                {
-                                    Array(10).fill().map((item, index) =>
+                                 {
+                                    this.state.product.map((item, index) =>
 
                                         <SwiperSlide>
                                             <div >
-                                                <CartProduct newwidth newheight />
+                                                <CartProduct product={item} newwidth newheight />
                                             </div>
                                         </SwiperSlide>
+
+
 
                                     )
                                 }

@@ -11,23 +11,117 @@ import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
 import { getProduct } from "./../Service/service";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+
 class Products extends React.Component {
     state = {
         toggler: 1,
-        product:[]
+        product:[],
+        productfilter:[],
+        datevalue:'',
+        companyvalue:'',
+        categoryid:''
+        
 
     }
-   async componentDidMount() {
+    async componentDidMount() {
         window.scrollTo(0, 0)
         try {
-            let product = await getProduct();
+            let product1 = await getProduct();
          
-            this.setState({product:product?.data?.result})
+            this.setState({product:product1?.data?.result})
+            this.setState({productfilter:product1?.data?.result})
           } catch (error) {
             console.log(error?.data);
             console.log(error?.response?.data?.message);
           }
     }
+    handleDate = (e) => {
+        if(!this.state.product.length){
+            console.log('elseee');
+        this.setState({product:this.state.productfilter})
+
+        }
+        console.log('valuedate',e.target.value);
+        this.setState({ datevalue: e.target.value })
+        let item = this.state.productfilter.filter(c => c.createdat == e.target.value)
+        console.log('item',item);
+        this.setState({product:item})
+        console.log('123',this.state.productfilter);
+        console.log('123',this.state.product);
+     
+      } 
+       handleCompany= (e) => {
+        if(!this.state.product.length){
+            console.log('elseee');
+        this.setState({product:this.state.productfilter})
+
+        }
+        console.log('valuedate',e.target.value);
+        this.setState({ companyvalue: e.target.value })
+        let item = this.state.productfilter.filter(c => c.storeName == e.target.value)
+        console.log('item',item);
+        this.setState({product:item})
+        console.log('123',this.state.productfilter);
+        console.log('123',this.state.product);
+     
+      }
+      handleCategory= (e) => {
+        if(!this.state.product.length){
+            console.log('elseee');
+        this.setState({product:this.state.productfilter})
+
+        }
+        console.log('valuedate',e.target.value);
+        this.setState({ categoryid: e.target.value })
+        let item = this.state.productfilter.filter(c => c.categoryName == e.target.value)
+        console.log('item',item);
+        this.setState({product:item})
+        console.log('123',this.state.productfilter);
+        console.log('123',this.state.product);
+     
+      }
+      
+       handleOnSearch = (string, results) => {
+        // onSearch will have as the first callback parameter
+        // the string searched and for the second the results.
+        console.log(string, results)
+        console.log(string)
+        console.log(this.state.product.length)
+        {this.state.product.length==1?this.setState({product:this.state.productfilter}):this.setState({product:this.state.product})}
+
+        if(this.state.product.length==1){
+            this.setState({product:this.state.productfilter})
+
+        }
+       
+            console.log(this.state.productfilter);
+            this.setState({product:results})
+      
+
+      }
+    
+       handleOnHover = (result) => {
+        {this.state.product.length==1?this.setState({product:this.state.productfilter}):this.setState({product:this.state.product})}
+
+        // the item hovered
+        console.log(result)
+      }
+    
+       handleOnSelect = (item) => {
+        // the item selected
+        this.setState({product:item})
+        {this.state.product.length==1?this.setState({product:this.state.productfilter}):this.setState({product:this.state.product})}
+
+        console.log(item)
+      }
+    
+       handleOnFocus = () => {
+        {this.state.product.length==1?this.setState({product:this.state.productfilter}):this.setState({product:this.state.product})}
+           
+        console.log('Focused')
+      }
+
     render() {
         console.log(this.state.product);
         return (
@@ -108,30 +202,71 @@ class Products extends React.Component {
                         </div>
                         <span className="mt-5 p-5 filter-heading" >Filtering By</span>
                         <div className="filters">
-                            <select className="filter-input" name="sort" id="sort">
-                                <option className="filter-input" value="date">date</option>
-                                <option value="time">time</option>
+                            <select className="filter-input" name="sort" value={this.state.companyvalue} onChange={(e) => this.handleCompany(e)} id="sort">
+                            <option  value='Date'>Please Select Company</option>
+                           
+                            {
+                          this.state?.productfilter.map((cat, index) =>
+
+                             
+                              <option key={index} value={cat.storeName}>{cat.storeName}</option>
+                          
+                          )
+                        }
+                              
                             </select>
-                            <select className="filter-input" name="sort" id="sort">
-                                <option value="Company">Company</option>
-                                <option value="Company">Company</option>
+                            <select className="filter-input" name="sort" value={this.state.datevalue} onChange={(e) => this.handleDate(e)} id="sort">
+                            <option  value='Date'>Please Select Date</option>
+                           
+                            {
+                          this.state?.productfilter.map((cat, index) =>
+
+                             
+                              <option key={index} value={cat.createdat}>{cat.createdat}</option>
+                          
+                          )
+                        }
+                              
                             </select>
-                            <select className="filter-input" name="sort" id="sort">
-                                <option value="Volume">Volume</option>
-                                <option value="Volume">Volume</option>
-                            </select>
-                            <select className="filter-input" name="sort" id="sort">
-                                <option value="Category">Category</option>
-                                <option value="Category">Category</option>
+                            <div style={{ width: 270 }}>
+                            <ReactSearchAutocomplete
+                            fuseOptions={{ keys: ["itemName"] }}
+                            //     // necessary, otherwise the results will be blank
+                                 resultStringKeyName="itemName"
+                                            items={this.state.productfilter}
+                                            onSearch={this.handleOnSearch}
+                                            onHover={this.handleOnHover}
+                                            onSelect={this.handleOnSelect}
+                                            onFocus={this.handleOnFocus}
+                                            autoFocus
+                                        />
+                                        </div>
+           
+                            <select className="filter-input" name="sort" value={this.state.categoryid} onChange={(e) => this.handleCategory(e)} id="sort">
+                            <option  value='Date'>Please Select Category</option>
+                           
+                            {
+                          this.state?.productfilter.map((cat, index) =>
+
+                             
+                              <option key={index} value={cat.categoryName}>{cat.categoryName}</option>
+                          
+                          )
+                        }
+                              
                             </select>
                         </div>
                         <div className="products-cart">
                             {
-                                this.state && this.state.product?
+                                
+                                this.state && this.state.product.length?
                                 this.state?.product.map((item, index) =>
                                     <CartProduct product={item}/>
                                 )
-                                :'product Not Found'
+                                :
+                                this.state?.productfilter.map((item, index) =>
+                                    <CartProduct product={item}/>
+                                )
                             }
 
                         </div>

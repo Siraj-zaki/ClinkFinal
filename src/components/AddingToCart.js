@@ -16,6 +16,8 @@ import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
 import { withRouter } from "react-router";
+import { getProduct } from "./../Service/service";
+
 import { getProductById,getProductUnitById } from "./../Service/service";
 import { connect } from 'react-redux';
 import { addToCart } from '../services/Store/Actions/cartActions';
@@ -32,7 +34,8 @@ class AddingToCart extends React.Component {
         product: [],
         quantity: 1,unit:[],
         items:'',
-        productUnit:[]
+        productUnit:[],
+        relatedproduct:[]
     }
     this.onChange = this.onChange.bind(this);
     }
@@ -76,7 +79,8 @@ class AddingToCart extends React.Component {
 
     async componentDidMount() {
         const id = this.props.match.params.id;
-
+        let product1 = await getProduct();
+        this.setState({relatedproduct:product1?.data?.result})
         if(this.props?.cartData && this.props?.cartData.length && this.props?.cartData.find(pro => pro.id === id)){
             this.setState({quantity: this.props?.cartData.find(pro => pro.id === id).quantity})
         }
@@ -278,10 +282,10 @@ class AddingToCart extends React.Component {
                                 <span className="slider-heading" >Products you may like</span>
                             </div>
                             <Slider {...settings}>
-                                {
-                                    Array(10).fill().map((item, index) =>
+                            {
+                                    this.state.relatedproduct.map((item, index) =>
                                         <div>
-                                            <CartProduct />
+                                            <CartProduct product={item} />
                                         </div>
                                     )
                                 }
