@@ -11,7 +11,7 @@ class SelectedItem extends React.Component {
 
             <div className="inner-cart-div mt-5 border-top pt-5">
                 <div className="cart-left-side">
-                    <img src={this.props.imgsrc} alt="" />
+                    <img width="200" src={this.props.imgsrc} alt="" />
                 </div>
                 <div className="cart-center-side">
                     <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%', flexDirection: 'column' }}>

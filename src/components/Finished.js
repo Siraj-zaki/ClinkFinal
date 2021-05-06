@@ -7,18 +7,30 @@ import cart from '../assets/cart.png'
 import "../css/devilvery.css"
 
 import Navbar from './Navbar'
+import { emptyFromCart } from '../services/Store/Actions/cartActions';
 import { motion } from "framer-motion"
 import SelectedItem from './SelectedItem'
 
 
 import Footer from './Footer';
-class Devilvery extends React.Component {
+import { connect } from 'react-redux';
+class Finished extends React.Component {
     state = {
         hearttoggler: false,
         counter: 0,
         toggler: 0,
     }
+
+    emptyCart = () => {
+        // this.props.emptycard();
+        window.location.href = "/Products"
+    }
+    emptyCart2 = () => {
+        // this.props.emptycard();
+        window.location.href = "./Home"
+    }
     render() {
+        let total_amount = 0
         console.log(this.state);
 
         const svganimation = {
@@ -240,22 +252,27 @@ class Devilvery extends React.Component {
 
 
                 <div className="products new-padding new-class-product" style={{ justifyContent: 'center', alignItems: 'center', flexDirection: "column" }} >
-                    <div className="cart-right-side" style={{ zIndex: 1, width: '80%', minWidth: '320px', paddingLeft: '4rem' }}>
+                    {/* <div className="cart-right-side" style={{ zIndex: 1, width: '80%', minWidth: '320px', paddingLeft: '4rem' }}>
                         <div className="selected-items-div">
                             <div className="cart-heading">
                                 <img src={cart} alt="" />
                                 <span className="cart-heading-heading">Cart</span>
                             </div>
-                            {Array(5).fill().map((item, index) =>
+                            {this.props?.cardData && this.props?.cardData.length ?
+                                    this.props?.cardData.map((pro, ind) => (
+                                        total_amount += (parseInt(pro.productUnit[0].cvr) + parseInt(pro.productUnit[0].itemPrice)) * pro.quantity,
 
-                                <SelectedItem
-                                    heading="Casamigos – Blanco"
-                                    headingsmall="Tequila Reposado"
-                                    size="375 ML"
-                                    price=" $25"
-                                    imgsrc={cartimg}
-                                />
-                            )}
+                                        <SelectedItem
+                                            key={ind}
+                                            id={pro.id}
+                                            heading={pro.itemName}
+                                            headingsmall={pro.storeName}
+                                            size={pro.productUnit[0].unit}
+                                            price={parseInt(pro.productUnit[0].cvr) + parseInt(pro.productUnit[0].itemPrice)}
+                                            quantity={pro.quantity}
+                                            imgsrc={pro.imgUrl}
+                                        />
+                                    )) : null}
                             <div className="inner-cart-div mt-5 border-top pt-5">
                                 <div className="cart-left-side">
                                     <img src={this.props.imgsrc} alt="" />
@@ -272,12 +289,58 @@ class Devilvery extends React.Component {
                                 </div>
                             </div>
                         </div>
+                    </div> */}
+                    <div className="cart-right-side" style={{ zIndex: 1, width: '100%', paddingLeft: '4rem' }}>
+                        <div className="selected-items-div">
+                            <div className="cart-heading">
+                                <img src={cart} alt="" />
+                                <span className="cart-heading-heading">Cart</span>
+                            </div>
+                            {this.props?.cardData && this.props?.cardData.length ?
+                                this.props?.cardData.map((pro, ind) => (
+                                    total_amount += (parseInt(pro.productUnit[0].cvr) + parseInt(pro.productUnit[0].itemPrice)) * pro.quantity,
+
+                                    <SelectedItem
+                                        key={ind}
+                                        id={pro.id}
+                                        heading={pro.itemName}
+                                        headingsmall={pro.storeName}
+                                        size={pro.productUnit[0].unit}
+                                        price={parseInt(pro.productUnit[0].cvr) + parseInt(pro.productUnit[0].itemPrice)}
+                                        quantity={pro.quantity}
+                                        imgsrc={pro.imgUrl}
+                                    />
+                                )) : null}
+                            <div className="inner-cart-div mt-5 border-top pt-5">
+                                <div className="cart-left-side">
+                                    <img src={this.props.imgsrc} alt="" />
+                                </div>
+                                <div className="cart-center-side" style={{ width: '100%' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%', flexDirection: 'column' }}>
+                                        <span className="div-right-side-heading m-2" style={{ fontSize: '20px' }} >{this.props.heading}</span>
+                                        <span className="div-right-side-small-heading m-2" style={{ textAlign: 'left' }} >{this.props.headingsmall}</span>
+                                        <>
+
+
+                                            <div className="m-2" style={{ display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%' }} >
+                                                <span className=" div-right-side-small-heading m-2" style={{ display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >Total Amount</span>
+
+                                                <span className="li-size" style={{ fontSize: '7rem', display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >{total_amount}$</span>
+                                            </div>
+
+
+                                        </>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
 
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap' }}>
-                    <button className="li-size  addtocart " style={{ minHeight: 70, border: 'none', width: 270, margin: '2rem', marginTop: '6rem' }} onClick={() => window.location.href = "/Products"} >See more products</button>
-                    <button className="li-size  addtocart " style={{ minHeight: 70, border: '1px solid #a10948', color: "#a10948", width: 270, margin: '2rem', marginTop: '6rem', backgroundColor: 'transparent' }} onClick={() => window.location.href = "/Home"} >Go to Main Page </button>
+                    <button className="li-size  addtocart " style={{ minHeight: 70, border: 'none', width: 270, margin: '2rem', marginTop: '6rem' }} onClick={this.emptyCart} >See more products</button>
+                    <button className="li-size  addtocart " style={{ minHeight: 70, border: '1px solid #a10948', color: "#a10948", width: 270, margin: '2rem', marginTop: '6rem', backgroundColor: 'transparent' }} onClick={this.emptyCart2} >Go to Main Page </button>
                 </div>
                 <Footer />
 
@@ -287,4 +350,25 @@ class Devilvery extends React.Component {
     }
 
 };
-export default Devilvery;
+// export default Finished;
+const mapStateToProps = (state) => {
+    return {
+        user: state.AuthReducer.user,
+        cartData: state.CartReducer.cartData,
+        customerAddress: state.CartReducer.customerAddress,
+
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        emptyFromCart: data => { dispatch(emptyFromCart()) }
+    };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Finished);
+
+
+
+
+

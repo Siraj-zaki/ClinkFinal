@@ -24,20 +24,20 @@ class AddingToCart extends React.Component {
     state = {
         hearttoggler: false,
         counter: 0,
-        product:[],
-        productfilter:[],
+        product: [],
+        productfilter: [],
     }
     async componentDidMount() {
         window.scrollTo(0, 0)
         try {
             let product1 = await getProduct();
-         
-            this.setState({product:product1?.data?.result})
-            this.setState({productfilter:product1?.data?.result})
-          } catch (error) {
+
+            this.setState({ product: product1?.data?.result })
+            this.setState({ productfilter: product1?.data?.result })
+        } catch (error) {
             console.log(error?.data);
             console.log(error?.response?.data?.message);
-          }
+        }
     }
     emptyCart = () => {
         // if (this.props.user?.id === true) {
@@ -267,7 +267,7 @@ class AddingToCart extends React.Component {
                                 onSlideChange={() => console.log('slide change')}
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
-                                 {
+                                {
                                     this.state.product.map((item, index) =>
 
                                         <SwiperSlide>
@@ -318,7 +318,7 @@ class AddingToCart extends React.Component {
                             )} */}
                             <div className="inner-cart-div mt-5 border-top pt-5">
                                 <div className="cart-left-side">
-                                    <img src={this.props.imgsrc} alt="" />
+                                    <img  src={this.props.imgsrc} alt="" />
                                 </div>
                                 <div className="cart-center-side" style={{ width: '100%' }}>
                                     <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%', flexDirection: 'column' }}>
