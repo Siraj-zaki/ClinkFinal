@@ -11,6 +11,10 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.Toastify__toast-body {
+    font-size: 15px!important;
+}
+
 /* Firefox */
 
 input[type=number] {
