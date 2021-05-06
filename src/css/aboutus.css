@@ -1,0 +1,36 @@
+.about-us {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 11rem;
+}
+
+.new-color {
+    color: var(--maincolor)!important;
+}
+
+.about-us-grid {
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    grid-gap: 4rem;
+    width: 100%;
+    justify-items: center;
+    display: grid;
+    align-content: center;
+    position: relative;
+    justify-content: center;
+    margin-top: 10rem;
+    z-index: 20;
+}
+
+.same-class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+/* .section-main-about-us{
+
+} */

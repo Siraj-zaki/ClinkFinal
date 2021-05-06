@@ -1,0 +1,210 @@
+:root {
+    --maincolor: #a10948
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 68.67%!important;
+    overflow-x: hidden;
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap'); */
+
+@font-face {
+    src: url('../assets/Giaza.otf');
+    font-family: giazapro
+}
+
+@font-face {
+    src: url("../fonts/Montserrat-Medium.ttf");
+    font-family: Montserrat
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
+@media(max-width:1340px) {
+    html {
+        font-size: 37%!important;
+    }
+    .left-side-nav {
+        height: 2px!important;
+    }
+    .icon-nav {
+        width: 20px;
+        height: 20px;
+    }
+    .search-icon {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+@media(max-width:600px) {
+    .carousel-main-div {
+        /* width: 80%!important; */
+        min-width: 220px!important;
+        width: 220px!important;
+    }
+    .new-padding {
+        padding: 0px!important;
+    }
+    .detail-heading {
+        padding: 20px!important;
+    }
+    /* .bgimg-1{
+        display: none!important;
+    } */
+}
+
+@media(max-width:768px) {
+    html {
+        font-size: 27%!important;
+    }
+    .left-side-top-side {
+        flex-direction: column!important;
+        align-items: flex-start!important;
+        align-self: flex-start!important;
+    }
+    .new-class-product {
+        flex-direction: column!important;
+        margin-top: 50px;
+        justify-content: flex-start!important;
+        align-items: center!important;
+    }
+    .slider-div {
+        background-color: transparent!important;
+        width: none!important;
+    }
+    .slick-list {
+        padding-left: 0px!important;
+    }
+    #root>div>div.products.new-padding>div.cart-left-side.w-100>div {
+        padding: 14px!important;
+    }
+    .signup-menu {
+        width: 100%!important;
+    }
+    .signup-p {
+        font-size: 10px!important;
+    }
+    .signup-heading {
+        font-size: 20px!important;
+    }
+    .menu {
+        height: 100%!important;
+        width: 100%!important;
+    }
+    .alert-new {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%!important;
+        height: 100%!important;
+    }
+    /* .bgimg-1{
+height: 100%!important;
+    } */
+    /* .bgimg-3{
+        width: 100%!important;
+        height: 100%!important;
+    } */
+    .carousel-main-div {
+        /* width: 80%!important; */
+        min-width: 220px!important;
+        /* width: 220px!important; */
+    }
+    .icons-nav {
+        width: 50px!important;
+        margin-left: 10px!important;
+    }
+    /* .bgimg-1 {
+        width: 100%!important;
+        top: 0!important;
+    } */
+    .right-side {
+        position: absolute;
+        top: 10px;
+        width: 100%!important;
+        padding: 0!important;
+        margin: 0!important;
+        /* height: auto; */
+        height: 100%!important;
+    }
+    .blog-p {
+        font-size: 15px!important;
+    }
+    .blog-heading {
+        font-size: 17px!important;
+    }
+    .li {
+        width: 100%!important;
+        margin: 0px!important;
+        margin-top: 10px!important;
+    }
+    .section-ask {
+        padding: 10px!important;
+    }
+    .right-side-new {
+        width: 100%!important;
+        position: relative;
+        z-index: 20;
+        padding: 30px!important;
+    }
+    .section-main {
+        padding: 0!important;
+        position: relative;
+    }
+    .section-1 {
+        position: relative;
+        width: 100%;
+        /* height: 70rem; */
+        height: auto;
+    }
+    .left-side {
+        width: 100%!important;
+        position: relative;
+        z-index: 20;
+        padding: 30px!important;
+    }
+    .left-side-new {
+        position: absolute;
+        top: 10px;
+        width: 100%!important;
+        padding: 0!important;
+        margin-top: 40px!important;
+        margin: 0!important;
+        height: 100%!important;
+        height: auto;
+    }
+    .img-responsive {
+        height: 70rem;
+        display: none;
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f7f6f1;
+}

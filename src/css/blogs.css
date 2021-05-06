@@ -1,0 +1,88 @@
+.css-grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+    grid-gap: 1rem;
+    width: 100%;
+    justify-items: center;
+    display: grid;
+    align-content: center;
+    position: relative;
+    justify-content: center;
+    margin-top: 10rem;
+    z-index: 20;
+}
+@media(max-width:768px){
+    .css-grid-2{
+        grid-template-columns: repeat(auto-fit, minmax(317px, 1fr))!important;
+
+
+    }
+}
+
+.inner-blog {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 80%;
+    min-width: 280px;
+}
+
+.blog-heading {
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 2.4rem;
+    letter-spacing: -0.03em;
+    /* line-height: 38px; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    color: var(--maincolor);
+}
+
+.blog-p {
+    /* width: 417.15px;
+height: 110.91px; */
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 1.7rem;
+    letter-spacing: -0.03em;
+    /* line-height: 24px; */
+    text-align: left;
+    color: rgb(0, 0, 0);
+}
+
+.blog-btn {
+    width: 121px;
+    height: 45px;
+    border-radius: 5px;
+    background: transparent;
+    border: 2px solid var(--maincolor);
+    opacity: 0.92;
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: var(--maincolor);
+}
+
+.all-blogs-btn {
+    width: 159px;
+    height: 54px;
+    border-radius: 8px;
+    background: #233d3a;
+    margin-top: 8rem;
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    /* line-height: 15px; */
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+    align-items: center;
+    color: #fff;
+    border: none;
+    outline: none;
+}

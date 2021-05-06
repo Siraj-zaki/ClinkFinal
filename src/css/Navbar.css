@@ -1,0 +1,471 @@
+.menu-back {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(44, 44, 44, 0.562);
+    z-index: 21;
+    animation-name: back;
+    animation-duration: 1s;
+}
+
+.signup-menu-back {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(44, 44, 44, 0.562);
+    z-index: 21;
+    animation-name: signback;
+    animation-duration: 1s;
+}
+
+.signup-heading {
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 3.5rem;
+    letter-spacing: 0.03em;
+    /* line-height: 20px; */
+    text-align: left;
+    color: #233d3a;
+}
+
+.signup-p {
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 1.4rem;
+    text-align: left;
+    color: #a5a5a5;
+}
+
+.input-1-new {
+    width: 44rem;
+    min-width: 300px;
+    height: 5rem;
+    min-height: 40px;
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    padding-left: 15%;
+    padding-right: 15%;
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 16px;
+    text-align: left;
+    color: #d2d2d2;
+}
+
+.checking {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    outline: none;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+}
+
+.remember-me {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    flex-direction: row;
+}
+
+.signupbtn {
+    width: 180px;
+    height: 60px;
+    border-radius: 5px;
+    background: #a10948;
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 15px;
+    margin-top: 3rem;
+    text-align: center;
+    border: 1px solid #a10948;
+    color: #fff;
+}
+
+#root>div>div.signup-menu>div.signup-form>div>div.remember-me>div:nth-child(1)>input[type=checkbox] {
+    border-radius: 30px!important;
+    outline: none;
+    border: 1px solid black;
+}
+
+.new-span {
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 15px;
+    text-align: left;
+    color: #d2d2d2;
+}
+
+.btn-2-new {
+    background: transparent;
+    color: #a10948;
+}
+
+.signup-btns {
+    margin-top: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr))!important;
+    display: grid;
+    justify-content: space-between;
+    justify-items: center;
+    grid-column-gap: 11rem;
+    width: 100%;
+    align-items: center;
+}
+
+.forgot {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: left;
+    color: #264f73;
+}
+
+.remember-heading {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: left;
+    color: #d2d2d2;
+}
+
+.email-label {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.eye-label {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+.alert-new {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* width: 40%!important;
+    height: 50%!important; */
+}
+
+.remember-me input[type="checkbox"] {
+    display: none;
+}
+
+.custom-checkbox {
+    border: 1px solid #a10948;
+    border-radius: 5px;
+    width: 20px;
+    margin-right: 1rem;
+    height: 20px;
+}
+
+.custom-checkbox:hover {
+    background-color: rgb(216, 210, 210);
+}
+
+.remember-me {
+    position: relative;
+}
+
+.remember-me input:checked~.custom-checkbox {
+    background-color: #a10948;
+    background-image: url('../assets/checksolid.svg');
+    width: 20px;
+    /* margin-right: 1rem; */
+    height: 20px;
+}
+
+.signup-form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    /* width: 44rem; */
+    min-width: 300px;
+}
+
+.new-grid {
+    margin-top: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(171px, 1fr))!important;
+    display: grid;
+    justify-content: space-between;
+    justify-items: center;
+    grid-column-gap: 4rem;
+    width: 76%;
+    align-items: center;
+}
+
+.signup-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: scroll;
+    background: #f7f6f1;
+    background-image: url('../assets/signupimg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    right: 0;
+    height: 100%;
+    width: 56.5%;
+    /* background-color: rgba(44, 44, 44, 0.562); */
+    z-index: 21;
+    animation-name: signmenu;
+    animation-duration: 1s;
+}
+
+.menu {
+    overflow: scroll;
+    position: fixed;
+    min-height: 600px!important;
+    height: 100%;
+    width: 56.6%;
+    right: 0;
+    background-color: #233d3a;
+    background-image: url('../assets/menuimg.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 22;
+    /* z-index: 21; */
+}
+
+.menu-li {
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 2rem;
+    text-align: left;
+    color: #f7f6f1;
+    list-style: none;
+    margin-top: 2rem;
+}
+
+.menu-heading {
+    font-family: Montserrat;
+    font-weight: normal;
+    margin-top: 2rem;
+    font-size: 16px;
+    text-align: left;
+    color: #efede6;
+}
+
+.menu-icons {
+    list-style: none;
+    /* margin-top: 2rem; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.privacy {
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 2rem;
+    text-align: left;
+    position: absolute;
+    bottom: 4%;
+    left: 4%;
+    color: #f7f6f1;
+}
+
+li {
+    text-decoration: none!important;
+}
+
+.cross {
+    position: absolute;
+    z-index: 23;
+    right: 20%;
+    width: 4rem;
+    height: 3.5rem;
+    top: 5%;
+}
+
+.menu[ani="1"] {
+    animation-name: menu;
+    animation-duration: 1s;
+    min-height: 600px!important;
+}
+
+.menu-back[ani="0"] {
+    animation-name: back;
+    animation-duration: 1s;
+}
+
+@keyframes back {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes menu {
+    0% {
+        right: -56.5%;
+        opacity: 0.2;
+    }
+    /* 25% {
+        right: -46.5%;
+        opacity: 0.4;
+    }
+    50% {
+        right: -36.5%;
+        opacity: 0.6;
+    }
+    75% {
+        right: -26.5%;
+        opacity: 0.8;
+    } */
+    100% {
+        right: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes signback {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes signmenu {
+    0% {
+        right: -56.5%;
+        opacity: 0.2;
+    }
+    /* 25% {
+        right: -46.5%;
+        opacity: 0.4;
+    }
+    50% {
+        right: -36.5%;
+        opacity: 0.6;
+    }
+    75% {
+        right: -26.5%;
+        opacity: 0.8;
+    } */
+    100% {
+        right: 0;
+        opacity: 1;
+    }
+}
+
+.Navbar {
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px;
+    align-items: flex-start;
+    /* position: relative; */
+}
+
+.pop-up-nav {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.349);
+}
+
+.left-side-nav {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    height: 2px;
+    align-items: center;
+    z-index: 1;
+}
+
+.right-side-nav {
+    position: relative;
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-side-nav {
+    width: 33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-search-bar, .btn-search-bar:active, .btn-search-bar:focus {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    /* left: 90%; */
+    right: 1rem;
+    top: 50%;
+    transform: translate(0%, -50%);
+    text-align: center;
+}
+
+.search-bar-nav {
+    position: relative;
+    width: 48rem;
+}
+
+.input-search-bar {
+    width: 48rem;
+    min-width: 220px;
+    height: 5rem;
+    min-height: 40px;
+    padding-left: 20px;
+    /* font-family: Montserrat;
+     */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 2rem;
+    color: #353434;
+    border-radius: 11px;
+    background: #fff;
+    border: 1px solid #d2d2d2;
+}
+
+.btn-nav {
+    width: 19rem;
+    height: 5rem;
+    border-radius: 5px;
+    background: white;
+    border: 2px solid var(--maincolor);
+    opacity: 0.92;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    /* font-family: Montserrat; */
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    /* font-weight: 500; */
+    font-size: 1.7rem;
+    color: var(--maincolor);
+}
+
+.icons-nav {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 30px;
+}
