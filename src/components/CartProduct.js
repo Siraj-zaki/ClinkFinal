@@ -33,17 +33,17 @@ class CartProduct extends React.Component {
             <div>
                 {
                     this.state.cartproduct.map((cart, index) =>
-                        <div className="" style={{ position: 'relative', minHeight: this.props.newheight ? 310 : "", width: this.props.newwidth ? 280 : "" }} key={index} >
+                        <div className="add-products" style={{ position: 'relative', minHeight: this.props.newheight ? 310 : "", width: this.props.newwidth ? 280 : "" }} key={index} >
                             <div className="heart-main" onClick={() => this.setState({ hearttoggler: !this.state.hearttoggler })}>
                                 <img className="heart-div" src={this.state.hearttoggler === true ? heartfill : heart} alt="" />
                             </div>
-                            <div className="add-products" onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`}>
-                                <img height="250px" width="250px" src={cart.img} alt="not" />
-                                <span className="cart-company" >{cart.Company}</span>
-                                <span className="cart.bottle" >{cart.Bottle}</span>
-                                <span className="cart-size">{cart.Size}</span>
-                            </div>
+                            {/* <div className="add-products" > */}
+                            <img onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} height="250px" width="250px" src={cart.img} alt="not" />
+                            <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart-company" >{cart.Company}</span>
+                            <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart.bottle" >{cart.Bottle}</span>
+                            <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart-size">{cart.Size}</span>
                         </div>
+                        // </div>
                     )
                 }
             </div>

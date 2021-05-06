@@ -90,6 +90,21 @@
     opacity: 0.92;
 }
 
+#root>div.Home.bgimg-1>div:nth-child(2)>div.products>div.filters>div>div>div {
+    width: 280px;
+    height: 50px;
+    border-radius: 5px;
+    background: transparent;
+    border: 1px solid #a10948;
+    /* padding-left: 20px; */
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 15px;
+    text-align: left;
+    color: #233d3a;
+    opacity: 0.92;
+}
+
 .items {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     /* grid-gap: 4rem; */
