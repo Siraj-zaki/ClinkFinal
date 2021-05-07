@@ -29,14 +29,20 @@ class Navbar extends React.Component {
       toggler: 0,
       toggler1: 0,
       toggler2: 0,
+      toggler3: 0,
+      toggler4: 0,
+      code: '',
       passShow: false,
       passShow1: false,
       email: "",
       password: "",
       checked: "",
       email1: "",
+      forgotEmail: "",
       password1: "",
       confirmPassowrd: "",
+      password2: "",
+      confirmPassowrd2: "",
       checked1: "",
       checked2: "",
       age: "",
@@ -49,11 +55,14 @@ class Navbar extends React.Component {
 
     // }
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
-
+    this.handleChangeCode = this.handleChangeCode.bind(this);
+    this.handleChangeforgotEmail = this.handleChangeforgotEmail.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleChangePassword2 = this.handleChangePassword2.bind(this);
     this.handleChecked = this.handleChecked.bind(this);
     this.handleage = this.handleage.bind(this);
     this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
+    this.handleConfirmPassword2 = this.handleConfirmPassword2.bind(this);
     this.handleChecked2 = this.handleChecked2.bind(this);
     this.submituserRegistrationForm = this.submituserRegistrationForm.bind(
       this
@@ -72,6 +81,14 @@ class Navbar extends React.Component {
     console.log(e.target.value);
     this.setState({ email: e.target.value });
   }
+  handleChangeCode(e) {
+    console.log(e.target.value);
+    this.setState({ code: e.target.value });
+  }
+  handleChangeforgotEmail(e) {
+    console.log(e.target.value);
+    this.setState({ forgotEmail: e.target.value });
+  }
 
   handleChangePassword(e) {
     console.log(e.target.value);
@@ -80,6 +97,14 @@ class Navbar extends React.Component {
   }
   handleConfirmPassword(e) {
     this.setState({ confirmPassowrd: e.target.value });
+  }
+  handleChangePassword2(e) {
+    console.log(e.target.value);
+
+    this.setState({ password2: e.target.value });
+  }
+  handleConfirmPassword2(e) {
+    this.setState({ confirmPassowrd2: e.target.value });
   }
   handleage(e) {
     this.setState({ age: e.target.value });
@@ -97,9 +122,10 @@ class Navbar extends React.Component {
     console.log("asdasdasdasd", this.validateForm());
     if (this.state.age <= 20) {
       return toast.dark("AGE WILL BE GREATER OR EQUAL TO 21")
+    } else if (this.state.confirmPassowrd !== this.state.password) {
+      return toast.dark("Confirm Password is not matched")
     } else if (this.validateForm()) {
       console.log(this.state);
-
       try {
         let data = {
           email: this.state.email,
@@ -570,7 +596,7 @@ class Navbar extends React.Component {
                         </label>
                       </div>
                       <div>
-                        <a href="#" className="forgot">
+                        <a onClick={() => this.setState({ toggler3: 1, toggler1: 0 })} href="#" className="forgot">
                           {" "}
                           Forgot Passoword ?
                         </a>
@@ -610,6 +636,228 @@ class Navbar extends React.Component {
                 </div>
                 <div
                   onClick={() => this.setState({ toggler1: 0 })}
+                  className="cross"
+                >
+                  <img width="100%" height="100%" src={cross2} alt="" />
+                </div>
+              </form>
+            </>
+          ) : null}
+          {this.state.toggler3 === 1 ? (
+            <>
+              <div
+                onClick={() => this.setState({ toggler1: 0 })}
+                ani={this.state.toggler1}
+                className="signup-menu-back"
+              ></div>
+              <form
+                onSubmit={() => this.setState({ toggler3: 0, toggler4: 1 })}
+                ani={this.state.toggler1}
+                className="signup-menu"
+              >
+                <div
+                  className="signup-form"
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    height: "60%",
+                    flexDirection: "column",
+                  }}
+                >
+                  <span className="signup-heading">
+                    Welcome to{" "}
+                    <span className="font" style={{ fontSize: 50 }}>
+                      {" "}
+                      Clink
+                    </span>
+                  </span>
+                  <p className="signup-p">
+                    Welcome back to clink sign in to place your
+                    <br />
+                    order..
+                  </p>
+                  <div className="signup-form">
+                    <div style={{ position: "relative" }}>
+                      <label className="email-label" htmlFor="forgotEmail">
+                        <img src={emailico} alt="" />
+                      </label>
+
+                      <input
+                        onChange={this.handleChangeforgotEmail}
+                        value={this.state.forgotEmail}
+                        className="input-1-new"
+                        type="email"
+                        id="forgotEmail"
+                        placeholder="Email"
+                        required
+                      />
+                    </div>
+
+                    <div className="signup-btns">
+                      <button className="signupbtn btn-1-new" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  onClick={() => this.setState({ toggler3: 0 })}
+                  className="cross"
+                >
+                  <img width="100%" height="100%" src={cross2} alt="" />
+                </div>
+              </form>
+            </>
+          ) : null}
+          {this.state.toggler4 === 1 ? (
+            <>
+              <div
+                onClick={() => this.setState({ toggler1: 0 })}
+                ani={this.state.toggler1}
+                className="signup-menu-back"
+              ></div>
+              <form
+                onSubmit={() => this.setState({ toggler4: 0, toggler5: 1 })}
+                ani={this.state.toggler1}
+                className="signup-menu"
+              >
+                <div
+                  className="signup-form"
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    height: "60%",
+                    flexDirection: "column",
+                  }}
+                >
+                  <span className="signup-heading">
+                    Welcome to{" "}
+                    <span className="font" style={{ fontSize: 50 }}>
+                      {" "}
+                      Clink
+                    </span>
+                  </span>
+                  <p className="signup-p">
+                    Welcome back to clink sign in to place your
+                    <br />
+                    order..
+                  </p>
+                  <div className="signup-form">
+                    <div style={{ position: "relative" }}>
+                      <label className="email-label" htmlFor="forgotEmail">
+                        <img src={emailico} alt="" />
+                      </label>
+                      <input
+                        onChange={this.handleChangeCode}
+                        value={this.state.code}
+                        className="input-1-new"
+                        type="number"
+                        id="forgotEmail"
+                        placeholder="Enter Code"
+                        required
+                      />
+                    </div>
+
+                    <div className="signup-btns">
+                      <button className="signupbtn btn-1-new" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  onClick={() => this.setState({ toggler4: 0 })}
+                  className="cross"
+                >
+                  <img width="100%" height="100%" src={cross2} alt="" />
+                </div>
+              </form>
+            </>
+          ) : null}
+          {this.state.toggler5 === 1 ? (
+            <>
+              <div
+                onClick={() => this.setState({ toggler1: 0 })}
+                ani={this.state.toggler1}
+                className="signup-menu-back"
+              ></div>
+              <form
+                onSubmit={() => this.setState({ toggler4: 0, toggler5: 1 })}
+                ani={this.state.toggler1}
+                className="signup-menu"
+              >
+                <div
+                  className="signup-form"
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-start",
+                    height: "60%",
+                    flexDirection: "column",
+                  }}
+                >
+                  <span className="signup-heading">
+                    Welcome to{" "}
+                    <span className="font" style={{ fontSize: 50 }}>
+                      {" "}
+                      Clink
+                    </span>
+                  </span>
+                  <p className="signup-p">
+                    Welcome back to clink sign in to place your
+                    <br />
+                    order..
+                  </p>
+                  <div className="signup-form">
+                    <div style={{ position: "relative", marginTop: 20 }}>
+                      <label className="email-label" htmlFor="pass1">
+                        <img src={lock} alt="" />
+                      </label>
+                      <label
+                        onMouseLeave={() =>
+                          this.setState({ passShow: false })
+                        }
+                        onMouseEnter={() => this.setState({ passShow: true })}
+                        className="eye-label"
+                        htmlFor="emal1"
+                      >
+                        <img src={eye} alt="" />
+                      </label>
+                      <input
+                        onChange={this.handleChangePassword2}
+                        value={this.state.password2}
+                        className="input-1-new"
+                        type={this.state.passShow ? "text" : "password"}
+                        id="pass1"
+                        placeholder="New Password"
+                        required
+                      />
+                    </div>
+                    <div style={{ position: "relative", marginTop: 20 }}>
+                      <label className="email-label" htmlFor="pass1">
+                        <img src={lock} alt="" />
+                      </label>
+                      <input
+                        onChange={this.handleConfirmPassword2}
+                        className="input-1-new"
+                        value={this.state.confirmPassowrd2}
+                        type="password"
+                        id="pass1"
+                        placeholder="Confirm Password"
+                        required
+                      />
+                    </div>
+                    <div className="signup-btns">
+                      <button className="signupbtn btn-1-new" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  onClick={() => this.setState({ toggler5: 0 })}
                   className="cross"
                 >
                   <img width="100%" height="100%" src={cross2} alt="" />
