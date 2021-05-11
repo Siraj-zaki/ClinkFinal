@@ -316,21 +316,32 @@ class AddingToCart extends React.Component {
                                     imgsrc={cartimg}
                                 />
                             )} */}
-                            <div className="inner-cart-div mt-5 border-top pt-5">
-                                <div className="cart-left-side">
-                                    <img  src={this.props.imgsrc} alt="" />
-                                </div>
-                                <div className="cart-center-side" style={{ width: '100%' }}>
-                                    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%', flexDirection: 'column' }}>
-                                        <span className="div-right-side-heading m-2" style={{ fontSize: '20px' }} >{this.props.heading}</span>
-                                        <span className="div-right-side-small-heading m-2" style={{ textAlign: 'left' }} >{this.props.headingsmall}</span>
-                                        <div className="m-2" style={{ display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%' }} >
-                                            <span className=" div-right-side-small-heading m-2" style={{ display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >Total Amount</span>
-                                            <span className="li-size" style={{ fontSize: '7rem', display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >{total_amount}$</span>
+                             {
+                                total_amount === 0 ? <span className="cart-heading-heading" style={{opacity:0.5,marginTop:"3rem"}} >Cart is Empty</span>
+                                    :
+                                    <div className="inner-cart-div mt-5 border-top pt-5">
+                                        <div className="cart-left-side">
+                                            <img src={this.props.imgsrc} alt="" />
+                                        </div>
+                                        <div className="cart-center-side" style={{ width: '100%' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%', flexDirection: 'column' }}>
+                                                <span className="div-right-side-heading m-2" style={{ fontSize: '20px' }} >{this.props.heading}</span>
+                                                <span className="div-right-side-small-heading m-2" style={{ textAlign: 'left' }} >{this.props.headingsmall}</span>
+                                                <>
+
+
+                                                    <div className="m-2" style={{ display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%' }} >
+                                                        <span className=" div-right-side-small-heading m-2" style={{ display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >Total Amount</span>
+
+                                                        <span className="li-size" style={{ fontSize: '7rem', display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >{total_amount}$</span>
+                                                    </div>
+
+
+                                                </>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                            }
 
 
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap' }}>
