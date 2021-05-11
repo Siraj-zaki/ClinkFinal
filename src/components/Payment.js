@@ -463,7 +463,7 @@ class Payment extends React.Component {
                                             <input type="text" placeholder="User Name" onChange={this.handleChangeName} className="adresses-input" style={{ width: '50rem' }} required />
                                         </div>
                                         <div className="form-selected-option mt-4">
-                                            <input type="text" placeholder="Contact Number" onChange={this.handleChangeNumber} className="adresses-input" style={{ width: '50rem' }} required />
+                                            <input type="number" placeholder="Contact Number" onChange={this.handleChangeNumber} className="adresses-input" style={{ width: '50rem' }} required />
                                         </div>
                                         <div style={{ width: "100%" }}>
                                             <div className="form-selected-option " style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', flexDirection: 'row', flexWrap: 'wrap' }}>

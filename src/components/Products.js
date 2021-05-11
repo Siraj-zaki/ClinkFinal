@@ -19,7 +19,7 @@ class Products extends React.Component {
         product: [],
         productfilter: [],
         datevalue: '',
-        companyvalue: '',
+        companyvalue: 'Please Select Company',
         categoryid: ''
 
 
