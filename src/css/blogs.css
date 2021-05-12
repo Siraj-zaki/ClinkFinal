@@ -10,11 +10,10 @@
     margin-top: 10rem;
     z-index: 20;
 }
-@media(max-width:768px){
-    .css-grid-2{
+
+@media(max-width:768px) {
+    .css-grid-2 {
         grid-template-columns: repeat(auto-fit, minmax(317px, 1fr))!important;
-
-
     }
 }
 
@@ -72,6 +71,7 @@ height: 110.91px; */
     height: 54px;
     border-radius: 8px;
     background: #233d3a;
+    margin-bottom: 8rem;
     margin-top: 8rem;
     font-family: Montserrat;
     font-weight: normal;
