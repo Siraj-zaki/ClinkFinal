@@ -8,6 +8,9 @@ export const getaddressbycustomer=baseUrl+'/v1/deliveryaddress/getcustomer'
 export const addcustomerdetail=baseUrl+'/v1/deliveryaddress/getcustomer'
 export const addorder=baseUrl+'/v1/orderItems'
 export const getProductUnit=baseUrl+'/v1/unitproduct/get'
+export const verificationcode=baseUrl+'/v1/verifycode'
+export const forgetpassword=baseUrl+'/v1/forgotPassword/'
+export const verifiedcode=baseUrl+'/v1/verifiedcustomer'
 
 
 

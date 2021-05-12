@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { signUp,login,getproduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,getProductUnit } from "./api";
+import { signUp,login,getproduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
 
 export const customerSignUp = (data)=>
 {
@@ -60,6 +60,30 @@ export const getProduct = (data)=>
     // .catch(error => error);
 }
 
+export const getVerification = (data)=>
+{
+   
+    return axios
+    .post(verificationcode,data)
+    // .then(response =>response)
+    // .catch(error => error);
+}
+export const getforgetpassword = (data)=>
+{
+   
+    return axios
+    .post(forgetpassword,data)
+    // .then(response =>response)
+    // .catch(error => error);
+}
+export const getVerifiedCustomer = (data)=>
+{
+   
+    return axios
+    .post(verifiedcode,data)
+    // .then(response =>response)
+    // .catch(error => error);
+}
 export const addDelivery = (data)=>
 {
    

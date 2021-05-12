@@ -18,7 +18,7 @@ import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 
 
-import { customerSignUp, customerLogin } from "./../Service/service";
+import { customerSignUp, customerLogin, getVerification,getVerifiedCustomer,getforgetpassword } from "./../Service/service";
 import { LOGIN_USER } from "./../services/Store/Actions/action";
 class Navbar extends React.Component {
   constructor(props) {
@@ -39,6 +39,7 @@ class Navbar extends React.Component {
       checked: "",
       email1: "",
       forgotEmail: "",
+      emailforget:"",
       password1: "",
       confirmPassowrd: "",
       password2: "",
@@ -48,7 +49,8 @@ class Navbar extends React.Component {
       age: "",
       signup: [],
       errors: {},
-      customer: null
+      customer: null,
+      userlogin:''
     };
     // formhandler1 = (e) => {
     //     e.preventDefault()
@@ -68,11 +70,21 @@ class Navbar extends React.Component {
       this
     );
     this.formhandler1 = this.formhandler1.bind(this);
+    this.forgetpassword = this.forgetpassword.bind(this);
+    this.codeSet = this.codeSet.bind(this);
+    this.forgetPasswordhandler = this.forgetPasswordhandler.bind(this);
   }
 
-  componentDidMount() {
+ async componentDidMount() {
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 768px)").addListener(handler);
+    console.log(this.props.user);
+    
+    if (this.props.user) {
+      console.log(this.props.user);
+     await this.setState({userlogin: this.props.user});
+      console.log(this.state.userlogin);
+    }
 
   }
 
@@ -85,9 +97,11 @@ class Navbar extends React.Component {
     console.log(e.target.value);
     this.setState({ code: e.target.value });
   }
-  handleChangeforgotEmail(e) {
-    console.log(e.target.value);
+  async handleChangeforgotEmail(e) {
+    console.log("testtt", e.target.value);
     this.setState({ forgotEmail: e.target.value });
+
+
   }
 
   handleChangePassword(e) {
@@ -167,41 +181,232 @@ class Navbar extends React.Component {
       }
     }
   }
-
-  async formhandler1(e) {
+  async forgetpassword(e) {
 
     e.preventDefault()
     console.log("state", this.state.email);
-    let data = {
-      email: this.state.email,
-      password: this.state.password,
-
-    };
-
+    console.log('foreettt')
     try {
-      let customer = await customerLogin(data);
-      if (customer && customer.data && customer.data.data) {
-        console.log(customer.data.data);
-        this.props.LOGIN_USER(customer.data.data)
-        // console.log(this.props.cardItems)
-        return toast.dark("Login Successfully", {
-          style: { fontSize: 13 },
-          className: 'dark-toast',
-          autoClose: 5000
-        },
-          this.setState({ toggler1: 0 })
-        );
+      let data = {
+        email: this.state.forgotEmail,
+        
+        
+      };
+      console.log("data", data);
+      let customer = await getVerification(data)
+      .then((re1) => {
+        console.log(re1);
+        if (re1?.data?.success) {
+            this.setState({ toggler3: 0, toggler4: 1 })
+            return toast.dark(re1?.data?.message, {
+              style: { fontSize: 13 },
+              className: 'dark-toast',
+              autoClose: 5000
+            },
 
-        console.log(customer);
+            );
 
+          } else {
+            console.log("errrrr", re1);
+            return toast.dark(re1?.data?.message, {
+              style: { fontSize: 13 },
+              className: 'dark-toast',
+              autoClose: 5000
+            }
+            );
+          }
+
+
+        })
+        .catch(err => {
+          return toast.dark("User Not Exist", {
+            style: { fontSize: 13 },
+            className: 'dark-toast',
+            autoClose: 5000
+          }
+          );
+          console.log("er", err);
+        })
+    }
+    catch (error) {
+      return toast.dark("User Not Exist", {
+        style: { fontSize: 13 },
+        className: 'dark-toast',
+        autoClose: 5000
+      },
+
+      );
+    }
+  }
+  async codeSet(e) {
+
+    e.preventDefault()
+    console.log("state", this.state.code);
+    console.log('foreettt')
+    try {
+      let data = {
+        code: this.state.code,
+        
+      };
+      console.log("data", data);
+      let customer = await getVerifiedCustomer(data)
+      .then((re1) => {
+        console.log(re1);
+        if (re1?.data?.success) {
+          this.setState({ toggler4: 0, toggler5: 1 })
+          this.setState({ emailforget: re1.data?.data })
+            return toast.dark(re1?.data?.message, {
+              style: { fontSize: 13 },
+              className: 'dark-toast',
+              autoClose: 5000
+            },
+
+            );
+
+          } else {
+            console.log("errrrr", re1);
+            return toast.dark(re1?.data?.message, {
+              style: { fontSize: 13 },
+              className: 'dark-toast',
+              autoClose: 5000
+            }
+            );
+          }
+
+
+        })
+        .catch(err => {
+          return toast.dark("Code is Wrong", {
+            style: { fontSize: 13 },
+            className: 'dark-toast',
+            autoClose: 5000
+          }
+          );
+          console.log("er", err);
+        })
+    }
+    catch (error) {
+      return toast.dark("Code is Wrong", {
+        style: { fontSize: 13 },
+        className: 'dark-toast',
+        autoClose: 5000
+      },
+
+      );
+    }
+  }
+  async forgetPasswordhandler(e) {
+
+    e.preventDefault()
+    console.log("state", this.state.code);
+    console.log('foreettt')
+    try {
+      let data = {
+        email: this.state.emailforget,
+        password:this.state.password2
+        
+      };
+      console.log("data", data);
+      let customer = await getforgetpassword(data)
+      .then((re1) => {
+        console.log(re1);
+        if (re1?.data?.success) {
+         
+          this.setState({ toggler5: 0 })
+            return toast.dark(re1?.data?.message, {
+              style: { fontSize: 13 },
+              className: 'dark-toast',
+              autoClose: 5000
+            },
+
+
+            );
+
+          } else {
+            console.log("errrrr", re1);
+            return toast.dark(re1?.data?.message, {
+              style: { fontSize: 13 },
+              className: 'dark-toast',
+              autoClose: 5000
+            }
+            );
+          }
+
+
+        })
+        .catch(err => {
+          return toast.dark("Server Error", {
+            style: { fontSize: 13 },
+            className: 'dark-toast',
+            autoClose: 5000
+          }
+          );
+          console.log("er", err);
+        })
+    }
+    catch (error) {
+      return toast.dark("Code is Wrong", {
+        style: { fontSize: 13 },
+        className: 'dark-toast',
+        autoClose: 5000
+      },
+
+      );
+    }
+  }
+  async formhandler1(e) {
+    if (this.props.user) {
+      console.log(this.props.user);
+     await this.setState({userlogin: this.props.user});
+      console.log(this.state.userlogin);
+    }
+    console.log(this.state.userlogin);
+    if(!this.state.userlogin){
+      e.preventDefault()
+      console.log("state", this.state.email);
+      let data = {
+        email: this.state.email,
+        password: this.state.password,
+  
+
+        
+      };
+  
+      try {
+        let customer = await customerLogin(data);
+        if (customer && customer.data && customer.data.data) {
+          console.log(customer.data.data);
+          this.props.LOGIN_USER(customer.data.data)
+          // console.log(this.props.cardItems)
+          return toast.dark("Login Successfully", {
+            style: { fontSize: 13 },
+            className: 'dark-toast',
+            autoClose: 5000
+          },
+            this.setState({ toggler1: 0 })
+          );
+  
+          console.log(customer);
+  
+        }
+  
+  
+      } catch (error) {
+        console.log(error.data);
+        return toast.dark("Email or Password Incorrect")
+        console.log(error.response.data.message);
       }
 
-
-    } catch (error) {
-      console.log(error.data);
-      return toast.dark("Email or Password Incorrect")
-      console.log(error.response.data.message);
+    }else{
+      return toast.dark("User Already login", {
+        style: { fontSize: 13 },
+        className: 'dark-toast',
+        autoClose: 5000
+      },
+        this.setState({ toggler1: 0 })
+      );
     }
+  
     //    console.log("data1",customer);
 
   }
@@ -651,7 +856,8 @@ class Navbar extends React.Component {
                 className="signup-menu-back"
               ></div>
               <form
-                onSubmit={() => this.setState({ toggler3: 0, toggler4: 1 })}
+                // onSubmit={() => this.setState({ toggler3: 0, toggler4: 1 })}
+                onSubmit={this.forgetpassword}
                 ani={this.state.toggler1}
                 className="signup-menu"
               >
@@ -718,7 +924,8 @@ class Navbar extends React.Component {
                 className="signup-menu-back"
               ></div>
               <form
-                onSubmit={() => this.setState({ toggler4: 0, toggler5: 1 })}
+                // onSubmit={() => this.setState({ toggler4: 0, toggler5: 1 })}
+                onSubmit={this.codeSet}
                 ani={this.state.toggler1}
                 className="signup-menu"
               >
@@ -780,11 +987,14 @@ class Navbar extends React.Component {
             <>
               <div
                 onClick={() => this.setState({ toggler1: 0 })}
+                // onClick={ this.forgetPasswordhandler}
+                
                 ani={this.state.toggler1}
                 className="signup-menu-back"
               ></div>
               <form
-                onSubmit={() => this.setState({ toggler4: 0, toggler5: 1 })}
+                // onSubmit={() => this.setState({ toggler4: 0, toggler5: 1 })}
+                onSubmit={ this.forgetPasswordhandler}
                 ani={this.state.toggler1}
                 className="signup-menu"
               >
