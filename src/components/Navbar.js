@@ -17,7 +17,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 
-
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 import { customerSignUp, customerLogin, getVerification,getVerifiedCustomer,getforgetpassword } from "./../Service/service";
 import { LOGIN_USER } from "./../services/Store/Actions/action";
 class Navbar extends React.Component {
@@ -87,6 +90,29 @@ class Navbar extends React.Component {
     }
 
   }
+  handleSelect = address => {
+    geocodeByAddress(address)
+      .then(results => {
+      
+
+        this.state.completeAddress.push(results[0].formatted_address)
+
+
+        getLatLng(results[0])
+        .then(latLng => {
+          console.log('Success', latLng)
+          this.setState({ lat: latLng.lat })
+          this.setState({ long: latLng.lng })
+          console.log(this.state.lat);
+          console.log(this.state.long);
+        })
+        .catch(error => console.error('Error', error));
+      })
+  };
+
+  handleChange = address => {
+    this.setState({ address });
+  };
 
 
   handleChangeEmail(e) {
@@ -1157,14 +1183,72 @@ class Navbar extends React.Component {
               style={{ display: this.state.matches ? "none" : "flex" }}
             >
               <form className="search-bar-nav">
-                <input
+                {/* <input
                   className="input-search-bar"
                   type="text"
                   placeholder="Enter your Zip code"
                   name="search"
                   id="search"
                   required
-                />
+                /> */}
+
+<PlacesAutocomplete
+                        value={this.state.address}
+                        onChange={this.handleChange}
+                        onSelect={this.handleSelect}
+                      >
+                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                          <div>
+                            
+                            {/* <input
+                           {...getInputProps({
+                              placeholder: 'Search Places ...',
+                              className: 'location-search-input',
+                            })}
+                            type="text"
+                  className="input-search-bar"
+                  placeholder="Enter your Zip code"
+                  name="search"
+                  id="search"
+                  required
+                > </input> */}
+                            
+                            <input    {...getInputProps({
+                              placeholder: 'Enter your Zip code',
+                              className: 'location-search-input',
+                            })} type="text" name="name" required 
+                            className="input-search-bar" ></input>
+
+                            {/* <input autoFocus {...getInputProps({
+                              placeholder: 'Search Places ...',
+                              className: 'location-search-input',
+                            })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="number" minLength="5" id="email" placeholder="xxxxxxxx" required /> */}
+
+                            <div className="autocomplete-dropdown-container">
+                              {loading && <div>Loading...</div>}
+                              {suggestions.map(suggestion => {
+                                const className = suggestion.active
+                                  ? 'suggestion-item--active'
+                                  : 'suggestion-item';
+                                // inline style for demonstration purpose
+                                const style = suggestion.active
+                                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                return (
+                                  <div
+                                    {...getSuggestionItemProps(suggestion, {
+                                      className,
+                                      style,
+                                    })}
+                                  >
+                                    <span style={{ marginTop: 20, border: '1px solid black', color: 'black',fontSize:10  }} >{suggestion.description}</span>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </PlacesAutocomplete>
                 <button className="btn-search-bar" type="submit">
                   <img
                     className="search-icon"
