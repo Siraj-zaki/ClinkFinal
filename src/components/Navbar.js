@@ -1192,7 +1192,7 @@ class Navbar extends React.Component {
                   required
                 /> */}
 
-<PlacesAutocomplete
+                <PlacesAutocomplete
                         value={this.state.address}
                         onChange={this.handleChange}
                         onSelect={this.handleSelect}
