@@ -16,7 +16,7 @@ import lock from "../assets/lock.png";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-
+import { addAreaProduct } from "./../Service/service";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -53,7 +53,11 @@ class Navbar extends React.Component {
       signup: [],
       errors: {},
       customer: null,
-      userlogin: ''
+      userlogin: '',
+      product: [],
+        productfilter: [],
+        completeAddress: []
+
     };
     // formhandler1 = (e) => {
     //     e.preventDefault()
@@ -129,7 +133,32 @@ class Navbar extends React.Component {
 
 
   }
+  checkarea = async (e) => {
+    e.preventDefault()
+    let area = {
+        longitude: this.state.long,
+        latitude: this.state.lat,
+    }
+    let res;
 
+    console.log(area);
+    try {
+
+          res = await addAreaProduct(area)
+          console.log(res.data.result);
+          this.setState({ product: res?.data.result })
+          this.setState({ productfilter:res?.data.result })
+
+    } catch (err) {
+        console.log(err);
+        console.log(err?.data?.message);
+    }
+
+
+
+    this.setState({ toggler: 0 })
+
+}
   handleChangePassword(e) {
     console.log(e.target.value);
 
@@ -1182,7 +1211,7 @@ class Navbar extends React.Component {
               className="center-side-nav"
               style={{ display: this.state.matches ? "none" : "flex" }}
             >
-              <form className="search-bar-nav">
+              <form onSubmit={this.checkarea} className="search-bar-nav">
                 {/* <input
                   className="input-search-bar"
                   type="text"
@@ -1193,16 +1222,6 @@ class Navbar extends React.Component {
                 /> */}
 
                 <PlacesAutocomplete
-<<<<<<< HEAD
-                        value={this.state.address}
-                        onChange={this.handleChange}
-                        onSelect={this.handleSelect}
-                      >
-                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                          <div>
-                            
-                            {/* <input
-=======
                   value={this.state.address}
                   onChange={this.handleChange}
                   onSelect={this.handleSelect}
@@ -1211,7 +1230,6 @@ class Navbar extends React.Component {
                     <div>
 
                       {/* <input
->>>>>>> 98ae91ad3661094041fa7bcfad519d39ddd4aee5
                            {...getInputProps({
                               placeholder: 'Search Places ...',
                               className: 'location-search-input',

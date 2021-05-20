@@ -11,6 +11,7 @@ export const getProductUnit=baseUrl+'/v1/unitproduct/get'
 export const verificationcode=baseUrl+'/v1/verifycode'
 export const forgetpassword=baseUrl+'/v1/forgotPassword/'
 export const verifiedcode=baseUrl+'/v1/verifiedcustomer'
+export const checkareaporduct=baseUrl+'/v1/product/getarea'
 
 
 

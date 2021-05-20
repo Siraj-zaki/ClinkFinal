@@ -10,7 +10,7 @@ import '../css/products.css'
 import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
-import { getProduct } from "./../Service/service";
+import { getProduct,addAreaProduct } from "./../Service/service";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import PlacesAutocomplete, {
     geocodeByAddress,
@@ -163,7 +163,7 @@ class Products extends React.Component {
 
         console.log('Focused')
     }
-    checkarea = (e) => {
+    checkarea = async (e) => {
         e.preventDefault()
         let area = {
             longitude: this.state.long,
@@ -174,12 +174,14 @@ class Products extends React.Component {
         console.log(area);
         try {
 
-            //   res = await api.addStore(area)
-            //   console.log(res);
+              res = await addAreaProduct(area)
+              console.log(res.data.result);
+              this.setState({ product: res?.data.result })
+              this.setState({ productfilter:res?.data.result })
 
         } catch (err) {
-
-            console.log(err.data.message);
+            console.log(err);
+            console.log(err?.data?.message);
         }
 
 
