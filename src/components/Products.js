@@ -15,7 +15,7 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
-  } from 'react-places-autocomplete';
+} from 'react-places-autocomplete';
 
 class Products extends React.Component {
     state = {
@@ -27,7 +27,7 @@ class Products extends React.Component {
         categoryid: '',
         lat: '',
         long: '',
-        zipcode:'',
+        zipcode: '',
         completeAddress: []
 
 
@@ -36,13 +36,13 @@ class Products extends React.Component {
         console.log('test');
         window.scrollTo(0, 0)
         navigator.geolocation.getCurrentPosition(
-            function(position) {
-              console.log(position);
+            function (position) {
+                console.log(position);
             },
-            function(error) {
-              console.error("Error Code = " + error.code + " - " + error.message);
+            function (error) {
+                console.error("Error Code = " + error.code + " - " + error.message);
             }
-          );
+        );
         try {
             let product1 = await getProduct();
 
@@ -56,28 +56,28 @@ class Products extends React.Component {
     }
     handleSelect = address => {
         geocodeByAddress(address)
-          .then(results => {
-          
-    
-            this.state.completeAddress.push(results[0].formatted_address)
-    
-    
-            getLatLng(results[0])
-            .then(latLng => {
-              console.log('Success', latLng)
-              this.setState({ lat: latLng.lat })
-              this.setState({ long: latLng.lng })
-              console.log(this.state.lat);
-              console.log(this.state.long);
+            .then(results => {
+
+
+                this.state.completeAddress.push(results[0].formatted_address)
+
+
+                getLatLng(results[0])
+                    .then(latLng => {
+                        console.log('Success', latLng)
+                        this.setState({ lat: latLng.lat })
+                        this.setState({ long: latLng.lng })
+                        console.log(this.state.lat);
+                        console.log(this.state.long);
+                    })
+                    .catch(error => console.error('Error', error));
             })
-            .catch(error => console.error('Error', error));
-          })
-      };
-    
-      handleChange = address => {
+    };
+
+    handleChange = address => {
         this.setState({ address });
-      };
-      
+    };
+
     handleDate = (e) => {
         if (!this.state.product.length) {
             console.log('elseee');
@@ -163,9 +163,9 @@ class Products extends React.Component {
 
         console.log('Focused')
     }
-    checkarea=(e)=>{
+    checkarea = (e) => {
         e.preventDefault()
-        let area={
+        let area = {
             longitude: this.state.long,
             latitude: this.state.lat,
         }
@@ -173,18 +173,18 @@ class Products extends React.Component {
 
         console.log(area);
         try {
-    
-        //   res = await api.addStore(area)
-        //   console.log(res);
-       
+
+            //   res = await api.addStore(area)
+            //   console.log(res);
+
         } catch (err) {
-          
-          console.log(err.data.message);
+
+            console.log(err.data.message);
         }
-    
-    
-    
-       this.setState({ toggler: 0 })
+
+
+
+        this.setState({ toggler: 0 })
 
     }
 
@@ -195,67 +195,61 @@ class Products extends React.Component {
                 {
                     this.state.toggler === 1 ?
                         <>
-                            <div ani={this.state.toggler} className="menu alert-new" style={{ alignItems: 'center', width: '50%', height: '60%' }}>
-                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "80%", flexDirection: 'column' }} >
+                            <div ani={this.state.toggler} className="menu alert-new" style={{ alignItems: 'center', width: '50%', height: '60%', justifyContent: 'flex-start' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "80%", flexDirection: 'column', marginTop: '20rem' }} >
                                     <li className="menu-li" style={{ fontSize: "5rem" }}>Before We start !</li>
-
-                                   
                                     <form onSubmit={this.checkarea}>
-                                        <div style={{ marginTop: 20 }} style={{ position: 'relative' }}>
-                                           
+                                        <div style={{ marginTop: 20, width: '300px' }} style={{ position: 'relative' }}>
                                             <PlacesAutocomplete
-                        value={this.state.address}
-                        onChange={this.handleChange}
-                        onSelect={this.handleSelect}
-                      >
-                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                          <div>
-                             <li className="menu-li" style={{ fontSize: "3rem", textAlign: 'center ' }}>
-                                        Enter your zıp code <br />
-                                     to see products near you
-                                         </li>
-                                         <br />
-                                         <button type="submit" className="footer-btn" style={{ position: 'absolute', right: 0, marginTop: 20, zIndex: 20, borderRadius: '0px', border: '1px solid white' }}>Enter</button>
+                                                value={this.state.address}
+                                                onChange={this.handleChange}
+                                                onSelect={this.handleSelect}
+                                            >
+                                                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                                    <div style={{ width: '300px' }}>
+                                                        <li className="menu-li" style={{ fontSize: "3rem", textAlign: 'center ' }}>
+                                                            Enter your zıp code <br />
+                                                            to see products near you
+                                                        </li>
+                                                        <br />
+                                                        <button type="submit" className="footer-btn" style={{ position: 'absolute', right: 0, marginTop: 20, zIndex: 20, borderRadius: '0px', border: '1px solid white' }}>Enter</button>
 
 
 
-                            
-                            {/* <input    {...getInputProps({
+
+                                                        {/* <input    {...getInputProps({
                               placeholder: 'Search Places ...',
                               className: 'location-search-input',
                             })} type="text" name="name" required class="form-control" ></input> */}
 
-                            <input autoFocus {...getInputProps({
-                              placeholder: 'Search Places ...',
-                              className: 'location-search-input',
-                            })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="number" minLength="5" id="email" placeholder="xxxxxxxx" required />
+                                                        <input autoFocus {...getInputProps({
+                                                            placeholder: 'Search Places ...',
+                                                            className: 'location-search-input',
+                                                        })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="number" minLength="5" id="email" placeholder="xxxxxxxx" required />
 
-                            <div className="autocomplete-dropdown-container">
-                              {loading && <div>Loading...</div>}
-                              {suggestions.map(suggestion => {
-                                const className = suggestion.active
-                                  ? 'suggestion-item--active'
-                                  : 'suggestion-item';
-                                // inline style for demonstration purpose
-                                const style = suggestion.active
-                                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                return (
-                                  <div
-                                    {...getSuggestionItemProps(suggestion, {
-                                      className,
-                                      style,
-                                    })}
-                                  >
-                                    <span style={{ marginTop: 20, border: '1px solid black', color: 'black',fontSize:10  }} >{suggestion.description}</span>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
-                      </PlacesAutocomplete>
-                                           
+                                                        <div className="autocomplete-dropdown-container " style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: "column" }}>
+                                                            {loading && <div>Loading...</div>}
+                                                            {suggestions.map(suggestion => {
+                                                                const className = suggestion.active
+                                                                    ? 'suggestion-item--active'
+                                                                    : 'suggestion-item';
+                                                                // inline style for demonstration purpose
+
+                                                                return (
+                                                                    <div
+                                                                        {...getSuggestionItemProps(suggestion, {
+                                                                            className,
+                                                                        })}
+                                                                    >
+                                                                        <span style={{ marginTop: 20, color: 'white', fontSize: 15 }} >{suggestion.description}</span>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </PlacesAutocomplete>
+
                                         </div>
 
                                         {/* <div className="new-grid">
@@ -353,7 +347,7 @@ class Products extends React.Component {
                                     onHover={this.handleOnHover}
                                     onSelect={this.handleOnSelect}
                                     onFocus={this.handleOnFocus}
-                                    // autoFocus
+                                // autoFocus
                                 />
                             </div>
 

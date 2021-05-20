@@ -212,3 +212,43 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-color: #f7f6f1;
 }
+
+.suggestion-item {
+    background-color: #a81c56!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: white 1px white;
+    flex-direction: column;
+    border-radius: 10px;
+    min-height: 70px;
+    opacity: 0.7;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+    /* width: 300px; */
+}
+
+.autocomplete-dropdown-container {
+    overflow-y: scroll;
+    min-height: 20px;
+    height: 250px;
+    position: absolute;
+    z-index: 200;
+}
+
+.suggestion-item--active {
+    background-color: #da236f!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 10px;
+    min-height: 70px;
+    cursor: pointer;
+    opacity: 0.7;
+    /* align-items: flex-start; */
+    flex-direction: column;
+    border: white 1px white;
+    width: 100%;
+}

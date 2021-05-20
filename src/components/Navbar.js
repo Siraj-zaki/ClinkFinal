@@ -21,7 +21,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-import { customerSignUp, customerLogin, getVerification,getVerifiedCustomer,getforgetpassword } from "./../Service/service";
+import { customerSignUp, customerLogin, getVerification, getVerifiedCustomer, getforgetpassword } from "./../Service/service";
 import { LOGIN_USER } from "./../services/Store/Actions/action";
 class Navbar extends React.Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class Navbar extends React.Component {
       checked: "",
       email1: "",
       forgotEmail: "",
-      emailforget:"",
+      emailforget: "",
       password1: "",
       confirmPassowrd: "",
       password2: "",
@@ -53,7 +53,7 @@ class Navbar extends React.Component {
       signup: [],
       errors: {},
       customer: null,
-      userlogin:''
+      userlogin: ''
     };
     // formhandler1 = (e) => {
     //     e.preventDefault()
@@ -78,14 +78,14 @@ class Navbar extends React.Component {
     this.forgetPasswordhandler = this.forgetPasswordhandler.bind(this);
   }
 
- async componentDidMount() {
+  async componentDidMount() {
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 768px)").addListener(handler);
     console.log(this.props.user);
-    
+
     if (this.props.user) {
       console.log(this.props.user);
-     await this.setState({userlogin: this.props.user});
+      await this.setState({ userlogin: this.props.user });
       console.log(this.state.userlogin);
     }
 
@@ -93,20 +93,20 @@ class Navbar extends React.Component {
   handleSelect = address => {
     geocodeByAddress(address)
       .then(results => {
-      
+
 
         this.state.completeAddress.push(results[0].formatted_address)
 
 
         getLatLng(results[0])
-        .then(latLng => {
-          console.log('Success', latLng)
-          this.setState({ lat: latLng.lat })
-          this.setState({ long: latLng.lng })
-          console.log(this.state.lat);
-          console.log(this.state.long);
-        })
-        .catch(error => console.error('Error', error));
+          .then(latLng => {
+            console.log('Success', latLng)
+            this.setState({ lat: latLng.lat })
+            this.setState({ long: latLng.lng })
+            console.log(this.state.lat);
+            console.log(this.state.long);
+          })
+          .catch(error => console.error('Error', error));
       })
   };
 
@@ -215,14 +215,14 @@ class Navbar extends React.Component {
     try {
       let data = {
         email: this.state.forgotEmail,
-        
-        
+
+
       };
       console.log("data", data);
       let customer = await getVerification(data)
-      .then((re1) => {
-        console.log(re1);
-        if (re1?.data?.success) {
+        .then((re1) => {
+          console.log(re1);
+          if (re1?.data?.success) {
             this.setState({ toggler3: 0, toggler4: 1 })
             return toast.dark(re1?.data?.message, {
               style: { fontSize: 13 },
@@ -272,15 +272,15 @@ class Navbar extends React.Component {
     try {
       let data = {
         code: this.state.code,
-        
+
       };
       console.log("data", data);
       let customer = await getVerifiedCustomer(data)
-      .then((re1) => {
-        console.log(re1);
-        if (re1?.data?.success) {
-          this.setState({ toggler4: 0, toggler5: 1 })
-          this.setState({ emailforget: re1.data?.data })
+        .then((re1) => {
+          console.log(re1);
+          if (re1?.data?.success) {
+            this.setState({ toggler4: 0, toggler5: 1 })
+            this.setState({ emailforget: re1.data?.data })
             return toast.dark(re1?.data?.message, {
               style: { fontSize: 13 },
               className: 'dark-toast',
@@ -329,16 +329,16 @@ class Navbar extends React.Component {
     try {
       let data = {
         email: this.state.emailforget,
-        password:this.state.password2
-        
+        password: this.state.password2
+
       };
       console.log("data", data);
       let customer = await getforgetpassword(data)
-      .then((re1) => {
-        console.log(re1);
-        if (re1?.data?.success) {
-         
-          this.setState({ toggler5: 0 })
+        .then((re1) => {
+          console.log(re1);
+          if (re1?.data?.success) {
+
+            this.setState({ toggler5: 0 })
             return toast.dark(re1?.data?.message, {
               style: { fontSize: 13 },
               className: 'dark-toast',
@@ -383,21 +383,21 @@ class Navbar extends React.Component {
   async formhandler1(e) {
     if (this.props.user) {
       console.log(this.props.user);
-     await this.setState({userlogin: this.props.user});
+      await this.setState({ userlogin: this.props.user });
       console.log(this.state.userlogin);
     }
     console.log(this.state.userlogin);
-    if(!this.state.userlogin){
+    if (!this.state.userlogin) {
       e.preventDefault()
       console.log("state", this.state.email);
       let data = {
         email: this.state.email,
         password: this.state.password,
-  
 
-        
+
+
       };
-  
+
       try {
         let customer = await customerLogin(data);
         if (customer && customer.data && customer.data.data) {
@@ -411,19 +411,19 @@ class Navbar extends React.Component {
           },
             this.setState({ toggler1: 0 })
           );
-  
+
           console.log(customer);
-  
+
         }
-  
-  
+
+
       } catch (error) {
         console.log(error.data);
         return toast.dark("Email or Password Incorrect")
         console.log(error.response.data.message);
       }
 
-    }else{
+    } else {
       return toast.dark("User Already login", {
         style: { fontSize: 13 },
         className: 'dark-toast',
@@ -432,7 +432,7 @@ class Navbar extends React.Component {
         this.setState({ toggler1: 0 })
       );
     }
-  
+
     //    console.log("data1",customer);
 
   }
@@ -1014,13 +1014,13 @@ class Navbar extends React.Component {
               <div
                 onClick={() => this.setState({ toggler1: 0 })}
                 // onClick={ this.forgetPasswordhandler}
-                
+
                 ani={this.state.toggler1}
                 className="signup-menu-back"
               ></div>
               <form
                 // onSubmit={() => this.setState({ toggler4: 0, toggler5: 1 })}
-                onSubmit={ this.forgetPasswordhandler}
+                onSubmit={this.forgetPasswordhandler}
                 ani={this.state.toggler1}
                 className="signup-menu"
               >
@@ -1192,15 +1192,15 @@ class Navbar extends React.Component {
                   required
                 /> */}
 
-<PlacesAutocomplete
-                        value={this.state.address}
-                        onChange={this.handleChange}
-                        onSelect={this.handleSelect}
-                      >
-                        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                          <div>
-                            
-                            {/* <input
+                <PlacesAutocomplete
+                  value={this.state.address}
+                  onChange={this.handleChange}
+                  onSelect={this.handleSelect}
+                >
+                  {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                    <div>
+
+                      {/* <input
                            {...getInputProps({
                               placeholder: 'Search Places ...',
                               className: 'location-search-input',
@@ -1212,43 +1212,43 @@ class Navbar extends React.Component {
                   id="search"
                   required
                 > </input> */}
-                            
-                            <input    {...getInputProps({
-                              placeholder: 'Enter your Zip code',
-                              className: 'location-search-input',
-                            })} type="text" name="name" required 
-                            className="input-search-bar" ></input>
 
-                            {/* <input autoFocus {...getInputProps({
+                      <input    {...getInputProps({
+                        placeholder: 'Enter your Zip code',
+                        className: 'location-search-input',
+                      })} type="text" name="name" required
+                        className="input-search-bar" ></input>
+
+                      {/* <input autoFocus {...getInputProps({
                               placeholder: 'Search Places ...',
                               className: 'location-search-input',
                             })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="number" minLength="5" id="email" placeholder="xxxxxxxx" required /> */}
 
-                            <div className="autocomplete-dropdown-container">
-                              {loading && <div>Loading...</div>}
-                              {suggestions.map(suggestion => {
-                                const className = suggestion.active
-                                  ? 'suggestion-item--active'
-                                  : 'suggestion-item';
-                                // inline style for demonstration purpose
-                                const style = suggestion.active
-                                  ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                                return (
-                                  <div
-                                    {...getSuggestionItemProps(suggestion, {
-                                      className,
-                                      style,
-                                    })}
-                                  >
-                                    <span style={{ marginTop: 20, border: '1px solid black', color: 'black',fontSize:10  }} >{suggestion.description}</span>
-                                  </div>
-                                );
+                      <div className="autocomplete-dropdown-container-1">
+                        {loading && <div>Loading...</div>}
+                        {suggestions.map(suggestion => {
+                          const className = suggestion.active
+                            ? 'suggestion-item--active-1'
+                            : 'suggestion-item-1';
+                          // inline style for demonstration purpose
+                          const style = suggestion.active
+                            ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                            : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                          return (
+                            <div
+                              {...getSuggestionItemProps(suggestion, {
+                                className,
+                                style,
                               })}
+                            >
+                              <span style={{ marginTop: 20, color: 'white', fontSize: 15 }} >{suggestion.description}</span>
                             </div>
-                          </div>
-                        )}
-                      </PlacesAutocomplete>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </PlacesAutocomplete>
                 <button className="btn-search-bar" type="submit">
                   <img
                     className="search-icon"
