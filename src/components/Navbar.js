@@ -22,7 +22,8 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { customerSignUp, customerLogin, getVerification, getVerifiedCustomer, getforgetpassword } from "./../Service/service";
-import { LOGIN_USER } from "./../services/Store/Actions/action";
+import { LOGIN_USER,zipCode } from "./../services/Store/Actions/action";
+
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
@@ -83,6 +84,7 @@ class Navbar extends React.Component {
   }
 
   async componentDidMount() {
+    
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 768px)").addListener(handler);
     console.log(this.props.user);
@@ -90,6 +92,7 @@ class Navbar extends React.Component {
     if (this.props.user) {
       console.log(this.props.user);
       await this.setState({ userlogin: this.props.user });
+   
       console.log(this.state.userlogin);
     }
 
@@ -107,6 +110,14 @@ class Navbar extends React.Component {
             console.log('Success', latLng)
             this.setState({ lat: latLng.lat })
             this.setState({ long: latLng.lng })
+            let area = {
+              longitude: this.state.long,
+              latitude: this.state.lat,
+          }
+          let res;
+          console.log(area);
+          this.props.zipCode(area)
+          window.location.reload()
             console.log(this.state.lat);
             console.log(this.state.long);
           })
@@ -135,24 +146,20 @@ class Navbar extends React.Component {
   }
   checkarea = async (e) => {
     e.preventDefault()
-    let area = {
-        longitude: this.state.long,
-        latitude: this.state.lat,
-    }
-    let res;
+    
+    
+    console.log(this.props);
+    // try {
 
-    console.log(area);
-    try {
+    //       res = await addAreaProduct(area)
+    //       console.log(res.data.result);
+    //       this.setState({ product: res?.data.result })
+    //       this.setState({ productfilter:res?.data.result })
 
-          res = await addAreaProduct(area)
-          console.log(res.data.result);
-          this.setState({ product: res?.data.result })
-          this.setState({ productfilter:res?.data.result })
-
-    } catch (err) {
-        console.log(err);
-        console.log(err?.data?.message);
-    }
+    // } catch (err) {
+    //     console.log(err);
+    //     console.log(err?.data?.message);
+    // }
 
 
 
@@ -1388,12 +1395,14 @@ class Navbar extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    user: state.AuthReducer.user
+    user: state.AuthReducer.user,
+    user_area:state.AuthReducer.user_area
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    LOGIN_USER: data => { dispatch(LOGIN_USER(data)) }
+    LOGIN_USER: data => { dispatch(LOGIN_USER(data)) },
+    zipCode: data => { dispatch(zipCode(data)) }
 
   };
 }

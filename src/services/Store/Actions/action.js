@@ -1,4 +1,4 @@
-import { ADD_TO_CART ,LOGIN_USER1} from "../../constants";
+import { ADD_TO_CART ,LOGIN_USER1,ZipCode} from "../../constants";
 
  
 export const LOGIN_USER=(data)=>{
@@ -11,3 +11,14 @@ export const LOGIN_USER=(data)=>{
     }
 
 }  
+
+export const zipCode=(data)=>{
+    return async dispatch=>{
+        console.log("zipcodeeee",data)
+        dispatch({
+            type:ZipCode,
+            payload:data
+        })
+    }
+
+} 

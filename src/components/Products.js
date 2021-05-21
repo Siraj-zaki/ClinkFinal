@@ -16,6 +16,7 @@ import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
 } from 'react-places-autocomplete';
+import { connect } from "react-redux";
 
 class Products extends React.Component {
     state = {
@@ -28,11 +29,40 @@ class Products extends React.Component {
         lat: '',
         long: '',
         zipcode: '',
-        completeAddress: []
+        completeAddress: [],
+        user_area:this.props.user_area
 
 
     }
     async componentDidMount() {
+        console.log(this.props.user_area);
+        if(this.props.user_area){
+            this.setState({toggler:0})
+         
+        let area = {
+            longitude: this.props.user_area.longitude,
+            latitude: this.props.user_area.latitude
+        }
+        let res;
+
+        console.log(area);
+        try {
+
+              res = await addAreaProduct(area)
+              console.log(res.data.result);
+              this.setState({ product: res?.data.result })
+              this.setState({ productfilter:res?.data.result })
+
+        } catch (err) {
+            console.log(err);
+            console.log(err?.data?.message);
+        }
+
+
+
+
+
+        }
         console.log('test');
         window.scrollTo(0, 0)
         navigator.geolocation.getCurrentPosition(
@@ -43,16 +73,16 @@ class Products extends React.Component {
                 console.error("Error Code = " + error.code + " - " + error.message);
             }
         );
-        try {
-            let product1 = await getProduct();
+        // try {
+        //     let product1 = await getProduct();
 
-            this.setState({ product: product1?.data?.result })
-            this.setState({ productfilter: product1?.data?.result })
+        //     this.setState({ product: product1?.data?.result })
+        //     this.setState({ productfilter: product1?.data?.result })
 
-        } catch (error) {
-            console.log(error?.data);
-            console.log(error?.response?.data?.message);
-        }
+        // } catch (error) {
+        //     console.log(error?.data);
+        //     console.log(error?.response?.data?.message);
+        // }
     }
     handleSelect = address => {
         geocodeByAddress(address)
@@ -219,15 +249,15 @@ class Products extends React.Component {
 
 
 
-                                                        {/* <input    {...getInputProps({
+                                                         {/* <input    {...getInputProps({
                               placeholder: 'Search Places ...',
                               className: 'location-search-input',
-                            })} type="text" name="name" required class="form-control" ></input> */}
+                            })} type="text" name="name" required class="form-control" ></input>  */}
 
-                                                        <input autoFocus {...getInputProps({
+                                                         <input autoFocus {...getInputProps({
                                                             placeholder: 'Search Places ...',
                                                             className: 'location-search-input',
-                                                        })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="number" minLength="5" id="email" placeholder="xxxxxxxx" required />
+                                                        })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="text" minLength="5" id="email"  required ></input> 
 
                                                         <div className="autocomplete-dropdown-container " style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: "column" }}>
                                                             {loading && <div>Loading...</div>}
@@ -375,9 +405,11 @@ class Products extends React.Component {
                                         <CartProduct product={item} />
                                     )
                                     :
-                                    this.state?.productfilter.map((item, index) =>
+                                    this.state?.productfilter.length ? this.state?.productfilter .map((item, index) =>
                                         <CartProduct product={item} />
                                     )
+                                    :'Product Data Not Found'
+                                     
                             }
 
                         </div>
@@ -392,4 +424,10 @@ class Products extends React.Component {
     }
 
 };
-export default Products;
+const mapStateToProps = (state) => {
+    return {
+      user: state.AuthReducer.user,
+      user_area:state.AuthReducer.user_area
+    };
+  };
+export default connect(mapStateToProps) (Products);
