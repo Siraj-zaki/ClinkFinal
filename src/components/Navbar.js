@@ -37,6 +37,7 @@ class Navbar extends React.Component {
       toggler3: 0,
       toggler4: 0,
       loginLoader: false,
+      loginLoader1: false,
       code: '',
       passShow: false,
       passShow1: false,
@@ -307,10 +308,14 @@ class Navbar extends React.Component {
 
       };
       console.log("data", data);
+      this.setState({ loginLoader1: true })
       let customer = await getVerifiedCustomer(data)
+
         .then((re1) => {
           console.log(re1);
+
           if (re1?.data?.success) {
+            this.setState({ loginLoader1: false })
             this.setState({ toggler4: 0, toggler5: 1 })
             this.setState({ emailforget: re1.data?.data })
             return toast.dark(re1?.data?.message, {
@@ -318,10 +323,10 @@ class Navbar extends React.Component {
               className: 'dark-toast',
               autoClose: 5000
             },
-
             );
 
           } else {
+            this.setState({ loginLoader1: false })
             console.log("errrrr", re1);
             return toast.dark(re1?.data?.message, {
               style: { fontSize: 13 },
@@ -1036,7 +1041,9 @@ class Navbar extends React.Component {
 
                     <div className="signup-btns">
                       <button className="signupbtn btn-1-new" type="submit">
-                        Submit
+                        {
+                          this.state.loginLoader1 ? <Loader type="Oval" width={40} height={40} color="black" /> : "Submit"
+                        }
                       </button>
                     </div>
                   </div>
