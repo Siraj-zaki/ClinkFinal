@@ -72,9 +72,12 @@
 }
 
 .signupbtn {
+    align-items: center;
     width: 180px;
     height: 60px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
     background: #a10948;
     font-family: Montserrat;
     font-weight: normal;
