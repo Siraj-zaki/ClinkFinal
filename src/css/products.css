@@ -599,6 +599,10 @@ height: 734px; */
     color: #a81c56;
 }
 
+.card-bottle {
+    font-size: 15px!important;
+}
+
 .remove-all {
     font-family: Montserrat;
     font-weight: 500;

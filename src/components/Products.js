@@ -228,7 +228,7 @@ class Products extends React.Component {
                     this.state.toggler === 1 ?
                         <>
                             <div ani={this.state.toggler} className="menu alert-new" style={{ alignItems: 'center', width: '50%', height: '60%', justifyContent: 'flex-start' }}>
-                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "80%", flexDirection: 'column', marginTop: '20rem' }} >
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "80%", flexDirection: 'column', marginTop: '20%' }} >
                                     <li className="menu-li" style={{ fontSize: "5rem" }}>Before We start !</li>
                                     <form onSubmit={this.checkarea}>
                                         <div style={{ marginTop: 20, width: '300px' }} style={{ position: 'relative' }}>

@@ -252,3 +252,12 @@ body {
     border: white 1px white;
     width: 100%;
 }
+
+.navbar-products {
+    width: 100%;
+    background-color: rgb(226, 102, 102);
+    opacity: 0.8;
+    min-height: 90vh;
+    position: absolute;
+    padding: 30px;
+}

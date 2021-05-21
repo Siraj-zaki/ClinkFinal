@@ -8,8 +8,10 @@ import facebook from "../assets/facebook.png";
 import tele from "../assets/tele.png";
 import whatsapp from "../assets/whatsapp.png";
 import "../css/Navbar.css";
+import Loader from "react-loader-spinner";
 import cross from "../assets/cross.png";
 import cross2 from "../assets/cross2.png";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import emailico from "../assets/email1.png";
 import eye from "../assets/eye.png";
 import lock from "../assets/lock.png";
@@ -35,6 +37,8 @@ class Navbar extends React.Component {
       toggler2: 0,
       toggler3: 0,
       toggler4: 0,
+      loginLoader: false,
+      loginLoader1: false,
       code: '',
       passShow: false,
       passShow1: false,
@@ -56,8 +60,8 @@ class Navbar extends React.Component {
       customer: null,
       userlogin: '',
       product: [],
-        productfilter: [],
-        completeAddress: []
+      productfilter: [],
+      completeAddress: []
 
     };
     // formhandler1 = (e) => {
@@ -146,6 +150,7 @@ class Navbar extends React.Component {
   }
   checkarea = async (e) => {
     e.preventDefault()
+<<<<<<< HEAD
     
     
     console.log(this.props);
@@ -160,12 +165,32 @@ class Navbar extends React.Component {
     //     console.log(err);
     //     console.log(err?.data?.message);
     // }
+=======
+    let area = {
+      longitude: this.state.long,
+      latitude: this.state.lat,
+    }
+    let res;
+
+    console.log(area);
+    try {
+
+      res = await addAreaProduct(area)
+      console.log(res.data.result);
+      this.setState({ product: res?.data.result })
+      this.setState({ productfilter: res?.data.result })
+
+    } catch (err) {
+      console.log(err);
+      console.log(err?.data?.message);
+    }
+>>>>>>> 3a6196419d2f09edcb0a4376f20bf769131f584c
 
 
 
     this.setState({ toggler: 0 })
 
-}
+  }
   handleChangePassword(e) {
     console.log(e.target.value);
 
@@ -311,10 +336,14 @@ class Navbar extends React.Component {
 
       };
       console.log("data", data);
+      this.setState({ loginLoader1: true })
       let customer = await getVerifiedCustomer(data)
+
         .then((re1) => {
           console.log(re1);
+
           if (re1?.data?.success) {
+            this.setState({ loginLoader1: false })
             this.setState({ toggler4: 0, toggler5: 1 })
             this.setState({ emailforget: re1.data?.data })
             return toast.dark(re1?.data?.message, {
@@ -322,10 +351,10 @@ class Navbar extends React.Component {
               className: 'dark-toast',
               autoClose: 5000
             },
-
             );
 
           } else {
+            this.setState({ loginLoader1: false })
             console.log("errrrr", re1);
             return toast.dark(re1?.data?.message, {
               style: { fontSize: 13 },
@@ -417,10 +446,12 @@ class Navbar extends React.Component {
     }
   }
   async formhandler1(e) {
+    this.setState({ loginLoader: true })
     if (this.props.user) {
       console.log(this.props.user);
       await this.setState({ userlogin: this.props.user });
       console.log(this.state.userlogin);
+
     }
     console.log(this.state.userlogin);
     if (!this.state.userlogin) {
@@ -445,7 +476,9 @@ class Navbar extends React.Component {
             className: 'dark-toast',
             autoClose: 5000
           },
-            this.setState({ toggler1: 0 })
+            this.setState({ loginLoader: false }),
+            this.setState({ toggler1: 0 }),
+
           );
 
           console.log(customer);
@@ -455,9 +488,11 @@ class Navbar extends React.Component {
 
       } catch (error) {
         console.log(error.data);
-        return toast.dark("Email or Password Incorrect")
-        console.log(error.response.data.message);
+        return toast.dark("Email or Password Incorrect"),
+          this.setState({ loginLoader: false }),
+          console.log(error.response.data.message);
       }
+
 
     } else {
       return toast.dark("User Already login", {
@@ -465,6 +500,7 @@ class Navbar extends React.Component {
         className: 'dark-toast',
         autoClose: 5000
       },
+        this.setState({ loginLoader: false }),
         this.setState({ toggler1: 0 })
       );
     }
@@ -871,7 +907,9 @@ class Navbar extends React.Component {
                     </div>
                     <div className="signup-btns">
                       <button className="signupbtn btn-1-new" type="submit">
-                        Login
+                        {
+                          this.state.loginLoader ? <Loader type="Oval" width={40} height={40} color="black" /> : "Login"
+                        }
                       </button>
                       <button
                         onClick={() =>
@@ -1031,7 +1069,9 @@ class Navbar extends React.Component {
 
                     <div className="signup-btns">
                       <button className="signupbtn btn-1-new" type="submit">
-                        Submit
+                        {
+                          this.state.loginLoader1 ? <Loader type="Oval" width={40} height={40} color="black" /> : "Submit"
+                        }
                       </button>
                     </div>
                   </div>

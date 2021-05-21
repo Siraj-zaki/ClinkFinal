@@ -40,7 +40,7 @@ class CartProduct extends React.Component {
                             {/* <div className="add-products" > */}
                             <img onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} height="250px" width="250px" src={cart.img} alt="not" />
                             <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart-company" >{cart.Company}</span>
-                            <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart.bottle" >{cart.Bottle}</span>
+                            <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart-company" >{cart.Bottle}</span>
                             <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart-size">{cart.Size}</span>
                         </div>
                         // </div>
