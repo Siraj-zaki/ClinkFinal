@@ -61,7 +61,8 @@ class Navbar extends React.Component {
       userlogin: '',
       product: [],
       productfilter: [],
-      completeAddress: []
+      completeAddress: [],
+      categorydata: [],
 
     };
     // formhandler1 = (e) => {
@@ -92,13 +93,14 @@ class Navbar extends React.Component {
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 768px)").addListener(handler);
     console.log(this.props.user);
-
+    
     if (this.props.user) {
       console.log(this.props.user);
       await this.setState({ userlogin: this.props.user });
    
       console.log(this.state.userlogin);
     }
+
 
   }
   handleSelect = address => {
@@ -150,7 +152,6 @@ class Navbar extends React.Component {
   }
   checkarea = async (e) => {
     e.preventDefault()
-<<<<<<< HEAD
     
     
     console.log(this.props);
@@ -165,26 +166,6 @@ class Navbar extends React.Component {
     //     console.log(err);
     //     console.log(err?.data?.message);
     // }
-=======
-    let area = {
-      longitude: this.state.long,
-      latitude: this.state.lat,
-    }
-    let res;
-
-    console.log(area);
-    try {
-
-      res = await addAreaProduct(area)
-      console.log(res.data.result);
-      this.setState({ product: res?.data.result })
-      this.setState({ productfilter: res?.data.result })
-
-    } catch (err) {
-      console.log(err);
-      console.log(err?.data?.message);
-    }
->>>>>>> 3a6196419d2f09edcb0a4376f20bf769131f584c
 
 
 

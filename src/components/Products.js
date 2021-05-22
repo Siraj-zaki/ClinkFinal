@@ -10,7 +10,8 @@ import '../css/products.css'
 import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
-import { getProduct,addAreaProduct } from "./../Service/service";
+import { getProduct,addAreaProduct,getCategories } from "./../Service/service";
+import { ToastContainer, toast } from "react-toastify";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import PlacesAutocomplete, {
     geocodeByAddress,
@@ -30,7 +31,8 @@ class Products extends React.Component {
         long: '',
         zipcode: '',
         completeAddress: [],
-        user_area:this.props.user_area
+        user_area:this.props.user_area,
+        categorydata:[],
 
 
     }
@@ -45,6 +47,28 @@ class Products extends React.Component {
         }
         let res;
 
+        
+    let customer = await getCategories()
+    .then((re1) => {
+        if (re1?.data?.success) {
+            this.setState({categorydata:re1.data.result})
+            
+            console.log(this.state.categorydata);
+      } 
+      
+      
+
+
+    })
+    .catch(err => {
+      return toast.dark("Data Not Found", {
+        style: { fontSize: 13 },
+        className: 'dark-toast',
+        autoClose: 5000
+      }
+      );
+      console.log("er", err);
+    })
         console.log(area);
         try {
 
@@ -304,21 +328,15 @@ class Products extends React.Component {
                 <Navbar />
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
                     <div className="items mt-4">
+                        {
+                            this.state.categorydata.length && this.state.categorydata.map(r1=>(
+                                
                         <button className="product-btn btn-new-1">
-                            Tequila
+                            {r1.itemName}
                         </button>
-                        <button className="product-btn btn-new-1">
-                            Beer
-                        </button>
-                        <button className="product-btn btn-new-1">
-                            Wine
-                        </button>
-                        <button className="product-btn btn-new-1">
-                            Vodka
-                        </button>
-                        <button className="product-btn btn-new-1">
-                            Whiskey
-                        </button>
+                            ))
+                        }
+                        
                     </div>
                     <div className="products">
 
