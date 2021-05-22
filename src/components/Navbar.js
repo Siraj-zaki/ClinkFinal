@@ -24,7 +24,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { customerSignUp, customerLogin, getVerification, getVerifiedCustomer, getforgetpassword } from "./../Service/service";
-import { LOGIN_USER,zipCode } from "./../services/Store/Actions/action";
+import { LOGIN_USER, zipCode } from "./../services/Store/Actions/action";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -88,7 +88,7 @@ class Navbar extends React.Component {
   }
 
   async componentDidMount() {
-    
+
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 768px)").addListener(handler);
     console.log(this.props.user);
@@ -96,7 +96,7 @@ class Navbar extends React.Component {
     if (this.props.user) {
       console.log(this.props.user);
       await this.setState({ userlogin: this.props.user });
-   
+
       console.log(this.state.userlogin);
     }
 
@@ -117,11 +117,16 @@ class Navbar extends React.Component {
             let area = {
               longitude: this.state.long,
               latitude: this.state.lat,
-          }
-          let res;
-          console.log(area);
-          this.props.zipCode(area)
-          window.location.reload()
+            }
+            let res;
+            console.log(area);
+            this.props.zipCode(area)
+            if (window.location.href === "/Products") {
+              // window.location.href
+              console.log("not reload");
+            } else {
+              window.location.href = "/Products"
+            }
             console.log(this.state.lat);
             console.log(this.state.long);
           })
@@ -129,9 +134,17 @@ class Navbar extends React.Component {
       })
   };
 
-  handleChange = address => {
+  handleChange = (address) => {
+
     this.setState({ address });
+    // window.location.href !== "/Products" ? window.location.href = "/Products" : ""
+
   };
+  // locationHandler = () => {
+  //   if (window.location.href !== "/Products") {
+  //     window.location.href = "/Products"
+  //   }
+  // }
 
 
   handleChangeEmail(e) {
@@ -150,22 +163,6 @@ class Navbar extends React.Component {
   }
   checkarea = async (e) => {
     e.preventDefault()
-<<<<<<< HEAD
-    
-    
-    console.log(this.props);
-    // try {
-
-    //       res = await addAreaProduct(area)
-    //       console.log(res.data.result);
-    //       this.setState({ product: res?.data.result })
-    //       this.setState({ productfilter:res?.data.result })
-
-    // } catch (err) {
-    //     console.log(err);
-    //     console.log(err?.data?.message);
-    // }
-=======
     let area = {
       longitude: this.state.long,
       latitude: this.state.lat,
@@ -184,7 +181,6 @@ class Navbar extends React.Component {
       console.log(err);
       console.log(err?.data?.message);
     }
->>>>>>> 3a6196419d2f09edcb0a4376f20bf769131f584c
 
 
 
@@ -1293,7 +1289,8 @@ class Navbar extends React.Component {
                         placeholder: 'Enter your Zip code',
                         className: 'location-search-input',
                       })} type="text" name="name" required
-                        className="input-search-bar" ></input>
+                        className="input-search-bar" >
+                      </input>
 
                       {/* <input autoFocus {...getInputProps({
                               placeholder: 'Search Places ...',
@@ -1317,7 +1314,7 @@ class Navbar extends React.Component {
                                 style,
                               })}
                             >
-                              <span style={{ marginTop: 20, color: 'white', fontSize: 15 }} >{suggestion.description}</span>
+                              <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: 'white', fontSize: 15 }} >{suggestion.description}</span>
                             </div>
                           );
                         })}
@@ -1436,7 +1433,7 @@ class Navbar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.AuthReducer.user,
-    user_area:state.AuthReducer.user_area
+    user_area: state.AuthReducer.user_area
   };
 };
 const mapDispatchToProps = (dispatch) => {
