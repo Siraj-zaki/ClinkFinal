@@ -232,7 +232,7 @@ body {
 .autocomplete-dropdown-container {
     overflow-y: scroll;
     min-height: 20px;
-    height: 250px;
+    height: 180px;
     position: absolute;
     z-index: 200;
 }

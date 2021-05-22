@@ -5,12 +5,15 @@ import beer from '../assets/beerbg.png'
 import wine from '../assets/winebg.png'
 import vodka from '../assets/vodkabg.png'
 import whiskey from '../assets/whiskeybg.png'
+import Slider from "react-slick";
+import left from '../assets/leftarrow.png'
+import right from '../assets/rightarrow.png'
 import Carousel from 'react-bootstrap/Carousel'
 import '../css/products.css'
 import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
-import { getProduct,addAreaProduct,getCategories } from "./../Service/service";
+import { getProduct, addAreaProduct, getCategories } from "./../Service/service";
 import { ToastContainer, toast } from "react-toastify";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import PlacesAutocomplete, {
@@ -45,14 +48,8 @@ class Products extends React.Component {
         })
         console.log(this.state.categorydata);
         console.log(this.props.user_area);
-        if(this.props.user_area){
-            this.setState({toggler:0})
-         
-        let area = {
-            longitude: this.props.user_area.longitude,
-            latitude: this.props.user_area.latitude
-        }
-        let res;
+        if (this.props.user_area) {
+            this.setState({ toggler: 0 })
 
 
         
@@ -78,7 +75,7 @@ class Products extends React.Component {
       console.log("er", err);
     })
         console.log(area);
-        try {
+        
 
               res = await addAreaProduct(area)
               console.log(res.data.result);
@@ -86,17 +83,48 @@ class Products extends React.Component {
               this.setState({ productfilter:res?.data.result })
               
 
-        } catch (err) {
-            console.log(err);
-            console.log(err?.data?.message);
+            let customer = await getCategories()
+                .then((re1) => {
+                    if (re1?.data?.success) {
+                        this.setState({ categorydata: re1.data.result })
+
+                        console.log(this.state.categorydata);
+                    }
+
+
+
+
+                })
+                .catch(err => {
+                    return toast.dark("Data Not Found", {
+                        style: { fontSize: 13 },
+                        className: 'dark-toast',
+                        autoClose: 5000
+                    }
+                    );
+                    console.log("er", err);
+                })
+            console.log(area);
+            try {
+
+                res = await addAreaProduct(area)
+                console.log(res.data.result);
+                this.setState({ product: res?.data.result })
+                this.setState({ productfilter: res?.data.result })
+
+            } catch (err) {
+                console.log(err);
+                console.log(err?.data?.message);
+            }
+
+
+
+
+
+        
         }
-
-
-
-
-
-        }
-        console.log('test');
+    
+       
         window.scrollTo(0, 0)
         navigator.geolocation.getCurrentPosition(
             function (position) {
@@ -237,10 +265,10 @@ class Products extends React.Component {
         console.log(area);
         try {
 
-              res = await addAreaProduct(area)
-              console.log(res.data.result);
-              this.setState({ product: res?.data.result })
-              this.setState({ productfilter:res?.data.result })
+            res = await addAreaProduct(area)
+            console.log(res.data.result);
+            this.setState({ product: res?.data.result })
+            this.setState({ productfilter: res?.data.result })
 
 
 
@@ -257,14 +285,71 @@ class Products extends React.Component {
     }
 
     render() {
+        function SamplePrevArrow(props) {
+            const { className, style, onClick } = props;
+            return (
+                <div className="left-arrow" onClick={onClick} >
+                    <img src={left} alt="" />
+                </div>
+            );
+        }
+
+        const ratingChanged = (newRating) => {
+            console.log(newRating);
+        };
+
+        function SampleNxtArrow(props) {
+            const { className, style, onClick } = props;
+            return (
+                <div className="right-arrow" onClick={onClick} >
+                    <img src={right} alt="" />
+                </div>
+            );
+        }
+        var settings = {
+            dots: true,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 6,
+            slidesToScroll: 1,
+            nextArrow: <SamplePrevArrow />,
+            prevArrow: <SampleNxtArrow />,
+            initialSlide: 0,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        initialSlide: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        };
         console.log(this.state.product);
         return (
             <div className="Home bgimg-1" style={{ position: 'relative', backgroundColor: 'white' }}>
                 {
                     this.state.toggler === 1 ?
                         <>
-                            <div ani={this.state.toggler} className="menu alert-new" style={{ alignItems: 'center', width: '50%', height: '60%', justifyContent: 'flex-start' }}>
-                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "80%", flexDirection: 'column', marginTop: '20%' }} >
+                            <div ani={this.state.toggler} className="menu alert-new" style={{ alignItems: 'center', width: '50%', height: '60%', justifyContent: 'center' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: "80%", flexDirection: 'column' }} >
                                     <li className="menu-li" style={{ fontSize: "5rem" }}>Before We start !</li>
                                     <form onSubmit={this.checkarea}>
                                         <div style={{ marginTop: 20, width: '300px' }} style={{ position: 'relative' }}>
@@ -285,15 +370,15 @@ class Products extends React.Component {
 
 
 
-                                                         {/* <input    {...getInputProps({
+                                                        {/* <input    {...getInputProps({
                               placeholder: 'Search Places ...',
                               className: 'location-search-input',
                             })} type="text" name="name" required class="form-control" ></input>  */}
 
-                                                         <input autoFocus {...getInputProps({
+                                                        <input autoFocus {...getInputProps({
                                                             placeholder: 'Search Places ...',
                                                             className: 'location-search-input',
-                                                        })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="text" minLength="5" id="email"  required ></input> 
+                                                        })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="text" minLength="2" id="email" required ></input>
 
                                                         <div className="autocomplete-dropdown-container " style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: "column" }}>
                                                             {loading && <div>Loading...</div>}
@@ -339,6 +424,7 @@ class Products extends React.Component {
                 {/* <img className="bgimg-1" src={bgimg1} alt="" /> */}
                 <Navbar />
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
+
                     <div className="items mt-4">
                     {
                        
@@ -438,11 +524,11 @@ class Products extends React.Component {
                                         <CartProduct product={item} />
                                     )
                                     :
-                                    this.state?.productfilter.length ? this.state?.productfilter .map((item, index) =>
+                                    this.state?.productfilter.length ? this.state?.productfilter.map((item, index) =>
                                         <CartProduct product={item} />
                                     )
-                                    :'Product Data Not Found'
-                                     
+                                        : 'Product Data Not Found'
+
                             }
 
                         </div>
@@ -459,8 +545,8 @@ class Products extends React.Component {
 };
 const mapStateToProps = (state) => {
     return {
-      user: state.AuthReducer.user,
-      user_area:state.AuthReducer.user_area
+        user: state.AuthReducer.user,
+        user_area: state.AuthReducer.user_area
     };
-  };
-export default connect(mapStateToProps) (Products);
+};
+export default connect(mapStateToProps)(Products);
