@@ -33,10 +33,17 @@ class Products extends React.Component {
         completeAddress: [],
         user_area:this.props.user_area,
         categorydata:[],
+        categorydata2:[],
 
 
     }
     async componentDidMount() {
+        await getCategories()
+        .then((r6)=>{
+         console.log(r6.data.result);
+         this.setState({categorydata:r6.data.result})
+        })
+        console.log(this.state.categorydata);
         console.log(this.props.user_area);
         if(this.props.user_area){
             this.setState({toggler:0})
@@ -46,6 +53,7 @@ class Products extends React.Component {
             latitude: this.props.user_area.latitude
         }
         let res;
+
 
         
     let customer = await getCategories()
@@ -76,6 +84,7 @@ class Products extends React.Component {
               console.log(res.data.result);
               this.setState({ product: res?.data.result })
               this.setState({ productfilter:res?.data.result })
+              
 
         } catch (err) {
             console.log(err);
@@ -233,6 +242,9 @@ class Products extends React.Component {
               this.setState({ product: res?.data.result })
               this.setState({ productfilter:res?.data.result })
 
+
+
+
         } catch (err) {
             console.log(err);
             console.log(err?.data?.message);
@@ -330,7 +342,7 @@ class Products extends React.Component {
                     <div className="items mt-4">
                     {
                        
-                                    this.state?.productfilter.map(filteredName =>
+                                    this.state.categorydata.map(filteredName =>
 
                                     <button className="product-btn btn-new-1">
                                     {filteredName.categoryName}
@@ -408,7 +420,7 @@ class Products extends React.Component {
                                 <option value='Date'>Please Select Category</option>
 
                                 {
-                                    this.state?.productfilter.map((cat, index) =>
+                                    this.state?.categorydata.map((cat, index) =>
 
 
                                         <option key={index} value={cat.categoryName}>{cat.categoryName}</option>

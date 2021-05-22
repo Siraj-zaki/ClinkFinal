@@ -13,6 +13,7 @@ export const forgetpassword=baseUrl+'/v1/forgotPassword/'
 export const verifiedcode=baseUrl+'/v1/verifiedcustomer'
 export const checkareaporduct=baseUrl+'/v1/product/getarea'
 export const categories=baseUrl+'/v1/category'
+export const categoriesdist=baseUrl+'/v1/product/getdist'
 
 
 
