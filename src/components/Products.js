@@ -328,14 +328,17 @@ class Products extends React.Component {
                 <Navbar />
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
                     <div className="items mt-4">
-                        {
-                            this.state.categorydata.length && this.state.categorydata.map(r1=>(
-                                
-                        <button className="product-btn btn-new-1">
-                            {r1.itemName}
-                        </button>
-                            ))
-                        }
+                    {
+                       
+                                    this.state?.productfilter.map(filteredName =>
+
+                                    <button className="product-btn btn-new-1">
+                                    {filteredName.categoryName}
+                                </button>
+
+                                    )
+                                }
+                       
                         
                     </div>
                     <div className="products">
