@@ -34,54 +34,22 @@ class Products extends React.Component {
         long: '',
         zipcode: '',
         completeAddress: [],
-        user_area:this.props.user_area,
-        categorydata:[],
-        categorydata2:[],
+        user_area: this.props.user_area,
+        categorydata: [],
 
 
     }
     async componentDidMount() {
-        await getCategories()
-        .then((r6)=>{
-         console.log(r6.data.result);
-         this.setState({categorydata:r6.data.result})
-        })
-        console.log(this.state.categorydata);
         console.log(this.props.user_area);
         if (this.props.user_area) {
             this.setState({ toggler: 0 })
 
+            let area = {
+                longitude: this.props.user_area.longitude,
+                latitude: this.props.user_area.latitude
+            }
+            let res;
 
-        
-    let customer = await getCategories()
-    .then((re1) => {
-        if (re1?.data?.success) {
-            this.setState({categorydata:re1.data.result})
-            
-            console.log(this.state.categorydata);
-      } 
-      
-      
-
-
-    })
-    .catch(err => {
-      return toast.dark("Data Not Found", {
-        style: { fontSize: 13 },
-        className: 'dark-toast',
-        autoClose: 5000
-      }
-      );
-      console.log("er", err);
-    })
-        console.log(area);
-        
-
-              res = await addAreaProduct(area)
-              console.log(res.data.result);
-              this.setState({ product: res?.data.result })
-              this.setState({ productfilter:res?.data.result })
-              
 
             let customer = await getCategories()
                 .then((re1) => {
@@ -121,10 +89,8 @@ class Products extends React.Component {
 
 
 
-        
         }
-    
-       
+        console.log('test');
         window.scrollTo(0, 0)
         navigator.geolocation.getCurrentPosition(
             function (position) {
@@ -270,16 +236,10 @@ class Products extends React.Component {
             this.setState({ product: res?.data.result })
             this.setState({ productfilter: res?.data.result })
 
-
-
-
         } catch (err) {
             console.log(err);
             console.log(err?.data?.message);
         }
-
-
-
         this.setState({ toggler: 0 })
 
     }
@@ -366,10 +326,6 @@ class Products extends React.Component {
                                                         </li>
                                                         <br />
                                                         <button type="submit" className="footer-btn" style={{ position: 'absolute', right: 0, marginTop: 20, zIndex: 20, borderRadius: '0px', border: '1px solid white' }}>Enter</button>
-
-
-
-
                                                         {/* <input    {...getInputProps({
                               placeholder: 'Search Places ...',
                               className: 'location-search-input',
@@ -426,18 +382,24 @@ class Products extends React.Component {
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
 
                     <div className="items mt-4">
-                    {
-                       
-                                    this.state.categorydata.map(filteredName =>
+                        {
 
-                                    <button className="product-btn btn-new-1">
-                                    {filteredName.categoryName}
-                                </button>
 
-                                    )
+                            <Slider {...settings}>
+                                {
+                                    this.state.categorydata.length === 0 ? "" :
+                                        this.state.categorydata.length && this.state.categorydata.map(r1 => (
+                                            <button className="product-btn btn-new-1">
+                                                {r1.itemName}
+                                            </button>
+                                        ))
                                 }
-                       
-                        
+
+                            </Slider>
+
+
+                        }
+
                     </div>
                     <div className="products">
 
@@ -506,7 +468,7 @@ class Products extends React.Component {
                                 <option value='Date'>Please Select Category</option>
 
                                 {
-                                    this.state?.categorydata.map((cat, index) =>
+                                    this.state?.productfilter.map((cat, index) =>
 
 
                                         <option key={index} value={cat.categoryName}>{cat.categoryName}</option>
