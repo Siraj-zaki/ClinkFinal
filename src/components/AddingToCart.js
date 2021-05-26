@@ -110,16 +110,26 @@ class AddingToCart extends React.Component {
     }
 
     onSubmit = () => {
-
-        let dup = this.state.product;
-        dup.quantity = this.state.quantity;
-        dup.productUnit = this.state.productUnit;
-        this.props.addToCart(dup);
-        toast.dark("Successfully Item Added",{
-            style:{fontSize:13},
-            className: 'dark-toast',
-            autoClose: 5000
-          });
+        console.log(this.state.productUnit.length);
+        if(this.state.productUnit.length){
+            let dup = this.state.product;
+            dup.quantity = this.state.quantity;
+            dup.productUnit = this.state.productUnit;
+            this.props.addToCart(dup);
+            toast.dark("Successfully Item Added",{
+                style:{fontSize:13},
+                className: 'dark-toast',
+                autoClose: 5000
+              });
+        }else{
+            
+            toast.dark("Please Select Unit",{
+                style:{fontSize:13},
+                className: 'dark-toast',
+                autoClose: 5000
+              });
+     
+        }
 
          
         // return toast("SuccessfullY Item Added", {
