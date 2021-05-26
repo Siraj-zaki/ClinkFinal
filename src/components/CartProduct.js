@@ -6,29 +6,35 @@ import '../css/products.css'
 
 
 class CartProduct extends React.Component {
-
     state = {
-
+        
         cartproduct: [
             {
                 img: this.props?.product?.imgUrl,
                 Company: this.props?.product?.storeName,
                 Bottle: this.props?.product?.itemName,
                 Size: this.props?.product?.price
-
+                
             }
-
+            
         ],
         product: [],
         hearttoggler: false
-
+        
     }
+    componentDidUpdate(){
+        
 
-
-
-
+        console.log(this.props);
+        console.log('did update');
+    }
+    
+    
+    
     render() {
 
+        console.log(this.state.cartproduct);
+        
         return (
             <div>
                 {

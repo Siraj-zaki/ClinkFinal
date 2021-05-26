@@ -51,27 +51,7 @@ class Products extends React.Component {
             let res;
 
 
-            let customer = await getCategories()
-                .then((re1) => {
-                    if (re1?.data?.success) {
-                        this.setState({ categorydata: re1.data.result })
-
-                        console.log(this.state.categorydata);
-                    }
-
-
-
-
-                })
-                .catch(err => {
-                    return toast.dark("Data Not Found", {
-                        style: { fontSize: 13 },
-                        className: 'dark-toast',
-                        autoClose: 5000
-                    }
-                    );
-                    console.log("er", err);
-                })
+          
             console.log(area);
             try {
 
@@ -90,6 +70,27 @@ class Products extends React.Component {
 
 
         }
+        let customer = await getCategories()
+        .then((re1) => {
+            if (re1?.data?.success) {
+                this.setState({ categorydata: re1.data.result })
+
+                console.log(this.state.categorydata);
+            }
+
+
+
+
+        })
+        .catch(err => {
+            return toast.dark("Data Not Found", {
+                style: { fontSize: 13 },
+                className: 'dark-toast',
+                autoClose: 5000
+            }
+            );
+            console.log("er", err);
+        })
         console.log('test');
         window.scrollTo(0, 0)
         navigator.geolocation.getCurrentPosition(
@@ -182,20 +183,30 @@ class Products extends React.Component {
     }
 
     handleOnSearch = (string, results) => {
+        console.log(this.state.product)
+        console.log(results)
+        // let matches = this.state.product.filter(v => v.itemName.includes(results));
+        // console.log(matches)
+        this.setState({ product: results })
+        this.setState({ productfilter: results })
+
+        console.log(this.state.product);
+        console.log(this.state.productfilter);
         // onSearch will have as the first callback parameter
         // the string searched and for the second the results.
-        console.log(string, results)
-        console.log(string)
-        console.log(this.state.product.length)
-        { this.state.product.length == 1 ? this.setState({ product: this.state.productfilter }) : this.setState({ product: this.state.product }) }
+        // console.log(string, results)
+        // console.log(string)
+        // console.log(this.state.product.length)
+        // { this.state.product.length == 1 ? this.setState({ product: this.state.productfilter }) : this.setState({ product: this.state.product }) }
 
-        if (this.state.product.length == 1) {
-            this.setState({ product: this.state.productfilter })
+        // if (this.state.product.length == 1) {
+        //     this.setState({ product: this.state.productfilter })
 
-        }
+        // }
 
-        console.log(this.state.productfilter);
-        this.setState({ product: results })
+        // console.log(this.state.productfilter);
+        // this.setState({ product: results })
+        
 
 
     }
@@ -209,6 +220,7 @@ class Products extends React.Component {
 
     handleOnSelect = (item) => {
         // the item selected
+        console.log(item);
         this.setState({ product: item })
         { this.state.product.length == 1 ? this.setState({ product: this.state.productfilter }) : this.setState({ product: this.state.product }) }
 
@@ -458,13 +470,13 @@ class Products extends React.Component {
                                     items={this.state.productfilter}
                                     onSearch={this.handleOnSearch}
                                     onHover={this.handleOnHover}
-                                    onSelect={this.handleOnSelect}
+                                   
                                     onFocus={this.handleOnFocus}
                                 // autoFocus
                                 />
                             </div>
 
-                            <select className="filter-input" name="sort" value={this.state.categoryid} onChange={(e) => this.handleCategory(e)} id="sort">
+                            {/* <select className="filter-input" name="sort" value={this.state.categoryid} onChange={(e) => this.handleCategory(e)} id="sort">
                                 <option value='Date'>Please Select Category</option>
 
                                 {
@@ -476,10 +488,11 @@ class Products extends React.Component {
                                     )
                                 }
 
-                            </select>
+                            </select> */}
                         </div>
                         <div className="products-cart">
                             {
+                                console.log(this.state.product),
 
                                 this.state && this.state.product.length ?
                                     this.state?.product.map((item, index) =>
