@@ -36,6 +36,7 @@ class Products extends React.Component {
         completeAddress: [],
         user_area: this.props.user_area,
         categorydata: [],
+        search: "",
 
 
     }
@@ -51,7 +52,7 @@ class Products extends React.Component {
             let res;
 
 
-          
+
             console.log(area);
             try {
 
@@ -71,26 +72,26 @@ class Products extends React.Component {
 
         }
         let customer = await getCategories()
-        .then((re1) => {
-            if (re1?.data?.success) {
-                this.setState({ categorydata: re1.data.result })
+            .then((re1) => {
+                if (re1?.data?.success) {
+                    this.setState({ categorydata: re1.data.result })
 
-                console.log(this.state.categorydata);
-            }
-
-
+                    console.log(this.state.categorydata);
+                }
 
 
-        })
-        .catch(err => {
-            return toast.dark("Data Not Found", {
-                style: { fontSize: 13 },
-                className: 'dark-toast',
-                autoClose: 5000
-            }
-            );
-            console.log("er", err);
-        })
+
+
+            })
+            .catch(err => {
+                return toast.dark("Data Not Found", {
+                    style: { fontSize: 13 },
+                    className: 'dark-toast',
+                    autoClose: 5000
+                }
+                );
+                console.log("er", err);
+            })
         console.log('test');
         window.scrollTo(0, 0)
         navigator.geolocation.getCurrentPosition(
@@ -131,6 +132,10 @@ class Products extends React.Component {
                     .catch(error => console.error('Error', error));
             })
     };
+    searchFilter = (e) => {
+        let searchItem = e.target.value
+        this.setState({ search: searchItem })
+    }
 
     handleChange = address => {
         this.setState({ address });
@@ -206,7 +211,7 @@ class Products extends React.Component {
 
         // console.log(this.state.productfilter);
         // this.setState({ product: results })
-        
+
 
 
     }
@@ -451,18 +456,13 @@ class Products extends React.Component {
                             </select>
                             <select className="filter-input" name="sort" value={this.state.datevalue} onChange={(e) => this.handleDate(e)} id="sort">
                                 <option value='Date'>Please Select Date</option>
-
                                 {
                                     this.state?.productfilter.map((cat, index) =>
-
-
                                         <option key={index} value={cat.createdat}>{cat.createdat}</option>
-
                                     )
                                 }
-
                             </select>
-                            <div style={{ width: 280 }}>
+                            {/* <div style={{ width: 280 }}>
                                 <ReactSearchAutocomplete
                                     fuseOptions={{ keys: ["itemName"] }}
                                     //     // necessary, otherwise the results will be blank
@@ -470,11 +470,12 @@ class Products extends React.Component {
                                     items={this.state.productfilter}
                                     onSearch={this.handleOnSearch}
                                     onHover={this.handleOnHover}
-                                   
+
                                     onFocus={this.handleOnFocus}
                                 // autoFocus
                                 />
-                            </div>
+                            </div> */}
+                            <input className="filter-input" name="sort" value={this.state.search} onChange={this.searchFilter} id="sort"></input>
 
                             {/* <select className="filter-input" name="sort" value={this.state.categoryid} onChange={(e) => this.handleCategory(e)} id="sort">
                                 <option value='Date'>Please Select Category</option>
@@ -487,13 +488,11 @@ class Products extends React.Component {
 
                                     )
                                 }
-
                             </select> */}
                         </div>
                         <div className="products-cart">
-                            {
+                            {/* {
                                 console.log(this.state.product),
-
                                 this.state && this.state.product.length ?
                                     this.state?.product.map((item, index) =>
                                         <CartProduct product={item} />
@@ -503,20 +502,40 @@ class Products extends React.Component {
                                         <CartProduct product={item} />
                                     )
                                         : 'Product Data Not Found'
-
+                            } */}
+                            {/* {this.state.product.map((item, index) =>
+                                <CartProduct
+                                    img={item.imgUrl}
+                                    Company={item.Company}
+                                    Bottle={item.itemName}
+                                    StoreName={item.storeName}
+                                    id={item.id}
+                                />
+                            )} */}
+                            {
+                                this.state.product.filter(data => {
+                                    if (this.state.search === "") {
+                                        return data
+                                    } else if (data.itemName.toLowerCase().includes(this.state.search.toLowerCase()) || data.storeName.toLowerCase().includes(this.state.search.toLowerCase())) {
+                                        return data
+                                    }
+                                }).map((item, index) =>
+                                    <CartProduct
+                                        img={item.imgUrl}
+                                        Company={item.Company}
+                                        Bottle={item.itemName}
+                                        StoreName={item.storeName}
+                                        id={item.id}
+                                    />
+                                )
                             }
-
                         </div>
-
                     </div>
-
                     <Footer />
-
                 </div>
             </div>
         )
     }
-
 };
 const mapStateToProps = (state) => {
     return {

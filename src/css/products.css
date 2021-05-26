@@ -655,3 +655,13 @@ height: 734px; */
         align-items: center
     }
 }
+
+@media(min-width:768px) {
+    #root>div.Home.bgimg-1>div:nth-child(2)>div.items.mt-4>div>div {
+        overflow-x: hidden;
+        padding: 6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
