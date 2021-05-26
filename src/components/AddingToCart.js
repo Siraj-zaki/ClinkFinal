@@ -192,7 +192,7 @@ class AddingToCart extends React.Component {
                 {/* <img className="bgimg-1" src={bgimg1} alt="" /> */}
                 <Navbar />
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'column' }}>
-                    <div className="items mt-4">
+                    {/* <div className="items mt-4">
                         <button className="product-btn btn-new-1">
                             Tequila
                         </button>
@@ -208,7 +208,7 @@ class AddingToCart extends React.Component {
                         <button className="product-btn btn-new-1">
                             Whiskey
                         </button>
-                    </div>
+                    </div> */}
                     <span className="detail-heading mt-5" >CLINK / TEQUILA / BLANCO / SILVER TEQUILA</span>
                     <div className="products new-padding">
                         <div className="product-detail-div">
