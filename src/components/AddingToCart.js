@@ -39,13 +39,17 @@ class AddingToCart extends React.Component {
     }
     this.onChange = this.onChange.bind(this);
     }
-    static getDerivedStateFromProps(nextProps, prevState) {
-        if (nextProps.cartData.find(pro => pro.id == nextProps.match.params.id)) {
-            return{
-                quantity: nextProps.cartData.find(pro => pro.id == nextProps.match.params.id).quantity
-            }
-        }
-    }
+    
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     console.log(nextProps);
+    //     console.log(nextProps.match.params.id);
+    //     if (nextProps.cartData.find(pro => pro.id == nextProps.match.params.id)) {
+    //         console.log('test propss')
+    //         return{
+    //             quantity: nextProps.cartData.find(pro => pro.id == nextProps.match.params.id).quantity
+    //         }
+    //     }
+    // }
     onChange=(event)=> {
         const target = event.target;
         var value = target.value;
@@ -78,10 +82,16 @@ class AddingToCart extends React.Component {
       }
 
     async componentDidMount() {
+       
         const id = this.props.match.params.id;
+        console.log('final carddd',id);
+
         let product1 = await getProduct();
         this.setState({relatedproduct:product1?.data?.result})
+
+
         if(this.props?.cartData && this.props?.cartData.length && this.props?.cartData.find(pro => pro.id === id)){
+            console.log('final carddd',this.state.quantity);
             this.setState({quantity: this.props?.cartData.find(pro => pro.id === id).quantity})
         }
 
@@ -100,6 +110,7 @@ class AddingToCart extends React.Component {
     }
 
     onSubmit = () => {
+
         let dup = this.state.product;
         dup.quantity = this.state.quantity;
         dup.productUnit = this.state.productUnit;
@@ -125,7 +136,7 @@ class AddingToCart extends React.Component {
     }
 
     render() {
-        console.log(this.state.unit);
+        console.log(this.state.quantity);
         let item = this.state.unit.filter(c => c.id === this.state.items)
        
         console.log(item);
@@ -259,9 +270,9 @@ class AddingToCart extends React.Component {
                                                 -
                                            </button>
                                             <button className="addtocart-btn">
-                                                {this.state.quantity}
+                                                {this.state.quantity }
                                             </button>
-                                            <button onClick={() => this.setState({ quantity: this.state.quantity + 1 })} className="addtocart-btn" style={{ fontSize: 30 }} >
+                                            <button onClick={() =>this.setState({ quantity: this.state.quantity + 1 })} className="addtocart-btn" style={{ fontSize: 30 }} >
                                                 +
                                             </button>
                                         </div>

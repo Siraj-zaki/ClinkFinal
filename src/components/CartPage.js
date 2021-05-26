@@ -293,15 +293,15 @@ class AddingToCart extends React.Component {
                             </div>
                             {this.props?.cartData && this.props?.cartData.length ?
                                 this.props?.cartData.map((pro, ind) => (
-                                    total_amount += (parseInt(pro.productUnit[0].cvr) + parseInt(pro.productUnit[0].itemPrice)) * pro.quantity,
+                                    total_amount += (parseInt(pro.productUnit[0]?.cvr) + parseInt(pro.productUnit[0]?.itemPrice)) * pro.quantity,
 
                                     <SelectedItem
                                         key={ind}
                                         id={pro.id}
                                         heading={pro.itemName}
                                         headingsmall={pro.storeName}
-                                        size={pro.productUnit[0].unit}
-                                        price={parseInt(pro.productUnit[0].cvr) + parseInt(pro.productUnit[0].itemPrice)}
+                                        size={pro.productUnit[0]?.unit}
+                                        price={parseInt(pro.productUnit[0]?.cvr) + parseInt(pro.productUnit[0]?.itemPrice)}
                                         quantity={pro.quantity}
                                         imgsrc={pro.imgUrl}
                                     />
