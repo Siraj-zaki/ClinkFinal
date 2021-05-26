@@ -36,9 +36,11 @@ class Products extends React.Component {
         completeAddress: [],
         user_area: this.props.user_area,
         categorydata: [],
+        stringName:''
 
 
     }
+    
     async componentDidMount() {
         console.log(this.props.user_area);
         if (this.props.user_area) {
@@ -185,9 +187,15 @@ class Products extends React.Component {
     handleOnSearch = (string, results) => {
         console.log(this.state.product)
         console.log(results)
+
         // let matches = this.state.product.filter(v => v.itemName.includes(results));
         // console.log(matches)
+
         this.setState({ product: results })
+        this.setState({ stringName: string })
+        
+        console.log(this.state.product)
+
         this.setState({ productfilter: results })
 
         console.log(this.state.product);
@@ -496,7 +504,7 @@ class Products extends React.Component {
 
                                 this.state && this.state.product.length ?
                                     this.state?.product.map((item, index) =>
-                                        <CartProduct product={item} />
+                                        <CartProduct product={item} string={this.handleOnSearch} />
                                     )
                                     :
                                     this.state?.productfilter.length ? this.state?.productfilter.map((item, index) =>

@@ -13,27 +13,36 @@ class CartProduct extends React.Component {
                 img: this.props?.product?.imgUrl,
                 Company: this.props?.product?.storeName,
                 Bottle: this.props?.product?.itemName,
-                Size: this.props?.product?.price
-                
+                Size: this.props?.product?.price,
+               value:0
             }
             
         ],
         product: [],
+        productlist: [],
         hearttoggler: false
         
     }
-    componentDidUpdate(){
-        
-
-        console.log(this.props);
-        console.log('did update');
+    componentDidMount(){
+        this.setState({value:this.state.value})
     }
+    
+    
     
     
     
     render() {
-
-        console.log(this.state.cartproduct);
+    
+        if(this.props.string ){
+           
+            // this.setState({productlist:this.props})
+            console.log(this.props.string);
+    
+        }
+    
+    
+    
+        
         
         return (
             <div>
