@@ -18,28 +18,28 @@ import Footer from './Footer';
 import { withRouter } from "react-router";
 import { getProduct } from "./../Service/service";
 
-import { getProductById,getProductUnitById } from "./../Service/service";
+import { getProductById, getProductUnitById } from "./../Service/service";
 import { connect } from 'react-redux';
 import { addToCart } from '../services/Store/Actions/cartActions';
 import { injectStyle } from "react-toastify/dist/inject-style";
 import { ToastContainer, toast } from "react-toastify";
 
 class AddingToCart extends React.Component {
-    
-    constructor(){
+
+    constructor() {
         super();
-    this.state = {
-        hearttoggler: false,
-        counter: 0,
-        product: [],
-        quantity: 1,unit:[],
-        items:'',
-        productUnit:[],
-        relatedproduct:[]
+        this.state = {
+            hearttoggler: false,
+            counter: 0,
+            product: [],
+            quantity: 1, unit: [],
+            items: '',
+            productUnit: [],
+            relatedproduct: []
+        }
+        this.onChange = this.onChange.bind(this);
     }
-    this.onChange = this.onChange.bind(this);
-    }
-    
+
     // static getDerivedStateFromProps(nextProps, prevState) {
     //     console.log(nextProps);
     //     console.log(nextProps.match.params.id);
@@ -50,58 +50,58 @@ class AddingToCart extends React.Component {
     //         }
     //     }
     // }
-    onChange=(event)=> {
+    onChange = (event) => {
         const target = event.target;
         var value = target.value;
-   
+
         console.log(value);
-        
-        if(target.checked){
-            this.state.items = value;   
+
+        if (target.checked) {
+            this.state.items = value;
             console.log(this.state.items);
-        }else{
+        } else {
 
             var index = this.state.items.indexOf(value);
-                if (index > -1) {
-                  let data=  this.state.items.splice(index, 1);
-                    this.setState({
-                        items: data
-                    })
-                } 
-                console.log(this.state.items);
-                // this.state.items.splice(value, 1);
+            if (index > -1) {
+                let data = this.state.items.splice(index, 1);
+                this.setState({
+                    items: data
+                })
             }
-            console.log(this.state.unit);
-            let item = this.state.unit.filter(c => c.id == this.state.items)
-            this.setState({
-                productUnit: item
-            })
-    console.log(item);
-    
+            console.log(this.state.items);
+            // this.state.items.splice(value, 1);
+        }
+        console.log(this.state.unit);
+        let item = this.state.unit.filter(c => c.id == this.state.items)
+        this.setState({
+            productUnit: item
+        })
+        console.log(item);
+
         // this.setState({ [e.target.name]: e.target.checked });
-      }
+    }
 
     async componentDidMount() {
-       
+
         const id = this.props.match.params.id;
-        console.log('final carddd',id);
+        console.log('final carddd', id);
 
         let product1 = await getProduct();
-        this.setState({relatedproduct:product1?.data?.result})
+        this.setState({ relatedproduct: product1?.data?.result })
 
 
-        if(this.props?.cartData && this.props?.cartData.length && this.props?.cartData.find(pro => pro.id === id)){
-            console.log('final carddd',this.state.quantity);
-            this.setState({quantity: this.props?.cartData.find(pro => pro.id === id).quantity})
+        if (this.props?.cartData && this.props?.cartData.length && this.props?.cartData.find(pro => pro.id === id)) {
+            console.log('final carddd', this.state.quantity);
+            this.setState({ quantity: this.props?.cartData.find(pro => pro.id === id).quantity })
         }
 
         try {
             let product = await getProductById(id);
             console.log(product);
             this.setState({ product: product.data.result[0] });
-            let unitproduct=await getProductUnitById(id);
+            let unitproduct = await getProductUnitById(id);
             console.log(unitproduct);
-            this.setState({unit:unitproduct.data.result})
+            this.setState({ unit: unitproduct.data.result })
 
         } catch (error) {
             console.log(error.data);
@@ -111,27 +111,27 @@ class AddingToCart extends React.Component {
 
     onSubmit = () => {
         console.log(this.state.productUnit.length);
-        if(this.state.productUnit.length){
+        if (this.state.productUnit.length) {
             let dup = this.state.product;
             dup.quantity = this.state.quantity;
             dup.productUnit = this.state.productUnit;
             this.props.addToCart(dup);
-            toast.dark("Successfully Item Added",{
-                style:{fontSize:13},
+            toast.dark("Successfully Item Added", {
+                style: { fontSize: 13 },
                 className: 'dark-toast',
                 autoClose: 5000
-              });
-        }else{
-            
-            toast.dark("Please Select Unit",{
-                style:{fontSize:13},
+            });
+        } else {
+
+            toast.dark("Please Select Unit", {
+                style: { fontSize: 13 },
                 className: 'dark-toast',
                 autoClose: 5000
-              });
-     
+            });
+
         }
 
-         
+
         // return toast("SuccessfullY Item Added", {
         //     position: "top-right",
         //     autoClose: 5000,
@@ -148,7 +148,7 @@ class AddingToCart extends React.Component {
     render() {
         console.log(this.state.quantity);
         let item = this.state.unit.filter(c => c.id === this.state.items)
-       
+
         console.log(item);
 
         function SamplePrevArrow(props) {
@@ -261,28 +261,28 @@ class AddingToCart extends React.Component {
                                     {this.state.product.description}
                                 </span>
                                 <div className="div-right-side-li">
-                                    {this?.state?.unit.map(r1=>(
+                                    {this?.state?.unit.map(r1 => (
 
                                         <li className="size-selector mt-5">
-                                        <div>
-                                            <input type="radio"  className="m-3 ml-5" id="t-option" name="selector" value={r1.id} onChange={(e)=>this.onChange(e)} />
-                                            <span className="li-size m-3">{r1.unit}</span>
-                                        </div>
-                                        <div>
-                                            <span className="li-size m-3 mr-5" >{parseInt(r1.itemPrice) +parseInt(r1.cvr)} $</span>
-                                        </div>
-                                    </li>
-                                    )) 
-                                  }
+                                            <div>
+                                                <input type="radio" className="m-3 ml-5" id="t-option" name="selector" value={r1.id} onChange={(e) => this.onChange(e)} />
+                                                <span className="li-size m-3">{r1.unit}</span>
+                                            </div>
+                                            <div>
+                                                <span className="li-size m-3 mr-5" >{parseInt(r1.itemPrice) + parseInt(r1.cvr)} $</span>
+                                            </div>
+                                        </li>
+                                    ))
+                                    }
                                     <li className="size-selector mt-5" style={{ minHeight: 'none', border: 'none' }}>
                                         <div style={{ border: '1px solid black', minHeight: '70px', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: "space-evenly", width: 200 }}>
                                             <button onClick={() => this.state.quantity === 0 ? this.setState({ quantity: this.state.quantity + 0 }) : this.setState({ quantity: this.state.quantity - 1 })} className="addtocart-btn" style={{ fontSize: 40 }} >
                                                 -
                                            </button>
                                             <button className="addtocart-btn">
-                                                {this.state.quantity }
+                                                {this.state.quantity}
                                             </button>
-                                            <button onClick={() =>this.setState({ quantity: this.state.quantity + 1 })} className="addtocart-btn" style={{ fontSize: 30 }} >
+                                            <button onClick={() => this.setState({ quantity: this.state.quantity + 1 })} className="addtocart-btn" style={{ fontSize: 30 }} >
                                                 +
                                             </button>
                                         </div>
@@ -292,7 +292,7 @@ class AddingToCart extends React.Component {
                                             <button className="li-size m-3 mr-5 addtocart " style={{ minHeight: 70, border: 'none' }} onClick={() => window.location.href = "/CartPage"}  >View Cart</button>
                                             :
                                         } */}
-                                        <button className="li-size m-3 mr-5 addtocart " style={{ minHeight: 70, border: 'none' }} onClick={() => this.onSubmit()}  >Add to Cart</button>
+                                            <button className="li-size m-3 mr-5 addtocart " style={{ minHeight: 70, border: 'none' }} onClick={() => this.onSubmit()}  >Add to Cart</button>
                                         </div>
                                     </li>
                                 </div>
@@ -303,10 +303,16 @@ class AddingToCart extends React.Component {
                                 <span className="slider-heading" >Products you may like</span>
                             </div>
                             <Slider {...settings}>
-                            {
+                                {
                                     this.state.relatedproduct.map((item, index) =>
                                         <div>
-                                            <CartProduct product={item} />
+                                            <CartProduct
+                                                img={item.imgUrl}
+                                                Company={item.Company}
+                                                Bottle={item.itemName}
+                                                StoreName={item.storeName}
+                                                id={item.id}
+                                            />
                                         </div>
                                     )
                                 }
@@ -349,10 +355,10 @@ class AddingToCart extends React.Component {
                     </div>
 
                     <Footer />
-                    <ToastContainer 
-        toastClassName="dark-toast"
-        progressClassName="transparent-progress" 
-      />
+                    <ToastContainer
+                        toastClassName="dark-toast"
+                        progressClassName="transparent-progress"
+                    />
                 </div>
             </div>
         )

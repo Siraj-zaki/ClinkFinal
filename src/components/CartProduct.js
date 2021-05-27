@@ -31,19 +31,6 @@ class CartProduct extends React.Component {
 
         return (
             <div>
-                {/* {
-                    this.state.cartproduct.map((cart, index) =>
-                        <div className="add-products" style={{ position: 'relative', minHeight: this.props.newheight ? 310 : "", width: this.props.newwidth ? 280 : "" }} key={index} >
-                            <div className="heart-main" onClick={() => this.setState({ hearttoggler: !this.state.hearttoggler })}>
-                                <img className="heart-div" src={this.state.hearttoggler === true ? heartfill : heart} alt="" />
-                            </div>
-                            <img onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} height="250px" width="250px" src={cart.img} alt="not" />
-                            <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart-company" >{cart.Company}</span>
-                            <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart-company" >{cart.Bottle}</span>
-                            <span onClick={() => window.location.href = `/AddingToCart/${this.props.product.id}`} className="cart-size">{cart.Size}</span>
-                        </div>
-                    )
-                } */}
                 <div className="add-products" style={{ position: 'relative', minHeight: this.props.newheight ? 310 : "", width: this.props.newwidth ? 280 : "" }}  >
                     <div className="heart-main" onClick={() => this.setState({ hearttoggler: !this.state.hearttoggler })}>
                         <img className="heart-div" src={this.state.hearttoggler === true ? heartfill : heart} alt="" />
