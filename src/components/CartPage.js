@@ -272,7 +272,15 @@ class AddingToCart extends React.Component {
 
                                         <SwiperSlide>
                                             <div >
-                                                <CartProduct product={item} newwidth newheight />
+                                                <CartProduct
+                                                    newwidth
+                                                    newheight
+                                                    img={item.imgUrl}
+                                                    Company={item.Company}
+                                                    Bottle={item.itemName}
+                                                    StoreName={item.storeName}
+                                                    id={item.id}
+                                                />
                                             </div>
                                         </SwiperSlide>
 
@@ -317,8 +325,8 @@ class AddingToCart extends React.Component {
                                     imgsrc={cartimg}
                                 />
                             )} */}
-                             {
-                                total_amount === 0 ? <span className="cart-heading-heading" style={{opacity:0.5,marginTop:"3rem"}} >Cart is Empty</span>
+                            {
+                                total_amount === 0 ? <span className="cart-heading-heading" style={{ opacity: 0.5, marginTop: "3rem" }} >Cart is Empty</span>
                                     :
                                     <div className="inner-cart-div mt-5 border-top pt-5">
                                         <div className="cart-left-side">
