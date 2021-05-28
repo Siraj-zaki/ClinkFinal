@@ -24,7 +24,7 @@ class SelectedItem extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="cart-right-side" onClick={() => this.props.removeFromCart(this.props.id)}>
+                <div className="cart-right-side" onClick={() => this.props.removeFromCart(this.props.id_random)}>
                     <img src={smallcross} alt="" />
                 </div>
 

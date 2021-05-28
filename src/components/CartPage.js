@@ -298,6 +298,7 @@ class AddingToCart extends React.Component {
                                     <SelectedItem
                                         key={ind}
                                         id={pro.id}
+                                        id_random={pro.id_random}
                                         heading={pro.itemName}
                                         headingsmall={pro.storeName}
                                         size={pro.productUnit[0]?.unit}

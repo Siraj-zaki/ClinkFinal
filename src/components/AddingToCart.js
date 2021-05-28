@@ -113,8 +113,10 @@ class AddingToCart extends React.Component {
         console.log(this.state.productUnit.length);
         if(this.state.productUnit.length){
             let dup = this.state.product;
+             dup.id_random=Math.floor(100000 + Math.random() * 900000);
             dup.quantity = this.state.quantity;
             dup.productUnit = this.state.productUnit;
+            console.log(dup);
             this.props.addToCart(dup);
             toast.dark("Successfully Item Added",{
                 style:{fontSize:13},
