@@ -482,43 +482,9 @@ class Products extends React.Component {
                                 // autoFocus
                                 />
                             </div> */}
-                            <input className="filter-input" name="sort" value={this.state.search} onChange={this.searchFilter} id="sort"></input>
-
-                            {/* <select className="filter-input" name="sort" value={this.state.categoryid} onChange={(e) => this.handleCategory(e)} id="sort">
-                                <option value='Date'>Please Select Category</option>
-
-                                {
-                                    this.state?.productfilter.map((cat, index) =>
-
-
-                                        <option key={index} value={cat.categoryName}>{cat.categoryName}</option>
-
-                                    )
-                                }
-                            </select> */}
+                            <input className="filter-input" name="sort" value={this.state.search} onChange={this.searchFilter} id="sort" placeholder="Search Product Here"></input>
                         </div>
                         <div className="products-cart">
-                            {/* {
-                                console.log(this.state.product),
-                                this.state && this.state.product.length ?
-                                    this.state?.product.map((item, index) =>
-                                        <CartProduct product={item} string={this.handleOnSearch} />
-                                    )
-                                    :
-                                    this.state?.productfilter.length ? this.state?.productfilter.map((item, index) =>
-                                        <CartProduct product={item} />
-                                    )
-                                        : 'Product Data Not Found'
-                            } */}
-                            {/* {this.state.product.map((item, index) =>
-                                <CartProduct
-                                    img={item.imgUrl}
-                                    Company={item.Company}
-                                    Bottle={item.itemName}
-                                    StoreName={item.storeName}
-                                    id={item.id}
-                                />
-                            )} */}
                             {
                                 this.state.product.filter(data => {
                                     if (this.state.search === "") {

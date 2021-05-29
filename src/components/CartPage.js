@@ -264,7 +264,8 @@ class AddingToCart extends React.Component {
                                 navigation
                                 pagination
                                 slidesPerView={1}
-                                onSlideChange={() => console.log('slide change')}
+                                slideToClickedSlide={(swiper) => console.log()}
+                                onSlideChange={(swiper) => console.log(swiper.activeIndex)}
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
                                 {
