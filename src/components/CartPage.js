@@ -265,7 +265,7 @@ class AddingToCart extends React.Component {
                                 pagination
                                 slidesPerView={1}
                                 slideToClickedSlide={(swiper) => console.log()}
-                                onSlideChange={(swiper) => console.log(swiper.activeIndex)}
+                                onSlideChange={(swiper) => console.log(swiper)}
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
                                 {
@@ -282,17 +282,15 @@ class AddingToCart extends React.Component {
                                                     StoreName={item.storeName}
                                                     id={item.id}
                                                 />
+                                                <button onClick={() => window.location.href = `/AddingToCart/${item.id}`} className="li-size  addtocart " style={{ minHeight: 70, border: 'none', width: 270,marginTop:20 }} >Add to Cart</button>
                                             </div>
                                         </SwiperSlide>
-
-
-
                                     )
                                 }
                             </Swiper>
                         </div>
-                        <button className="li-size  addtocart " style={{ minHeight: 70, border: 'none', width: 270 }} >Add to Cart</button>
-                        <button className="li-size  addtocart " style={{ backgroundColor: 'transparent', minHeight: 70, border: '1px solid  #a10948 ', color: '#a10948', width: 270, marginTop: 40, }} onClick={() => window.location.href = "/Products"} >Explore More</button>
+
+                        <button className="li-size  addtocart " style={{ backgroundColor: 'transparent', minHeight: 70, border: '1px solid  #a10948 ', color: '#a10948', width: 270, marginTop: 0, }} onClick={() => window.location.href = "/Products"} >Explore More</button>
                     </div>
                     <div className="cart-right-side" style={{ zIndex: 1, width: '100%', paddingLeft: '4rem' }}>
                         <div className="selected-items-div">

@@ -579,6 +579,7 @@ height: 734px; */
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    top: 40%!important;
     filter: drop-shadow(2px 3px 12px rgba(0, 0, 0, 0.06));
 }
 
@@ -586,6 +587,7 @@ height: 734px; */
     background-image: url('../assets/rightarrow.png')!important;
     background-position: center;
     background-size: contain;
+    top: 40%!important;
     background-repeat: no-repeat;
     filter: drop-shadow(2px 3px 12px rgba(0, 0, 0, 0.06));
 }

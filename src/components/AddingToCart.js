@@ -123,7 +123,9 @@ class AddingToCart extends React.Component {
                 className: 'dark-toast',
                 autoClose: 5000
             });
-            window.location.href = "/CartPage"
+            setTimeout(() => {
+                window.location.href = "/CartPage"
+            }, 2000);
         } else {
 
             toast.dark("Please Select Unit", {
