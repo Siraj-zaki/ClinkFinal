@@ -15,6 +15,8 @@ import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
 import { getProduct, addAreaProduct, getCategories } from "./../Service/service";
 import { ToastContainer, toast } from "react-toastify";
+import { zipCode } from "./../services/Store/Actions/action";
+
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import PlacesAutocomplete, {
     geocodeByAddress,
@@ -43,7 +45,8 @@ class Products extends React.Component {
     
     async componentDidMount() {
         console.log(this.props.user_area);
-        if (this.props.user_area) {
+        console.log(this.state.lat,'lat666666666666666666666666');
+        if (this.props.user_area ) {
             this.setState({ toggler: 0 })
 
             let area = {
@@ -71,6 +74,9 @@ class Products extends React.Component {
 
 
 
+        }
+        if(this.state.lat && this.state.long){
+            console.log('already longi 888888888888888888888888888888888');
         }
         let customer = await getCategories()
             .then((re1) => {
@@ -127,6 +133,13 @@ class Products extends React.Component {
                         console.log('Success', latLng)
                         this.setState({ lat: latLng.lat })
                         this.setState({ long: latLng.lng })
+
+                            let area = {
+                                longitude: this.state.long,
+                                latitude: this.state.lat,
+                              }
+                      
+                        this.props.zipCode(area)
                         console.log(this.state.lat);
                         console.log(this.state.long);
                     })
@@ -251,8 +264,11 @@ class Products extends React.Component {
             latitude: this.state.lat,
         }
         let res;
-
         console.log(area);
+        console.log(this.props.user_area);
+        // this.props.user_area.longitude=area.longitude
+        // this.props.user_area.latitude=area.latitude
+        console.log(this.props.user_area);
         try {
 
             res = await addAreaProduct(area)
@@ -516,4 +532,11 @@ const mapStateToProps = (state) => {
         user_area: state.AuthReducer.user_area
     };
 };
-export default connect(mapStateToProps)(Products);
+const mapDispatchToProps = (dispatch) => {
+    return {
+   
+      zipCode: data => { dispatch(zipCode(data)) }
+  
+    };
+  }
+export default connect(mapStateToProps, mapDispatchToProps)(Products);
