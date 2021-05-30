@@ -202,7 +202,8 @@ class Payment extends React.Component {
                     let data = {
 
                         stripeToken: this.state.stripeToken,
-                        userID: this?.props.customerAddress[0].userID,
+                        userID: this?.props.AuthReducer.id,
+                        customer_email: this?.props.AuthReducer.email,
                         customerAddress: this?.props.customerAddress[0].id,
                         itemquantity: item.quantity,
                         unitId: item.productUnit[0].id,
@@ -413,6 +414,7 @@ class Payment extends React.Component {
                 }
             ]
         };
+        console.log('thsss',this.props);
         return (
 
             <div className="Home bgimg-1 " style={{ position: 'relative', backgroundColor: 'white' }}>
@@ -580,7 +582,7 @@ const Devilvery = (props) => (
     <ElementsConsumer>
         {({ stripe, elements }) => (
 
-            <Payment stripe={stripe} elements={elements} cardData={props.cartData} customerAddress={props.customerAddress} emptycard={props.emptyFromCart} />
+            <Payment stripe={stripe} elements={elements} cardData={props.cartData} customerAddress={props.customerAddress} AuthReducer={props.user} emptycard={props.emptyFromCart} />
         )}
     </ElementsConsumer>
 );

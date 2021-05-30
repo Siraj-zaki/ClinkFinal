@@ -26,6 +26,7 @@ import { connect } from "react-redux";
 
 class Products extends React.Component {
     state = {
+        
         toggler: 1,
         product: [],
         productfilter: [],
@@ -39,7 +40,6 @@ class Products extends React.Component {
         user_area: this.props.user_area,
         categorydata: [],
         search: "",
-
 
     }
     
