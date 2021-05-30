@@ -61,6 +61,22 @@ html {
         height: 15px;
     }
 }
+@media(max-width:1600px) {
+    html {
+        font-size: 50.68%!important;
+    }
+    /* .left-side-nav {
+        height: 2px!important;
+    }
+    .icon-nav {
+        width: 20px;
+        height: 20px;
+    }
+    .search-icon {
+        width: 15px;
+        height: 15px;
+    } */
+}
 
 @media(max-width:600px) {
     .carousel-main-div {
