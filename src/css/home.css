@@ -19,10 +19,12 @@
     padding-left: 10rem;
     flex-direction: column;
 }
-.dark-toast{
-    background:red;
+
+.dark-toast {
+    background: red;
     color: #fff;
-  }
+}
+
 .left-side {
     width: 40%;
     display: flex;
@@ -62,6 +64,14 @@
 .font {
     font-family: giazapro;
     font-weight: normal;
+}
+
+.label-for-order {
+    font-family: Montserrat;
+    font-weight: normal;
+    font-size: 4rem;
+    text-align: left;
+    color: #233d3a;
 }
 
 .section-left-side-p {

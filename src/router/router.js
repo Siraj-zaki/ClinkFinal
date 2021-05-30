@@ -12,6 +12,10 @@ import Devilvery from '../components/Devilvery'
 import Finished from '../components/Finished'
 import Navbar from '../components/Navbar'
 import Shops from '../components/Shops'
+import OrderPage from '../components/OrderPage'
+import RecentViewProducts from '../components/RecentViewProducts'
+import Favourite from '../components/Favourite'
+import OrderDetailPage from '../components/OrderDetailPage'
 import { ElementsConsumer, CardElement } from "@stripe/react-stripe-js";
 
 class ReactRouter extends React.Component {
@@ -31,6 +35,10 @@ class ReactRouter extends React.Component {
         <Route path="/Devilvery" component={Devilvery} />
         <Route path="/Finished" component={Finished} />
         <Route path="/Contact" component={Shops} />
+        <Route path="/OrderPage" component={OrderPage} />
+        <Route path="/OrderDetailPage" component={OrderDetailPage} />
+        <Route path="/RecentViewProducts" component={RecentViewProducts} />
+        <Route path="/Favourite" component={Favourite} />
       </React.Fragment>
     );
   }

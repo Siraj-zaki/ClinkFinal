@@ -32,9 +32,10 @@ class CartProduct extends React.Component {
         return (
             <div>
                 <div className="add-products" style={{ position: 'relative', minHeight: this.props.newheight ? 310 : "", width: this.props.newwidth ? 280 : "" }}  >
-                    <div className="heart-main" onClick={() => this.setState({ hearttoggler: !this.state.hearttoggler })}>
+                    {this.props.fav ? <div className="heart-main" onClick={() => this.setState({ hearttoggler: !this.state.hearttoggler })}>
                         <img className="heart-div" src={this.state.hearttoggler === true ? heartfill : heart} alt="" />
-                    </div>
+                    </div> : ""
+                    }
                     <img onClick={() => window.location.href = `/AddingToCart/${this.props.id}`} height="250px" width="250px" src={this.props.img} alt="not" />
                     <span onClick={() => window.location.href = `/AddingToCart/${this.props.id}`} className="cart-company" >{this.props.Company}</span>
                     <span onClick={() => window.location.href = `/AddingToCart/${this.props.id}`} className="cart-company" >{this.props.Bottle}</span>
