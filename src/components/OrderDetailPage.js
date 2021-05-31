@@ -6,7 +6,7 @@ import SelectedItem from './SelectedItem'
 import 'swiper/swiper.scss';
 import Footer from './Footer';
 import { connect } from 'react-redux';
-import { getProduct } from "./../Service/service";
+import { customerwiseDetailOrder } from "./../Service/service";
 import { loadStripe } from '@stripe/stripe-js';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -54,9 +54,11 @@ class OrderDetailPage extends React.Component {
         productfilter: [],
     }
     async componentDidMount() {
+        const id = this.props.match.params.id;
+        console.log(id);
         window.scrollTo(0, 0)
         try {
-            let product1 = await getProduct();
+            let product1 = await customerwiseDetailOrder(id);
 
             this.setState({ product: product1?.data?.result })
             this.setState({ productfilter: product1?.data?.result })
@@ -75,7 +77,7 @@ class OrderDetailPage extends React.Component {
     }
     // this.props.user?.id ? window.location.href = "/Devilvery" : toast.warn("Please login Your Account"
     render() {
-        console.log(this.props);
+        console.log(this.state.product);
         let total_amount = 0
         return (
             <div className="Home bgimg-1 " style={{ position: 'relative', backgroundColor: 'white' }}>
@@ -87,25 +89,42 @@ class OrderDetailPage extends React.Component {
                             <div className="cart-heading">
                                 <span className="cart-heading-heading">Product Detail Page</span>
                             </div>
-                            {this.props?.cartData && this.props?.cartData.length ?
-                                this.props?.cartData.map((pro, ind) => (
-                                    total_amount += (parseInt(pro.productUnit[0]?.cvr) + parseInt(pro.productUnit[0]?.itemPrice)) * pro.quantity,
+                            {this.state?.product && this.state?.product.length ?
+                                this.state?.product.map((pro, ind) => (
+                                    total_amount += pro.total_amount,
+                                    <>
 
-                                    <SelectedItem
-                                        key={ind}
-                                        id={pro.id}
-                                        id_random={pro.id_random}
-                                        heading={pro.itemName}
-                                        headingsmall={pro.storeName}
-                                        size={pro.productUnit[0]?.unit}
-                                        price={parseInt(pro.productUnit[0]?.cvr) + parseInt(pro.productUnit[0]?.itemPrice)}
-                                        quantity={pro.quantity}
-                                        imgsrc={pro.imgUrl}
-                                        pending
-                                        OrderDetailPage
-                                    />
+                                        <SelectedItem
+                                            key={ind}
+                                            id={pro.id}
+                                            id_random={pro.id_random}
+                                            heading={pro.itemName}
+                                            headingsmall={pro.storeName}
+                                            size={pro?.unit}
+                                            price={parseInt(pro?.cvr) + parseInt(pro?.itemPrice)}
+                                            quantity={pro.itemquantity}
+                                            imgsrc={pro.imgUrl}
+                                            pending
+                                            ordernumber={`Order ${pro.id}`}
+                                        />
+                                        <div className="left-side-form" style={{ marginTop: '10rem', width: '100%' }}>
+                                            <div className="form-selected-option" >
+                                                <div className="form-selected-option mt-4">
+                                                    <label htmlFor="" className="label-for-order" >Booking  Time</label>
+                                                    <input type="text" placeholder="Devilery Time" className="adresses-input" style={{ width: '50rem' }} required disabled />
+                                                </div>
+                                                <div className="form-selected-option mt-4">
+                                                    <label htmlFor="" className="label-for-order" >Est.Time</label>
+                                                    <input type="text" placeholder="Est.Time" className="adresses-input" style={{ width: '50rem' }} required disabled />
+                                                </div>
+                                                <div className="form-selected-option mt-4">
+                                                    <label htmlFor="" className="label-for-order" >Order Number</label>
+                                                    <input type="text" placeholder="Order Number" className="adresses-input" style={{ width: '50rem' }} required disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
                                 )) : null}
-
 
                             <div className="inner-cart-div mt-5 border-top pt-5">
                                 <div className="cart-left-side">

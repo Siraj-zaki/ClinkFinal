@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { signUp,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
+import { signUp,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,ordermain,orderdetailcustomer,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
 
 export const customerSignUp = (data)=>
 {
@@ -27,6 +27,18 @@ return axios
   });
 }
 
+export const customerwiseDetailOrder = (id)=>
+{
+    console.log("customersignup");
+return axios
+  .get(orderdetailcustomer + '/' + id)
+  .then(response =>response)
+  .catch(error => {
+    if (error.response && error.response.status === 404) {
+      return `\u2014`;
+    }
+  });
+}
 const addTransaction = async (token, t) => {
   let getData = []
 
@@ -130,6 +142,15 @@ export const addOrder = (data)=>
   console.log('hit');
     return axios
     .post(addorder,data)
+    // .then(response =>response)
+    // .catch(error => error);
+}
+export const addmainOrder = (data)=>
+{
+   
+  console.log('hit');
+    return axios
+    .post(ordermain,data)
     // .then(response =>response)
     // .catch(error => error);
 }

@@ -33,7 +33,7 @@ class OrderPage extends React.Component {
         try {
             let product1 = await customerwiseOrder(this.props.user.id);
         
-
+            console.log(product1);
             this.setState({ product: product1?.data?.result })
             this.setState({ productfilter: product1?.data?.result })
             console.log(this.state.product);
@@ -65,9 +65,9 @@ class OrderPage extends React.Component {
                                 <span className="cart-heading-heading">Orders</span>
                             </div>
 
-                            {this.state?.product && this.props?.product.length ?
+                            {this.state?.product && this.state?.product.length ?
                                 this.state?.product.map((pro, ind) => (
-                                    total_amount += pro.to,
+                                    total_amount += pro.total_amount,
                                     <>
 
                                         <SelectedItem
@@ -76,12 +76,12 @@ class OrderPage extends React.Component {
                                             id_random={pro.id_random}
                                             heading={pro.itemName}
                                             headingsmall={pro.storeName}
-                                            size={pro.productUnit[0]?.unit}
-                                            price={parseInt(pro.productUnit[0]?.cvr) + parseInt(pro.productUnit[0]?.itemPrice)}
-                                            quantity={pro.quantity}
+                                            size={pro?.unit}
+                                            price={parseInt(pro?.cvr) + parseInt(pro?.itemPrice)}
+                                            quantity={pro.itemquantity}
                                             imgsrc={pro.imgUrl}
                                             pending
-                                            ordernumber={`Order ${ind + 1}`}
+                                            ordernumber={`Order ${pro.id}`}
                                         />
                                         <div className="left-side-form" style={{ marginTop: '10rem', width: '100%' }}>
                                             <div className="form-selected-option" >

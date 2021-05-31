@@ -28,7 +28,7 @@ import {
     StripeProvider,
     Elements,
 } from '@stripe/react-stripe-js';
-import { addOrder } from '../Service/service';
+import { addOrder ,addmainOrder} from '../Service/service';
 
 
 const CARD_ELEMENT_OPTIONS = {
@@ -66,7 +66,8 @@ class Payment extends React.Component {
             number: '',
             name: '',
             orderNote: '',
-            stripeToken: ''
+            stripeToken: '',
+            total_amount:0
         }
         console.log(this.props);
         this.handleChange = this.handleChange.bind(
@@ -188,49 +189,86 @@ class Payment extends React.Component {
 
 
             console.log(this.props);
+            console.log(this.state.total_amount,'total');
 
-            this?.props?.cardData?.map(async (item, index) => {
-                const card = elements.getElement(CardNumberElement);
-                const result = await stripe.createToken(card);
-                this.setState({ stripeToken: result.token })
-                console.log(result.token);
-                if (result.error) {
-                    console.log(result.error.message);
-                } else {
+            let data = {
+                        
+                stripeToken: this.state.stripeToken,
+                userID: this?.props.AuthReducer.id,
+                customer_email: this?.props.AuthReducer.email,
+                customerAddress: this?.props.customerAddress[0].id,
+                itemquantity: this?.props?.cardData[0]?.quantity,
+                unitId: this?.props?.cardData[0]?.productUnit[0].id,
+                product_id: this?.props?.cardData[0]?.id,
+                product_amount: (parseInt(this?.props?.cardData[0]?.productUnit[0].cvr) + parseInt(this?.props?.cardData[0]?.productUnit[0].itemPrice)) * this?.props?.cardData[0]?.quantity,
+                total_amount:this.state.total_amount
 
+            };
 
-                    let data = {
-
-                        stripeToken: this.state.stripeToken,
-                        userID: this?.props.AuthReducer.id,
-                        customer_email: this?.props.AuthReducer.email,
-                        customerAddress: this?.props.customerAddress[0].id,
-                        itemquantity: item.quantity,
-                        unitId: item.productUnit[0].id,
-                        product_id: item.id,
-                        product_amount: (parseInt(item.productUnit[0].cvr) + parseInt(item.productUnit[0].itemPrice)) * item.quantity,
+            console.log("data", data);
 
 
-                    };
 
-                    console.log("data", data);
-                    let customer = await addOrder(data)
-                        .then((re1) => {
-                            console.log(re1);
-                            console.log(this.props);
-                            toast.dark("PAYMENT PAID")
-                            setTimeout(() => {
-                                window.location.href = "/Finished"
-                            }, 2000);
+            let customer = await addmainOrder(data)
+            .then(r3=>{
+                console.log(r3.data.id);
 
-                        })
-                        .catch(err => {
-                            console.log("er", err);
-                        })
-                }
+                this?.props?.cardData?.map(async (item, index) => {
+                    const card = elements.getElement(CardNumberElement);
+                    const result = await stripe.createToken(card);
+                    this.setState({ stripeToken: result.token })
+                    console.log(result.token);
+                    if (result.error) {
+                        console.log(result.error.message);
+                    } else {
+                      
+                        setTimeout(async() => {
+                            
+                                                let data = {
+                            
+                                                    stripeToken: this.state.stripeToken,
+                                                    userID: this?.props.AuthReducer.id,
+                                                    customer_email: this?.props.AuthReducer.email,
+                                                    customerAddress: this?.props.customerAddress[0].id,
+                                                    itemquantity: item.quantity,
+                                                    unitId: item.productUnit[0].id,
+                                                    product_id: item.id,
+                                                    product_amount: (parseInt(item.productUnit[0].cvr) + parseInt(item.productUnit[0].itemPrice)) * item.quantity,
+                                                    total_amount:this.state.total_amount,
+                                                    order_main:r3.data.id
+                            
+                                                };
+                            
+                                                console.log("data222sss", data);
+                            
+    
+    
+                                                let customer = await addOrder(data)
+                                                    .then((re1) => {
+                                                        console.log(re1);
+                                                        console.log(this.props);
+                                                        toast.dark("PAYMENT PAID")
+                                                        setTimeout(() => {
+                                                            window.location.href = "/Finished"
+                                                        }, 4000)
+                            
+                                                    })
+                                                    .catch(err => {
+                                                        console.log("er", err);
+                                                    })
+                        }, 800);
+                    }
+    
+                })
+                setTimeout(() => {
+                    this.props.emptycard();
+                }, 2000);
+               
+
 
             })
-            this.props.emptycard();
+
+
 
 
 
@@ -244,7 +282,12 @@ class Payment extends React.Component {
 
     render() {
         let total_amount = 0
-        console.log('asda', this.props);
+
+        setTimeout(() => {
+            this.setState({total_amount:total_amount})
+        }, 500);
+        
+        
 
         const svganimation = {
             hidden: {
@@ -414,7 +457,7 @@ class Payment extends React.Component {
                 }
             ]
         };
-        console.log('thsss',this.props);
+        
         return (
 
             <div className="Home bgimg-1 " style={{ position: 'relative', backgroundColor: 'white' }}>
@@ -548,7 +591,7 @@ class Payment extends React.Component {
                                                     <div className="m-2" style={{ display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%' }} >
                                                         <span className=" div-right-side-small-heading m-2" style={{ display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >Total Amount</span>
 
-                                                        <span className="li-size" style={{ fontSize: '7rem', display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >{total_amount}$</span>
+                                                        <span className="li-size" style={{ fontSize: '7rem', display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >{this.state.total_amount}$</span>
                                                     </div>
 
 

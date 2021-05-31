@@ -36,7 +36,7 @@ class ReactRouter extends React.Component {
         <Route path="/Finished" component={Finished} />
         <Route path="/Contact" component={Shops} />
         <Route path="/OrderPage" component={OrderPage} />
-        <Route path="/OrderDetailPage" component={OrderDetailPage} />
+        <Route path="/OrderDetailPage/:id" component={OrderDetailPage} />
         <Route path="/RecentViewProducts" component={RecentViewProducts} />
         <Route path="/Favourite" component={Favourite} />
       </React.Fragment>

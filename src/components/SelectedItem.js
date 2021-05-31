@@ -43,7 +43,7 @@ class SelectedItem extends React.Component {
                                     :
                                     <>
                                         <span className="div-right-side-heading m-2" style={{ fontSize: '15px', color: '#a10948' }} >Pending</span>
-                                        <button onClick={() => window.location.href = "/OrderDetailPage"} className="li-size  addtocart " style={{ minHeight: 50, fontSize: 10, border: 'none', width: 150, margin: '6rem', display: 'flex', justifyContent: 'center', alignSelf: 'flex-start', alignItems: 'center' }}  >See More Order Items </button>
+                                        <button onClick={() => window.location.href = `/OrderDetailPage/${this.props.id}`} className="li-size  addtocart " style={{ minHeight: 50, fontSize: 10, border: 'none', width: 150, margin: '6rem', display: 'flex', justifyContent: 'center', alignSelf: 'flex-start', alignItems: 'center' }}  >See More Order Items </button>
                                     </>
                                 }
 
