@@ -389,7 +389,7 @@ li {
 }
 
 .left-side-nav {
-    width: 33%;
+    width: 100%;
     display: flex;
     justify-content: center;
     height: 2px;
@@ -399,7 +399,7 @@ li {
 
 .right-side-nav {
     position: relative;
-    width: 33%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -426,11 +426,11 @@ li {
 
 .search-bar-nav {
     position: relative;
-    width: 48rem;
+    width: 100%;
 }
 
 .input-search-bar {
-    width: 48rem;
+    width:100%;
     min-width: 220px;
     height: 5rem;
     min-height: 40px;
@@ -446,22 +446,46 @@ li {
     border: 1px solid #d2d2d2;
 }
 
+.dropdown-new {
+    border-radius: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 10px;
+    box-shadow: 0px 0px 30px -6px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0px 0px 30px -6px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0px 0px 30px -6px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-new-heading {
+    margin: 15px;
+    /* margin-top: 5px; */
+    font-size: 15px;
+    cursor: pointer;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    /* width: 100%; */
+    word-break: break-word;
+    color: #a81c56;
+}
+
 .btn-nav {
-    width: 19rem;
+    min-width: 19rem;
+    padding: 10px;
     height: 5rem;
     border-radius: 5px;
     background: white;
     border: 2px solid var(--maincolor);
     opacity: 0.92;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     text-decoration: none;
     /* font-family: Montserrat; */
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     /* font-weight: 500; */
-    font-size: 1.7rem;
+    overflow: hidden;
+    font-size: 16px;
     color: var(--maincolor);
 }
 

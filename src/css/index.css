@@ -99,6 +99,11 @@ html {
     html {
         font-size: 27%!important;
     }
+    .btn-nav {
+        min-width: 19rem;
+        width: 40rem!important;
+       
+    }
     .left-side-top-side {
         flex-direction: column!important;
         align-items: flex-start!important;

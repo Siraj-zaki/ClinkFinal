@@ -37,11 +37,13 @@ class Navbar extends React.Component {
       toggler2: 0,
       toggler3: 0,
       toggler4: 0,
+      dropDown: false,
       loginLoader: false,
       loginLoader1: false,
       code: '',
       passShow: false,
       passShow1: false,
+
       email: "",
       password: "",
       checked: "",
@@ -93,7 +95,7 @@ class Navbar extends React.Component {
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 768px)").addListener(handler);
     console.log(this.props.user);
-    
+
     if (this.props.user) {
       console.log(this.props.user);
       await this.setState({ userlogin: this.props.user });
@@ -165,8 +167,8 @@ class Navbar extends React.Component {
   }
   checkarea = async (e) => {
     e.preventDefault()
-    
-    
+
+
     console.log(this.props);
     // try {
 
@@ -1340,15 +1342,31 @@ class Navbar extends React.Component {
                   display: "flex",
                   justifyContent: "space-evenly",
                   alignItems: "center",
+                  position: 'relative',
                 }}
-              >
-                <Link
-                  onClick={() => this.setState({ toggler1: 1 })}
-                  className="btn-nav"
-                >
-                  {" "}
-                  Sign in / Sign up
-                </Link>
+              ><div style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
+                  <Link
+                    onClick={() => this.props.user === null ? this.setState({ toggler1: 1 }) : this.setState({ dropDown: !this.state.dropDown })}
+                    className="btn-nav"
+                  >
+                    {this.props.user === null ? "Sign In / Sign Up" : this.props.user.email + "+"}
+                  </Link>
+                  {
+                    this.state.dropDown ?
+                      <div className="dropdown-new" style={{ position: 'absolute', backgroundColor: 'white', zIndex: 1000, width: '100%', marginTop: 4 }}>
+                        <div>
+                        <h1 className="dropdown-new-heading">{this.props.user === null ? "" : this.props.user.email}</h1>
+                          <h1 className="dropdown-new-heading">Edit Profile</h1>
+                          <h1 onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
+                          <h1 onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
+                          <h1 onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
+                          <h1 className="dropdown-new-heading">Log Out</h1>
+
+                        </div>
+                      </div>
+                      : ""
+                  }
+                </div>
                 <div className="icons-nav">
                   <i onClick={() => (window.location.href = "/CartPage")}>
                     <svg
