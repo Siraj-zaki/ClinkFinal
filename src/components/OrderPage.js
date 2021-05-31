@@ -18,7 +18,7 @@ import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
 import { connect } from 'react-redux';
 import { ToastContainer, toast } from "react-toastify";
-import { getProduct } from "./../Service/service";
+import { customerwiseOrder } from "./../Service/service";
 
 class OrderPage extends React.Component {
     state = {
@@ -29,11 +29,14 @@ class OrderPage extends React.Component {
     }
     async componentDidMount() {
         window.scrollTo(0, 0)
+        console.log(this.props);
         try {
-            let product1 = await getProduct();
+            let product1 = await customerwiseOrder(this.props.user.id);
+        
 
             this.setState({ product: product1?.data?.result })
             this.setState({ productfilter: product1?.data?.result })
+            console.log(this.state.product);
         } catch (error) {
             console.log(error?.data);
             console.log(error?.response?.data?.message);
@@ -62,9 +65,9 @@ class OrderPage extends React.Component {
                                 <span className="cart-heading-heading">Orders</span>
                             </div>
 
-                            {this.props?.cartData && this.props?.cartData.length ?
-                                this.props?.cartData.map((pro, ind) => (
-                                    total_amount += (parseInt(pro.productUnit[0]?.cvr) + parseInt(pro.productUnit[0]?.itemPrice)) * pro.quantity,
+                            {this.state?.product && this.props?.product.length ?
+                                this.state?.product.map((pro, ind) => (
+                                    total_amount += pro.to,
                                     <>
 
                                         <SelectedItem

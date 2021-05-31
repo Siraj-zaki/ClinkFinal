@@ -1,11 +1,24 @@
 import axios from 'axios';
-import { signUp,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
+import { signUp,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
 
 export const customerSignUp = (data)=>
 {
     console.log("customersignup",data);
 return axios
   .post(signUp,data)
+  .then(response =>response)
+  .catch(error => {
+    if (error.response && error.response.status === 404) {
+      return `\u2014`;
+    }
+  });
+}
+
+export const customerwiseOrder = (id)=>
+{
+    console.log("customersignup");
+return axios
+  .get(ordercustomer + '/' + id)
   .then(response =>response)
   .catch(error => {
     if (error.response && error.response.status === 404) {
