@@ -16,7 +16,7 @@ import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
 import { withRouter } from "react-router";
-import { getProduct } from "./../Service/service";
+import { getProduct,whistlist ,whistlistUser} from "./../Service/service";
 
 import { getProductById, getProductUnitById } from "./../Service/service";
 import { connect } from 'react-redux';
@@ -35,7 +35,8 @@ class AddingToCart extends React.Component {
             quantity: 1, unit: [],
             items: '',
             productUnit: [],
-            relatedproduct: []
+            relatedproduct: [],
+
         }
         this.onChange = this.onChange.bind(this);
     }
@@ -82,9 +83,40 @@ class AddingToCart extends React.Component {
     }
 
     async componentDidMount() {
+        if(this.props.user.id){
+           
+            console.log(this.state.hearttoggler);
+    
+            let data={
+                itemId:this.props.match.params.id,
+                userId:this.props.user.id
+            }
+         
+             
+         let whi=  await  whistlistUser(data)
+         .then(r1=>{
+             
+             if(r1.data.result.length){
+                 if(r1.data.result[0].status=="true"){
+                    console.log(r1.data.result.status);
+
+                     this.setState({ hearttoggler: true })
+                 }
+
+                else{
+                this.setState({ hearttoggler: false })
+             }
+             }
+            
+
+         })
+
+
+
+        }
 
         const id = this.props.match.params.id;
-        console.log('final carddd', id);
+        console.log('final carddd', this.props);
 
         let product1 = await getProduct();
         this.setState({ relatedproduct: product1?.data?.result })
@@ -148,6 +180,47 @@ class AddingToCart extends React.Component {
         //     draggable: true,
         //     progress: undefined,
         //   });
+    }
+
+
+    whistlist =async () => {
+        if(this.props.user.id){
+            this.setState({ hearttoggler: !this.state.hearttoggler })
+            console.log(this.state.hearttoggler);
+    
+            let data={
+                itemId:this.props.match.params.id,
+                userId:this.props.user.id
+            }
+         
+             
+         let whi=  await  whistlist(data)
+         .then(r1=>{
+             console.log(r1);
+             toast.dark(r1.data.message, {
+                 style: { fontSize: 13 },
+                 className: 'dark-toast',
+                 autoClose: 5000
+             });
+
+         })
+
+
+
+        }
+else{
+    
+    toast.dark("Please login", {
+        style: { fontSize: 13 },
+        className: 'dark-toast',
+        autoClose: 5000
+    });
+}
+          
+        
+
+
+      
     }
 
     render() {
@@ -243,7 +316,7 @@ class AddingToCart extends React.Component {
                             </div>
                             <div className="product-detail-div-right-side" style={{ padding: '7rem', position: 'relative' }}>
                                 <div style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-                                    <div style={{ right: '0%', top: "50%", transform: "translate(0%, -50%)" }} className="heart-main" onClick={() => this.setState({ hearttoggler: !this.state.hearttoggler })}>
+                                    <div style={{ right: '0%', top: "50%", transform: "translate(0%, -50%)" }} className="heart-main" onClick={() => this.whistlist()}>
                                         <img className="heart-div" src={this.state.hearttoggler === true ? heartfill : heart} alt="" />
                                     </div>
                                     <span className="div-right-side-heading" >{this.state?.product?.itemName}</span>
@@ -373,7 +446,8 @@ class AddingToCart extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        cartData: state.CartReducer.cartData
+        cartData: state.CartReducer.cartData,
+        user: state.AuthReducer.user,
     };
 };
 

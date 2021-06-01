@@ -1,11 +1,49 @@
 import axios from 'axios';
-import { signUp,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,ordermain,orderdetailcustomer,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
+import { signUp,wish,wishuser,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,ordermain,orderdetailcustomer,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
 
 export const customerSignUp = (data)=>
 {
     console.log("customersignup",data);
 return axios
   .post(signUp,data)
+  .then(response =>response)
+  .catch(error => {
+    if (error.response && error.response.status === 404) {
+      return `\u2014`;
+    }
+  });
+}
+
+export const whistlist = (data)=>
+{
+    console.log("whistlist",data);
+return axios
+  .post(wish,data)
+  .then(response =>response)
+  .catch(error => {
+    if (error.response && error.response.status === 404) {
+      return `\u2014`;
+    }
+  });
+}
+
+export const whistlistALLProduct = (id)=>
+{
+    console.log("whistlist",id);
+return axios
+  .get(wish+"/"+id)
+  .then(response =>response)
+  .catch(error => {
+    if (error.response && error.response.status === 404) {
+      return `\u2014`;
+    }
+  });
+}
+export const whistlistUser = (data)=>
+{
+    console.log("whistlist",data);
+return axios
+  .post(wishuser,data)
   .then(response =>response)
   .catch(error => {
     if (error.response && error.response.status === 404) {
