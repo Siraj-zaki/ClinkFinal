@@ -101,8 +101,13 @@ html {
     }
     .btn-nav {
         min-width: 19rem;
-        width: 40rem!important;
+        width: 24rem!important;
+        font-size: 9px!important;
        
+    }
+    .dropdown-new{
+        width: 300px!important;
+        left: -120%;
     }
     .left-side-top-side {
         flex-direction: column!important;

@@ -93,7 +93,6 @@ class OrderDetailPage extends React.Component {
                                 this.state?.product.map((pro, ind) => (
                                     total_amount += pro.total_amount,
                                     <>
-
                                         <SelectedItem
                                             key={ind}
                                             id={pro.id}
