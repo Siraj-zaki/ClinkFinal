@@ -25,28 +25,35 @@ import PlacesAutocomplete, {
 import { connect } from "react-redux";
 
 class Products extends React.Component {
-    state = {
-        
-        toggler: 1,
-        product: [],
-        productfilter: [],
-        datevalue: '',
-        companyvalue: 'Please Select Company',
-        categoryid: '',
-        lat: '',
-        long: '',
-        zipcode: '',
-        completeAddress: [],
-        user_area: this.props.user_area,
-        categorydata: [],
-        search: "",
 
+    constructor(props) {
+        super(props);
+        this.state = {
+
+            toggler: 1,
+            product: [],
+            productfilter: [],
+            datevalue: '',
+            companyvalue: 'Please Select Company',
+            categoryid: '',
+            lat: '',
+            long: '',
+            zipcode: '',
+            completeAddress: [],
+            user_area: this.props.user_area,
+            categorydata: [],
+            search: "",
+            activeIndex: '',
+
+        }
+        this.searchInputFocus = React.createRef();
     }
-    
+
+
     async componentDidMount() {
         console.log(this.props.user_area);
-        console.log(this.state.lat,'lat666666666666666666666666');
-        if (this.props.user_area ) {
+        console.log(this.state.lat, 'lat666666666666666666666666');
+        if (this.props.user_area) {
             this.setState({ toggler: 0 })
 
             let area = {
@@ -75,7 +82,7 @@ class Products extends React.Component {
 
 
         }
-        if(this.state.lat && this.state.long){
+        if (this.state.lat && this.state.long) {
             console.log('already longi 888888888888888888888888888888888');
         }
         let customer = await getCategories()
@@ -134,11 +141,11 @@ class Products extends React.Component {
                         this.setState({ lat: latLng.lat })
                         this.setState({ long: latLng.lng })
 
-                            let area = {
-                                longitude: this.state.long,
-                                latitude: this.state.lat,
-                              }
-                      
+                        let area = {
+                            longitude: this.state.long,
+                            latitude: this.state.lat,
+                        }
+
                         this.props.zipCode(area)
                         console.log(this.state.lat);
                         console.log(this.state.long);
@@ -154,7 +161,13 @@ class Products extends React.Component {
     handleChange = address => {
         this.setState({ address });
     };
-
+    searchFunc = (e, index) => {
+        this.setState({ search: e.target.name })
+        this.setState({ activeIndex: index })
+        console.log(index)
+        console.log(this.state.activeIndex);
+        this.searchInputFocus.current.focus()
+    }
     handleDate = (e) => {
         if (!this.state.product.length) {
             console.log('elseee');
@@ -210,7 +223,7 @@ class Products extends React.Component {
 
         this.setState({ product: results })
         this.setState({ stringName: string })
-        
+
         console.log(this.state.product)
 
         this.setState({ productfilter: results })
@@ -293,7 +306,12 @@ class Products extends React.Component {
                 </div>
             );
         }
-
+        function NewArrow(props) {
+            const { className, style, onClick } = props;
+            return (
+                null
+            );
+        }
         const ratingChanged = (newRating) => {
             console.log(newRating);
         };
@@ -322,26 +340,84 @@ class Products extends React.Component {
                         slidesToShow: 3,
                         slidesToScroll: 1,
                         infinite: true,
-                        dots: true
+                        dots: true,
+                        nextArrow: <NewArrow />,
+                        prevArrow: <NewArrow />,
+
+                    }
+                },
+                {
+                    breakpoint: 1280,
+                    settings: {
+                        slidesToShow: 5,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true,
+                        nextArrow: <NewArrow />,
+                        prevArrow: <NewArrow />,
                     }
                 },
                 {
                     breakpoint: 600,
                     settings: {
-                        slidesToShow: 2,
+                        slidesToShow: 3,
                         slidesToScroll: 1,
-                        initialSlide: 2
+                        initialSlide: 2,
+                        nextArrow: <NewArrow />,
+                        prevArrow: <NewArrow />,
                     }
                 },
                 {
                     breakpoint: 480,
                     settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        nextArrow: <NewArrow />,
+                        prevArrow: <NewArrow />,
+                    }
+                },
+                {
+                    breakpoint: 380,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                        nextArrow: <NewArrow />,
+                        prevArrow: <NewArrow />,
+                    }
+                },
+                {
+                    breakpoint: 320,
+                    settings: {
                         slidesToShow: 1,
-                        slidesToScroll: 1
+                        slidesToScroll: 1,
+                        nextArrow: <NewArrow />,
+                        prevArrow: <NewArrow />,
                     }
                 }
             ]
         };
+        const category = [
+            {
+                name: "Tequila",
+                index: 0
+            },
+            {
+                name: "Whiskey",
+                index: 1
+            },
+            {
+                name: "Vodka",
+                index: 2
+            },
+            {
+                name: "Wine",
+                index: 3
+            },
+            {
+                name: "Beer",
+                index: 4
+            },
+        ]
         console.log(this.state.product);
         return (
             <div className="Home bgimg-1" style={{ position: 'relative', backgroundColor: 'white' }}>
@@ -366,10 +442,6 @@ class Products extends React.Component {
                                                         </li>
                                                         <br />
                                                         <button type="submit" className="footer-btn" style={{ position: 'absolute', right: 0, marginTop: 20, zIndex: 20, borderRadius: '0px', border: '1px solid white' }}>Enter</button>
-                                                        {/* <input    {...getInputProps({
-                              placeholder: 'Search Places ...',
-                              className: 'location-search-input',
-                            })} type="text" name="name" required class="form-control" ></input>  */}
 
                                                         <input autoFocus {...getInputProps({
                                                             placeholder: 'Search Places ...',
@@ -427,13 +499,57 @@ class Products extends React.Component {
 
                             <Slider {...settings}>
                                 {
-                                    this.state.categorydata.length === 0 ? "" :
-                                        this.state.categorydata.length && this.state.categorydata.map(r1 => (
-                                            <button className="product-btn btn-new-1">
-                                                {r1.itemName}
-                                            </button>
-                                        ))
+                                    category.map((item, index) =>
+                                        <a
+                                            href="#Products"
+                                            index={item.index}
+                                            name={item.name}
+                                            onClick={(e) => this.searchFunc(e, item.index)}
+                                            className="product-btn btn-new-1">
+                                            {item.name}
+                                        </a>
+                                    )
                                 }
+                                {/* <a
+                                    href="#Products"
+                                    index="0"
+                                    name="Tequila"
+                                    onClick={this.searchFunc}
+                                    className="product-btn btn-new-1">
+                                    Tequila
+                                            </a>
+                                <a
+                                    href="#Products"
+                                    index="1"
+                                    name="Whiskey"
+                                    onClick={this.searchFunc}
+                                    className="product-btn btn-new-1">
+                                    Whiskey
+                                            </a>
+                                <a
+                                    href="#Products"
+                                    index="2"
+                                    onClick={this.searchFunc}
+                                    name="Vodka"
+                                    className="product-btn btn-new-1">
+                                    Vodka
+                                            </a>
+                                <a
+                                    href="#Products"
+                                    index="3"
+                                    onClick={this.searchFunc}
+                                    name="Wine"
+                                    className="product-btn btn-new-1">
+                                    Wine
+                                            </a>
+                                <a
+                                    href="#Products"
+                                    index="4"
+                                    onClick={this.searchFunc}
+                                    name="Beer"
+                                    className="product-btn btn-new-1">
+                                    Beer
+                                            </a> */}
 
                             </Slider>
 
@@ -444,7 +560,7 @@ class Products extends React.Component {
                     <div className="products">
 
                         <div className="slider">
-                            <Carousel>
+                            <Carousel activeIndex={this.state.activeIndex}>
                                 <Carousel.Item interval={1500}>
                                     <img width="100%" height="100%" src={tec2} alt="" />
                                 </Carousel.Item>
@@ -498,9 +614,9 @@ class Products extends React.Component {
                                 // autoFocus
                                 />
                             </div> */}
-                            <input className="filter-input" name="sort" value={this.state.search} onChange={this.searchFilter} id="sort" placeholder="Search Product Here"></input>
+                            <input className="filter-input" ref={this.searchInputFocus} name="sort" value={this.state.search} onChange={this.searchFilter} id="sort" placeholder="Search Product Here"></input>
                         </div>
-                        <div className="products-cart">
+                        <div id="Products" className="products-cart">
                             {
                                 this.state.product.filter(data => {
                                     if (this.state.search === "") {
@@ -535,9 +651,9 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-   
-      zipCode: data => { dispatch(zipCode(data)) }
-  
+
+        zipCode: data => { dispatch(zipCode(data)) }
+
     };
-  }
+}
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

@@ -129,8 +129,15 @@
         width: 100%!important;
     }
 }
+a{
+    text-decoration: none;
+}
 
 .product-btn {
+    display: flex!important;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
     width: 118px!important;
     height: 40px;
     border-radius: 5px;
@@ -667,4 +674,10 @@ height: 734px; */
         justify-content: center;
         align-items: center;
     }
+}
+#root > div.Home.bgimg-1 > div:nth-child(2) > div.items.mt-4 > div > div > div > div.slick-slide> div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px!important;
 }

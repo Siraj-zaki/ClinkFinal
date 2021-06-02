@@ -93,7 +93,7 @@ class Navbar extends React.Component {
   async componentDidMount() {
 
     const handler = e => this.setState({ matches: e.matches });
-    window.matchMedia("(max-width: 768px)").addListener(handler);
+    window.matchMedia("(max-width: 1288px)").addListener(handler);
     console.log(this.props.user);
 
     if (this.props.user) {
@@ -1355,7 +1355,7 @@ class Navbar extends React.Component {
                     this.state.dropDown ?
                       <div className="dropdown-new" style={{ position: 'absolute', backgroundColor: 'white', zIndex: 1000, width: '100%', marginTop: 4 }}>
                         <div>
-                        <h1 className="dropdown-new-heading">{this.props.user === null ? "" : this.props.user.email}</h1>
+                          <h1 className="dropdown-new-heading">{this.props.user === null ? "" : this.props.user.email}</h1>
                           <h1 className="dropdown-new-heading">Edit Profile</h1>
                           <h1 onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
                           <h1 onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
