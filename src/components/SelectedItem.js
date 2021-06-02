@@ -14,14 +14,14 @@ class SelectedItem extends React.Component {
 
                         <div className="inner-cart-div mt-5 border-top pt-5">
                             {this.props.ordernumber ?
-                                <div className="cart-heading" style={{ display: 'flex', justifyContent: 'center',width:'100%' }}>
+                                <div className="cart-heading" style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
                                     <span className="cart-heading-heading ">{this.props.ordernumber}</span>
                                 </div>
                                 :
                                 ""
                             }
                             <div className="cart-left-side">
-                                <img width="200" src={this.props.imgsrc} alt="" />
+                                <img width="200" style={{ height: 250, objectFit: "contain" }} src={this.props.imgsrc} alt="" />
                             </div>
                             <div className="cart-center-side">
                                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%', flexDirection: 'column' }}>
@@ -55,7 +55,7 @@ class SelectedItem extends React.Component {
                     :
                     <div className="inner-cart-div mt-5 border-top pt-5">
                         <div className="cart-left-side">
-                            <img width="200" src={this.props.imgsrc} alt="" />
+                            <img width="200" style={{ height: 250, objectFit: "contain" }} src={this.props.imgsrc} alt="" />
                         </div>
                         <div className="cart-center-side">
                             <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', width: '100%', flexDirection: 'column' }}>
@@ -68,9 +68,10 @@ class SelectedItem extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="cart-right-side" onClick={() => this.props.removeFromCart(this.props.id_random)}>
+                        {this.props.cross ? "" : <div className="cart-right-side" onClick={() => this.props.removeFromCart(this.props.id_random)}>
                             <img src={smallcross} alt="" />
                         </div>
+                        }
 
 
 

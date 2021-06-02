@@ -311,8 +311,8 @@ else{
                     <span className="detail-heading mt-5" >CLINK / TEQUILA / BLANCO / SILVER TEQUILA</span>
                     <div className="products new-padding">
                         <div className="product-detail-div">
-                            <div className="product-detail-div-left-side">
-                                <img width="100%" height="100%" src={this.state?.product?.imgUrl} alt="" />
+                            <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}  className="product-detail-div-left-side">
+                                <img style={{objectFit:'contain',height:250}} src={this.state?.product?.imgUrl} alt="" />
                             </div>
                             <div className="product-detail-div-right-side" style={{ padding: '7rem', position: 'relative' }}>
                                 <div style={{ width: '100%', position: 'relative', display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>

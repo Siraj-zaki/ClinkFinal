@@ -104,10 +104,10 @@ class OrderDetailPage extends React.Component {
                                             price={parseInt(pro?.cvr) + parseInt(pro?.itemPrice)}
                                             quantity={pro.itemquantity}
                                             imgsrc={pro.imgUrl}
-                                            pending
+                                            cross
                                             ordernumber={`Order ${pro.id}`}
                                         />
-                                        <div className="left-side-form" style={{ marginTop: '10rem', width: '100%' }}>
+                                        {/* <div className="left-side-form" style={{ marginTop: '10rem', width: '100%' }}>
                                             <div className="form-selected-option" >
                                                 <div className="form-selected-option mt-4">
                                                     <label htmlFor="" className="label-for-order" >Booking  Time</label>
@@ -122,7 +122,7 @@ class OrderDetailPage extends React.Component {
                                                     <input type="text" placeholder="Order Number" className="adresses-input" style={{ width: '50rem' }} required disabled />
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </>
                                 )) : null}
 
