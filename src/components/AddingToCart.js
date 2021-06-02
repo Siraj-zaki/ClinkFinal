@@ -184,7 +184,7 @@ class AddingToCart extends React.Component {
 
 
     whistlist =async () => {
-        if(this.props.user.id){
+        if(this.props?.user?.id){
             this.setState({ hearttoggler: !this.state.hearttoggler })
             console.log(this.state.hearttoggler);
     
