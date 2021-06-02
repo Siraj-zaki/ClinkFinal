@@ -83,7 +83,7 @@ class AddingToCart extends React.Component {
     }
 
     async componentDidMount() {
-        if(this.props.user.id){
+        if(this.props?.user?.id){
            
             console.log(this.state.hearttoggler);
     
