@@ -648,6 +648,7 @@ class Products extends React.Component {
                                 }).map((item, index) =>
                                     <CartProduct
                                         img={item.imgUrl}
+                                        favourite={item.fav}
                                         Company={item.Company}
                                         Bottle={item.itemName}
                                         StoreName={item.storeName}
