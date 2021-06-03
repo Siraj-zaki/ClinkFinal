@@ -129,7 +129,8 @@
         width: 100%!important;
     }
 }
-a{
+
+a {
     text-decoration: none;
 }
 
@@ -675,9 +676,22 @@ height: 734px; */
         align-items: center;
     }
 }
-#root > div.Home.bgimg-1 > div:nth-child(2) > div.items.mt-4 > div > div > div > div.slick-slide> div{
+
+#root>div.Home.bgimg-1>div:nth-child(2)>div.items.mt-4>div>div>div>div.slick-slide>div {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 220px!important;
+}
+#root > div.Home.bgimg-1 > div:nth-child(2) > div.products{
+    padding-top: 0px!important;
+}
+.carousel-item-left .active {
+    height: 100%!important;
+    width: 100%!important;
+}
+
+.carousel-item-next .active {
+    height: 100%!important;
+    width: 100%!important;
 }

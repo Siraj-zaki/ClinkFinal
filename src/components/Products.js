@@ -559,21 +559,21 @@ class Products extends React.Component {
                     </div>
                     <div className="products">
 
-                        <div className="slider">
-                            <Carousel activeIndex={this.state.activeIndex}>
-                                <Carousel.Item interval={1500}>
+                        <div className="slider" style={{ minHeight: '40rem' }}>
+                            <Carousel fade={true} style={{ width: '100%', height: '100%' }} >
+                                <Carousel.Item className="custom" style={{ width: '100%', height: '100%' }} interval={1500}>
                                     <img width="100%" height="100%" src={tec2} alt="" />
                                 </Carousel.Item>
-                                <Carousel.Item interval={1500}>
+                                <Carousel.Item style={{ width: '100%', height: '100%' }} interval={1500}>
                                     <img width="100%" height="100%" src={beer} alt="" />
                                 </Carousel.Item>
-                                <Carousel.Item interval={1500}>
+                                <Carousel.Item style={{ width: '100%', height: '100%' }} interval={1500}>
                                     <img width="100%" height="100%" src={wine} alt="" />
                                 </Carousel.Item>
-                                <Carousel.Item interval={1500}>
+                                <Carousel.Item style={{ width: '100%', height: '100%' }} interval={1500}>
                                     <img width="100%" height="100%" src={vodka} alt="" />
                                 </Carousel.Item>
-                                <Carousel.Item interval={1500}>
+                                <Carousel.Item style={{ width: '100%', height: '100%' }} interval={1500}>
                                     <img width="100%" height="100%" src={whiskey} alt="" />
                                 </Carousel.Item>
                             </Carousel>
@@ -631,7 +631,7 @@ class Products extends React.Component {
                                         Bottle={item.itemName}
                                         StoreName={item.storeName}
                                         id={item.id}
-                                        fav={false}
+                                        fav
                                     />
                                 )
                             }

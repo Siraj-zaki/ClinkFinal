@@ -26,42 +26,42 @@ class CartProduct extends React.Component {
         productlist: [],
         hearttoggler: false
     }
-    // whistlist = async () => {
-    //     if (this.props.user.id) {
-    //         this.setState({ hearttoggler: !this.state.hearttoggler })
-    //         console.log(this.state.hearttoggler);
+    // whistlist = () => {
+    //     // if (this.props.user.id) {
+    //     this.setState({ hearttoggler: !this.state.hearttoggler })
+    //     //         console.log(this.state.hearttoggler);
 
-    //         let data = {
-    //             itemId: this.props.match.params.id,
-    //             userId: this.props.user.id
-    //         }
-
-
-    //         let whi = await whistlist(data)
-    //             .then(r1 => {
-    //                 console.log(r1);
-    //                 toast.dark(r1.data.message, {
-    //                     style: { fontSize: 13 },
-    //                     className: 'dark-toast',
-    //                     autoClose: 5000
-    //                 });
-
-    //             })
+    //     //         let data = {
+    //     //             itemId: this.props.match.params.id,
+    //     //             userId: this.props.user.id
+    //     //         }
 
 
+    //     //         let whi = await whistlist(data)
+    //     //             .then(r1 => {
+    //     //                 console.log(r1);
+    //     //                 toast.dark(r1.data.message, {
+    //     //                     style: { fontSize: 13 },
+    //     //                     className: 'dark-toast',
+    //     //                     autoClose: 5000
+    //     //                 });
 
-    //     }
-    //     else {
+    //     //             })
 
-    //         toast.dark("Please login", {
-    //             style: { fontSize: 13 },
-    //             className: 'dark-toast',
-    //             autoClose: 5000
-    //         });
-    //     }
+
+
+    //     //     }
+    //     //     else {
+
+    //     //         toast.dark("Please login", {
+    //     //             style: { fontSize: 13 },
+    //     //             className: 'dark-toast',
+    //     //             autoClose: 5000
+    //     //         });
+    //     //     }
+    //     // }
+
     // }
-
-
 
 
     render() {
@@ -71,18 +71,16 @@ class CartProduct extends React.Component {
         return (
             <div>
                 <div className="add-products" style={{ position: 'relative', minHeight: this.props.newheight ? 310 : "", width: this.props.newwidth ? 280 : "" }}  >
-                    {this.props.fav ? <div className="heart-main" >
-                        <img className="heart-div" src={this.state.hearttoggler === true ? heartfill : heart} alt=""  />
-                    </div> : <div className="heart-main" >
-                        <img className="heart-div" src={this.state.hearttoggler === false ? heartfill : ''} alt=""  />
-                    </div>
+                    {this.props.fav ? <div className="heart-main" onClick={() => this.setState({ hearttoggler: !this.state.hearttoggler })} >
+                        <img className="heart-div" src={this.state.hearttoggler === true ? heartfill : heart} alt="" />
+                    </div> : ""
                     }
                     <img style={{ objectFit: 'contain' }} onClick={() => window.location.href = `/AddingToCart/${this.props.id}`} height="250px" width="250px" src={this.props.img} alt="not" />
                     <span onClick={() => window.location.href = `/AddingToCart/${this.props.id}`} className="cart-company" >{this.props.Company}</span>
                     <span onClick={() => window.location.href = `/AddingToCart/${this.props.id}`} className="cart-company" >{this.props.Bottle}</span>
                     <span onClick={() => window.location.href = `/AddingToCart/${this.props.id}`} className="cart-size">{this.props.StoreName}</span>
                 </div>
-            </div>
+            </div >
         )
     }
 }

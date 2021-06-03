@@ -93,7 +93,7 @@ class Navbar extends React.Component {
   async componentDidMount() {
 
     const handler = e => this.setState({ matches: e.matches });
-    window.matchMedia("(max-width: 1288px)").addListener(handler);
+    window.matchMedia("(max-width: 1024px)").addListener(handler);
     console.log(this.props.user);
 
     if (this.props.user) {
@@ -1212,6 +1212,91 @@ class Navbar extends React.Component {
                   >
                     Contact
                   </li>
+                  <li className="menu-li">
+                    <div
+                      className="center-side-nav"
+                      style={{ display: this.state.matches ? "flex" : "none", width: '300px' }}
+                    >
+                      <form onSubmit={this.checkarea} className="search-bar-nav">
+                        {/* <input
+                  className="input-search-bar"
+                  type="text"
+                  placeholder="Enter your Zip code"
+                  name="search"
+                  id="search"
+                  required
+                /> */}
+
+                        <PlacesAutocomplete
+                          value={this.state.address}
+                          onChange={this.handleChange}
+                          onSelect={this.handleSelect}
+                        >
+                          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                            <div>
+
+                              {/* <input
+                           {...getInputProps({
+                              placeholder: 'Search Places ...',
+                              className: 'location-search-input',
+                            })}
+                            type="text"
+                  className="input-search-bar"
+                  placeholder="Enter your Zip code"
+                  name="search"
+                  id="search"
+                  required
+                > </input> */}
+
+                              <input style={{ fontSize: 15,paddingRight:40 }}    {...getInputProps({
+                                placeholder: 'Enter your Zip code',
+                                className: 'location-search-input',
+                              })} type="text" name="name" required
+                                className="input-search-bar" >
+                              </input>
+
+                              {/* <input autoFocus {...getInputProps({
+                              placeholder: 'Search Places ...',
+                              className: 'location-search-input',
+                            })} style={{ marginTop: 20, border: '1px solid white', color: 'white' }} className="footer-input input-3" type="number" minLength="5" id="email" placeholder="xxxxxxxx" required /> */}
+
+                              <div className="autocomplete-dropdown-container-1">
+                                {loading && <div>Loading...</div>}
+                                {suggestions.map(suggestion => {
+                                  const className = suggestion.active
+                                    ? 'suggestion-item--active-1'
+                                    : 'suggestion-item-1';
+                                  // inline style for demonstration purpose
+                                  const style = suggestion.active
+                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                  return (
+                                    <div
+                                      {...getSuggestionItemProps(suggestion, {
+                                        className,
+                                        style,
+                                      })}
+                                    >
+                                      <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: 'white', fontSize: 15 }} >{suggestion.description}</span>
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          )}
+                        </PlacesAutocomplete>
+                        <button className="btn-search-bar" type="submit">
+                          <img
+                            className="search-icon"
+                            src={searchBar}
+                            height="20px"
+                            width="20px"
+                            alt=""
+                          />
+                        </button>
+                      </form>
+                    </div>
+                  </li>
                   <li className="menu-icons">
                     <span className="menu-heading">Social Media</span>
                     <div className="footer-icons">
@@ -1246,7 +1331,7 @@ class Navbar extends React.Component {
               className="left-side-nav"
               style={{ width: this.state.matches ? "100%" : "33%" }}
             >
-              <div style={{ height: this.state.matches ? "50px" : "100px" }}>
+              <div className="new-nav" style={{ height: this.state.matches ? "50px" : "100px" }}>
                 <Logo mainpage />
               </div>
             </div>
@@ -1285,7 +1370,7 @@ class Navbar extends React.Component {
                   required
                 > </input> */}
 
-                      <input    {...getInputProps({
+                      <input style={{paddingRight:20}}    {...getInputProps({
                         placeholder: 'Enter your Zip code',
                         className: 'location-search-input',
                       })} type="text" name="name" required

@@ -104,6 +104,20 @@ html {
     html {
         font-size: 27%!important;
     }
+    .left-side-nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start!important;
+        height: 2px;
+        align-items: center;
+        z-index: 1;
+    }
+    .right-side-nav{
+        justify-content: flex-end!important;
+    }
+    .new-nav {
+        height: 60px!important;
+    }
     #root>div.Home.bgimg-1>div.products.bgimg-2 {
         padding: 2rem!important;
     }
