@@ -8,6 +8,7 @@ import tec4 from '../assets/wine.svg'
 import Carousel from 'react-bootstrap/Carousel'
 import tec5 from '../assets/beer.svg'
 import carouselimg from '../assets/carousel-img.png'
+import { Link } from 'react-router-dom'
 // import { Wine } from './Wine'
 import carouselbottomimg from '../assets/carsouselbottomimg.png'
 import '../css/ourproducts.css'
@@ -19,22 +20,52 @@ class OurProducts extends React.Component {
                 <div className="section-products" style={{ display: 'flex', justifyContent: "center", alignItems: 'center', flexDirection: 'column', width: '100%' }}>
                     <span className="section-products-h1" style={{ zIndex: 20, position: 'relative' }}>Our <span style={{ color: " #a10948" }}>Products</span></span>
                     <div className="css-grid">
-                        <div style={{ width: "33rem", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <Link to={
+                            {
+                                pathname: "/Products",
+                                tecquila: "tecquila"
+                            }
+                        }
+                            style={{ width: "33rem", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <img src={tecquila} width='90%' alt="" />
                             {/* <Wine /> */}
-                        </div>
-                        <div style={{ width: "33rem", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        </Link>
+                        <Link to={
+                            {
+                                pathname: "/Products",
+                                whiskey: "whiskey"
+                            }
+                        }
+                            style={{ width: "33rem", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <img src={tec2} width='90%' alt="" />
-                        </div>
-                        <div style={{ width: "33rem", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        </Link>
+                        <Link to={
+                            {
+                                pathname: "/Products",
+                                vodka: "vodka"
+                            }
+                        }
+                            style={{ width: "33rem", display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <img src={tec3} width='90%' alt="" />
-                        </div>
-                        <div style={{ width: '33rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        </Link>
+                        <Link to={
+                            {
+                                pathname: "/Products",
+                                wine: "wine"
+                            }
+                        }
+                            style={{ width: '33rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <img src={tec4} width='90%' alt="" />
-                        </div>
-                        <div style={{ width: '33rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        </Link>
+                        <Link to={
+                            {
+                                pathname: "/Products",
+                                beer: "beer"
+                            }
+                        }
+                            style={{ width: '33rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <img src={tec5} width='90%' alt="" />
-                        </div>
+                        </Link>
                     </div>
                     <div>
                         <span className="section-products-h1" style={{ zIndex: 20, position: 'relative' }}>Our <span style={{ color: " #a10948" }}>Reputation</span></span>

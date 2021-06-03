@@ -42,13 +42,33 @@ class Products extends React.Component {
             completeAddress: [],
             user_area: this.props.user_area,
             categorydata: [],
-            search: "",
+            search:
+                this.props.location.tecquila === "tecquila"
+                    ?
+                    "tecquila"
+                    :
+                    this.props.location.whiskey === "whiskey"
+                        ?
+                        "whiskey"
+                        :
+                        this.props.location.vodka === "vodka"
+                            ?
+                            "vodka"
+                            :
+                            this.props.location.wine === "wine"
+                                ?
+                                "wine"
+                                :
+                                this.props.location.beer === "beer"
+                                    ?
+                                    "beer"
+                                    :
+                                    "",
             activeIndex: '',
 
         }
         this.searchInputFocus = React.createRef();
     }
-
 
     async componentDidMount() {
         console.log(this.props.user_area);
@@ -298,6 +318,7 @@ class Products extends React.Component {
     }
 
     render() {
+        console.log("links", this.props.location.searchName);
         function SamplePrevArrow(props) {
             const { className, style, onClick } = props;
             return (
