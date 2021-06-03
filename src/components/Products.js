@@ -515,7 +515,7 @@ class Products extends React.Component {
                                         Bottle={item.itemName}
                                         StoreName={item.storeName}
                                         id={item.id}
-                                        fav
+                                        fav={false}
                                     />
                                 )
                             }

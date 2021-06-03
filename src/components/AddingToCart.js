@@ -150,11 +150,12 @@ class AddingToCart extends React.Component {
             dup.productUnit = this.state.productUnit;
             console.log(dup);
             this.props.addToCart(dup);
-            toast.dark("Successfully Item Added", {
-                style: { fontSize: 13 },
-                className: 'dark-toast',
-                autoClose: 5000
-            });
+            toast.dark("Successfully Item Added")
+            // , {
+            //     style: { fontSize: 13 },
+            //     className: 'dark-toast',
+            //     autoClose: 5000
+            // });
             setTimeout(() => {
                 window.location.href = "/CartPage"
             }, 2000);
@@ -433,10 +434,10 @@ else{
                     </div>
 
                     <Footer />
-                    <ToastContainer
+                    {/* <ToastContainer
                         toastClassName="dark-toast"
                         progressClassName="transparent-progress"
-                    />
+                    /> */}
                 </div>
             </div>
         )

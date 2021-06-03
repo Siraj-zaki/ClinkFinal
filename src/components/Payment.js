@@ -247,7 +247,7 @@ class Payment extends React.Component {
                                                     .then((re1) => {
                                                         console.log(re1);
                                                         console.log(this.props);
-                                                        toast.dark("PAYMENT PAID")
+                                                       
                                                         setTimeout(() => {
                                                             window.location.href = "/Finished"
                                                         }, 4000)
@@ -261,6 +261,7 @@ class Payment extends React.Component {
     
                 })
                 setTimeout(() => {
+                    toast.dark("PAYMENT PAID")
                     this.props.emptycard();
                 }, 2000);
                

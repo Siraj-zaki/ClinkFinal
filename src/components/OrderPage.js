@@ -87,7 +87,7 @@ class OrderPage extends React.Component {
                                             <div className="form-selected-option" >
                                                 <div className="form-selected-option mt-4">
                                                     <label htmlFor="" className="label-for-order" >Booking  Time</label>
-                                                    <input type="text" placeholder="Devilery Time" className="adresses-input" style={{ width: '50rem' }} required disabled />
+                                                    <input type="text" placeholder={new Date(pro.createdat_time).toString()} className="adresses-input" style={{ width: '50rem' }} required disabled />
                                                 </div>
                                                 <div className="form-selected-option mt-4">
                                                     <label htmlFor="" className="label-for-order" >Est.Time</label>
@@ -95,7 +95,7 @@ class OrderPage extends React.Component {
                                                 </div>
                                                 <div className="form-selected-option mt-4">
                                                     <label htmlFor="" className="label-for-order" >Order Number</label>
-                                                    <input type="text" placeholder="Order Number" className="adresses-input" style={{ width: '50rem' }} required disabled />
+                                                    <input type="text" placeholder={pro.id} className="adresses-input" style={{ width: '50rem' }} required disabled />
                                                 </div>
                                             </div>
                                         </div>
