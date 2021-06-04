@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { signUp,wish,wishuser,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,ordermain,orderdetailcustomer,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
+import { signUp,wish,recentitem,wishuser,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,ordermain,orderdetailcustomer,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
 
 export const customerSignUp = (data)=>
 {
@@ -52,6 +52,33 @@ return axios
   });
 }
 
+export const recentProduct = (data)=>
+{
+    console.log("recent",data);
+return axios
+  .post(recentitem,data)
+  .then(response =>response)
+  .catch(error => {
+    if (error.response && error.response.status === 404) {
+      return `\u2014`;
+    }
+  });
+}
+
+
+export const recentProductuser = (id)=>
+{
+    console.log("recent",id);
+return axios
+  .get(recentitem+ '/' + id)
+  .then(response =>response)
+  .catch(error => {
+    if (error.response && error.response.status === 404) {
+      return `\u2014`;
+    }
+  });
+}
+
 export const customerwiseOrder = (id)=>
 {
     console.log("customersignup");
@@ -64,6 +91,8 @@ return axios
     }
   });
 }
+
+
 
 export const customerwiseDetailOrder = (id)=>
 {

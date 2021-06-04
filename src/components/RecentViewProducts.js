@@ -13,7 +13,7 @@ import '../css/products.css'
 import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
-import { getProduct, addAreaProduct, getCategories } from "./../Service/service";
+import { getProduct, addAreaProduct, getCategories ,recentProductuser} from "./../Service/service";
 import { ToastContainer, toast } from "react-toastify";
 import { zipCode } from "./../services/Store/Actions/action";
 
@@ -60,8 +60,8 @@ class RecentViewProducts extends React.Component {
             console.log(area);
             try {
 
-                res = await addAreaProduct(area)
-                console.log(res.data.result);
+                res = await recentProductuser(this.props.user.id)
+                console.log(res);
                 this.setState({ product: res?.data.result })
                 this.setState({ productfilter: res?.data.result })
 

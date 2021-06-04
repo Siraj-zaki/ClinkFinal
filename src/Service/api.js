@@ -19,6 +19,7 @@ export const orderdetailcustomer=baseUrl+'/v1/order/customer'
 export const ordermain=baseUrl+'/v1/ordermain'
 export const wish=baseUrl+'/v1/fav'
 export const wishuser=baseUrl+'/v1/favuser'
+export const recentitem=baseUrl+'/v1/recent'
 
 
 

@@ -16,7 +16,7 @@ import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
 import { withRouter } from "react-router";
-import { getProduct,whistlist ,whistlistUser} from "./../Service/service";
+import { getProduct,whistlist ,whistlistUser,recentProduct} from "./../Service/service";
 
 import { getProductById, getProductUnitById } from "./../Service/service";
 import { connect } from 'react-redux';
@@ -92,6 +92,7 @@ class AddingToCart extends React.Component {
                 userId:this.props.user.id
             }
          
+            let recent=  await  recentProduct(data)
              
          let whi=  await  whistlistUser(data)
          .then(r1=>{
