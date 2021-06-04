@@ -531,47 +531,6 @@ class Products extends React.Component {
                                         </a>
                                     )
                                 }
-                                {/* <a
-                                    href="#Products"
-                                    index="0"
-                                    name="Tequila"
-                                    onClick={this.searchFunc}
-                                    className="product-btn btn-new-1">
-                                    Tequila
-                                            </a>
-                                <a
-                                    href="#Products"
-                                    index="1"
-                                    name="Whiskey"
-                                    onClick={this.searchFunc}
-                                    className="product-btn btn-new-1">
-                                    Whiskey
-                                            </a>
-                                <a
-                                    href="#Products"
-                                    index="2"
-                                    onClick={this.searchFunc}
-                                    name="Vodka"
-                                    className="product-btn btn-new-1">
-                                    Vodka
-                                            </a>
-                                <a
-                                    href="#Products"
-                                    index="3"
-                                    onClick={this.searchFunc}
-                                    name="Wine"
-                                    className="product-btn btn-new-1">
-                                    Wine
-                                            </a>
-                                <a
-                                    href="#Products"
-                                    index="4"
-                                    onClick={this.searchFunc}
-                                    name="Beer"
-                                    className="product-btn btn-new-1">
-                                    Beer
-                                            </a> */}
-
                             </Slider>
 
 
