@@ -20,7 +20,17 @@ class Home extends React.Component {
       toggler: 1
 
     };
-    console.log(this.props.cardItems);
+    console.log(this.props);
+  }
+
+  async componentDidMount() {
+  
+  if(this.props?.user?.id){
+    this.setState({toggler:0})
+
+  }
+
+
   }
 
 
@@ -88,7 +98,11 @@ class Home extends React.Component {
   }
 
 };
-const mapStateToProps = (cardItems) => {
-  return cardItems;
+const mapStateToProps = (state) => {
+  return {
+    user: state.AuthReducer.user,
+   
+  };
+
 };
 export default connect(mapStateToProps)(Home);
