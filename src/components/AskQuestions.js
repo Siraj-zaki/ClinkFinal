@@ -32,7 +32,6 @@ class AskQuestions extends React.Component {
                                         3. Add your drink to the cart. (Don’t forget your chaser).<br />
                                         4. Once you’re ready to checkout, go to your cart and begin the checkout process.<br />
                                         5. Once you complete the checkout process you will receive a confirmation email, your drinks are on the way!<br />
-
                                         </div>
                                     </Accordion.Collapse>
 

@@ -532,8 +532,6 @@ class Products extends React.Component {
                                     )
                                 }
                             </Slider>
-
-
                         }
 
                     </div>
