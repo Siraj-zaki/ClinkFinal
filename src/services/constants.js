@@ -5,3 +5,4 @@ export const DeliveryAddress="Delivery_Address";
 
 export const LOGIN_USER1="LOGIN_USER";
 export const ZipCode="Zip_Code";
+export const areaProduct="Area_Product";
