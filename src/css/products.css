@@ -681,11 +681,13 @@ height: 734px; */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 220px!important;
+    /* width: 220px!important; */
 }
-#root > div.Home.bgimg-1 > div:nth-child(2) > div.products{
+
+#root>div.Home.bgimg-1>div:nth-child(2)>div.products {
     padding-top: 0px!important;
 }
+
 .carousel-item-left .active {
     height: 100%!important;
     width: 100%!important;
@@ -694,4 +696,10 @@ height: 734px; */
 .carousel-item-next .active {
     height: 100%!important;
     width: 100%!important;
+}
+
+#root>div.Home.bg-white>div:nth-child(2)>div.products.new-padding>div.w-100.mt-5.slider-div>div.slick-slider.slick-initialized>div.slick-list>div>div.slick-slide.slick-active.slick-current>div>div>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
