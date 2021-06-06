@@ -384,7 +384,7 @@ else{
                             </div>
                             <Slider {...settings}>
                                 {
-                                    this.state.relatedproduct.map((item, index) =>
+                                    this.props.product.map((item, index) =>
                                         <div>
                                             <CartProduct
                                                 img={item.imgUrl}
@@ -450,6 +450,7 @@ const mapStateToProps = (state) => {
     return {
         cartData: state.CartReducer.cartData,
         user: state.AuthReducer.user,
+        product: state.AreaProduct?.product
     };
 };
 

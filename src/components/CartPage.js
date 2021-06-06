@@ -269,7 +269,7 @@ class AddingToCart extends React.Component {
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
                                 {
-                                    this.state.product.map((item, index) =>
+                                    this.props.product.map((item, index) =>
 
                                         <SwiperSlide>
                                             <div >
@@ -389,7 +389,8 @@ class AddingToCart extends React.Component {
 const mapStateToProps = (state) => {
     return {
         user: state.AuthReducer.user,
-        cartData: state.CartReducer.cartData
+        cartData: state.CartReducer.cartData,
+        product: state.AreaProduct?.product
     };
 };
 

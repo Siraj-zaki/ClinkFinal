@@ -16,6 +16,7 @@ import Footer from './Footer';
 import { getProduct, addAreaProduct, getCategories } from "./../Service/service";
 import { ToastContainer, toast } from "react-toastify";
 import { zipCode } from "./../services/Store/Actions/action";
+import { AreaProduct } from "./../services/Store/Actions/area_product";
 
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import PlacesAutocomplete, {
@@ -84,13 +85,14 @@ class Products extends React.Component {
 
 
 
-            console.log(area);
+            console.log(this.props);
             try {
 
                 res = await addAreaProduct(area)
                 console.log(res.data.result);
                 this.setState({ product: res?.data.result })
                 this.setState({ productfilter: res?.data.result })
+                this.props.AreaProduct(this.state.product)
 
             } catch (err) {
                 console.log(err);
@@ -668,13 +670,16 @@ class Products extends React.Component {
 const mapStateToProps = (state) => {
     return {
         user: state.AuthReducer.user,
-        user_area: state.AuthReducer.user_area
+        user_area: state.AuthReducer.user_area,
+        product: state.AreaProduct?.product
+        
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
 
-        zipCode: data => { dispatch(zipCode(data)) }
+        zipCode: data => { dispatch(zipCode(data)) },
+        AreaProduct: data => { dispatch(AreaProduct(data)) }
 
     };
 }
