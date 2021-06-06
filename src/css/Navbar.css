@@ -465,7 +465,7 @@ li {
     border-bottom: 1px solid rgb(218, 218, 218);
     /* width: 100%; */
     word-break: break-word;
-    color: #a81c56;
+    color: var(--maincolor);
 }
 
 .btn-nav {
@@ -488,7 +488,26 @@ li {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 16px;
+    transition: all .4s;
     color: var(--maincolor);
+}
+
+.btn:hover {
+    background-color: var(--maincolor);
+    border: 2px solid var(--maincolor);
+    color: white;
+}
+
+.btn:active {
+    background-color: var(--maincolor)!important;
+    border: 2px solid var(--maincolor)!important;
+    color: white;
+}
+
+.btn:focus {
+    background-color: var(--maincolor)!important;
+    border: 2px solid var(--maincolor)!important;
+    color: white;
 }
 
 .icons-nav {
@@ -500,7 +519,7 @@ li {
 }
 
 .suggestion-item-1 {
-    background-color: #a81c56!important;
+    background-color: var(--maincolor)!important;
     display: flex;
     justify-content: center;
     align-items: center;

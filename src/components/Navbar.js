@@ -9,6 +9,7 @@ import tele from "../assets/tele.png";
 import whatsapp from "../assets/whatsapp.png";
 import "../css/Navbar.css";
 import Loader from "react-loader-spinner";
+import Dropdown from 'react-bootstrap/Dropdown'
 import cross from "../assets/cross.png";
 import cross2 from "../assets/cross2.png";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -1248,7 +1249,7 @@ class Navbar extends React.Component {
                   required
                 > </input> */}
 
-                              <input style={{ fontSize: 15,paddingRight:40 }}    {...getInputProps({
+                              <input style={{ fontSize: 15, paddingRight: 40 }}    {...getInputProps({
                                 placeholder: 'Enter your Zip code',
                                 className: 'location-search-input',
                               })} type="text" name="name" required
@@ -1370,7 +1371,7 @@ class Navbar extends React.Component {
                   required
                 > </input> */}
 
-                      <input style={{paddingRight:20}}    {...getInputProps({
+                      <input style={{ paddingRight: 20 }}    {...getInputProps({
                         placeholder: 'Enter your Zip code',
                         className: 'location-search-input',
                       })} type="text" name="name" required
@@ -1430,7 +1431,7 @@ class Navbar extends React.Component {
                   position: 'relative',
                 }}
               ><div style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
-                  <Link
+                  {/* <Link
                     onClick={() => this.props.user === null ? this.setState({ toggler1: 1 }) : this.setState({ dropDown: !this.state.dropDown })}
                     className="btn-nav"
                   >
@@ -1450,7 +1451,23 @@ class Navbar extends React.Component {
                         </div>
                       </div>
                       : ""
-                  }
+                  } */}
+                  <Dropdown>
+                    <Dropdown.Toggle className="btn-nav"  id="dropdown-basic">
+                      {this.props.user === null ? "Sign In / Sign Up" : this.props.user.email}
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                      {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
+                      <h1 className="dropdown-new-heading">{this.props.user === null ? "" : this.props.user.email}</h1>
+                      <h1 className="dropdown-new-heading">Edit Profile</h1>
+                      <h1 onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
+                      <h1 onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
+                      <h1 onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
+                      <h1 className="dropdown-new-heading">Log Out</h1>
+                    </Dropdown.Menu>
+                  </Dropdown>
                 </div>
                 <div className="icons-nav">
                   <i onClick={() => (window.location.href = "/CartPage")}>
