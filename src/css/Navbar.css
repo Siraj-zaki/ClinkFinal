@@ -492,6 +492,15 @@ li {
     color: var(--maincolor);
 }
 
+@media(max-width:768px) {
+    .btn-nav {
+        min-width: 135px!important;
+        padding: 5px!important;
+        height: 6rem!important;
+        font-size: 8px!important;
+    }
+}
+
 .btn:hover {
     background-color: var(--maincolor);
     border: 2px solid var(--maincolor);
