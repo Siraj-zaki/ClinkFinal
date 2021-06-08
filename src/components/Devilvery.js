@@ -4,6 +4,7 @@ import left from '../assets/leftarrow.png'
 import right from '../assets/rightarrow.png'
 import cartimg from '../assets/cartimg.png'
 import cart from '../assets/cart.png'
+import Dropdown from 'react-bootstrap/Dropdown'
 import "../css/devilvery.css"
 import { connect } from "react-redux";
 
@@ -39,7 +40,8 @@ class Devilvery extends React.Component {
             errors: {},
             number: '',
             filterData: [],
-            ani: 1
+            ani: 1,
+            storeClose: true
 
         }
 
@@ -459,6 +461,34 @@ class Devilvery extends React.Component {
 
                 <div className="products new-padding new-class-product" style={{ justifyContent: 'space-between', alignItems: 'flex-start', flexDirection: 'row' }} >
                     <div style={{ display: "flex", justifyContent: 'center', alignItems: "center", flexDirection: 'column', position: 'relative' }} >
+                        {
+                            this.state.storeClose ?
+                                <div className="slider-div-1" style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column', width: "auto", marginBottom: 30 }} >
+                                    <div style={{ margin: 30 }} >
+                                        <span className="slider-heading" style={{ fontWeight: 400 }} >Store is Closed</span>
+                                    </div>
+                                    <div className="left-side-form">
+                                        <div className="form-selected-option">
+                                            <h1 style={{fontSize:17}} >See Secdule for more details</h1>
+                                        </div>
+                                        <div className="mt-5" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}  >
+                                            <Dropdown>
+                                                <Dropdown.Toggle
+                                                    className="btn-nav"
+                                                    id="dropdown-basic"
+                                                >
+                                                    See Details
+                                                </Dropdown.Toggle>
+                                                <Dropdown.Menu>
+                                                    <h1 className="dropdown-new-heading">Coming Soon</h1>
+                                                </Dropdown.Menu>
+
+                                            </Dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                                : ""
+                        }
                         <div className="slider-div-1" ani={this.state.ani} animation={this.state.toggler} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column', width: "auto", marginBottom: 30 }} >
                             <div style={{ margin: 30 }} >
                                 <span className="slider-heading" style={{ fontWeight: 400 }} >Delivery Information</span>
@@ -491,6 +521,7 @@ class Devilvery extends React.Component {
                                 </div>
                             </div>
                         </div>
+
                         {
                             this.state.toggler === 1 ?
                                 <div className="slider-div-1 new-animation" ani={this.state.ani} style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', flexDirection: 'column', width: "auto", marginBottom: 30 }} >
@@ -595,8 +626,6 @@ class Devilvery extends React.Component {
 
                                                         <span className="li-size" style={{ fontSize: '7rem', display: 'flex', justifyContent: 'center', alignItems: "center", width: '100%', alignSelf: 'center' }} >{total_amount}$</span>
                                                     </div>
-
-
                                                 </>
                                             </div>
                                         </div>

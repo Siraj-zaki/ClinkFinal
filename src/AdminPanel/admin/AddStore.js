@@ -3,8 +3,10 @@ import React from "react";
 import '../styles/adminlte.min.css'
 import '../styles/dataTables.bootstrap4.min.css'
 import '../styles/responsive.bootstrap4.min.css'
+import Datetime from 'react-datetime';
 import '../styles/indexNew.css'
 import firebase from 'firebase'
+import "react-datetime/css/react-datetime.css";
 import { connect } from "react-redux";
 import { _getItems } from '../Store/middlewares/appMiddleware'
 import { set_loading } from '../Store/actions/globalActions'
@@ -16,6 +18,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
+import moment from "moment";
 
 class AddStore extends React.Component {
   constructor(props) {
@@ -42,14 +45,62 @@ class AddStore extends React.Component {
       city: '',
       zipcode: '',
       password: '',
-      completeAddress: []
+      completeAddress: [],
+      allDays: [],
+      workingDays: [
+        {
+          days: "Monday",
+          checked: true,
+        },
+        {
+          days: "Tuesday",
+          checked: true,
+        },
+        {
+          days: "Wednesday",
+          checked: true,
+        },
+        {
+          days: "Thursday",
+          checked: true,
+        },
+        {
+          days: "Friday",
+          checked: true,
+        },
+        {
+          days: "Saturday",
+          checked: true,
+        },
+        {
+          days: "Sunday",
+          checked: false,
+        },
+      ]
+
     }
+
     this.handleSelect = this.handleSelect.bind(
       this
     );
     this.handleChange = this.handleChange.bind(
       this
     );
+  }
+  handleDays = (e, index) => {
+    let temp = this.state.workingDays
+    temp[index].checked = !temp[index].checked
+
+  }
+  allDays = () => {
+    let temp1 = this.state.workingDays
+    let temp2 = this.state.allDays
+
+    temp1.filter(day => day.checked === true); {
+      this.setState({ workingDays: temp1 })
+      temp2 = this.state.workingDays
+    }
+    alert(JSON.stringify(this.state.workingDays))
   }
 
   componentDidMount() {
@@ -366,22 +417,76 @@ class AddStore extends React.Component {
                       <label>State</label>
                       <input type="text" name="name" value={this.state.state} placeholder="Address" required class="form-control" onChange={(e) => this.setState({ state: e.target.value })}></input>
                     </div>
-
                   </div>
                   <div className='row' >
                     <div class="form-group col-md-6">
                       <label>ZipCode</label>
                       <input type="text" name="name" value={this.state.zipcode} placeholder="zipcode" required class="form-control" onChange={(e) => this.setState({ zipcode: e.target.value })}></input>
                     </div>
-
                   </div>
+                  <button type="button" class="btn btn-success mb-2 mt-2" data-toggle="modal" data-target="#exampleModalCenter">
+                    Add Schedule
+</button>
+                  <br />
                   <button type="submit" class="btn btn-success">{this.props.loading ? <Loading color="#fffa" /> : "Save"}</button>
                 </form>
               </div>
             </div>
           </div>
         </section>
-      </div>
+        <div style={{ width: '100%' }} className="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLongTitle">Add Schedule</h5>
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <table id="example1" className="table table-bordered table-hover dataTable no-footer dtr-inline" role="grid" aria-describedby="example1_info">
+                  <thead>
+                    <tr role="row">
+                      <th className='center' rowspan="1" colspan="1"  >Days</th>
+                      <th className='center' rowspan="1" colspan="1"  >Starting Time</th>
+                      <th className='center' rowspan="1" colspan="1"  >Ending Time</th>
+                      <th className='center' rowspan="1" colspan="1">Working</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {this.state.workingDays.map((item, index) =>
+                      <tr role="row" class="odd">
+                        <td className='center' class="sorting_1">{item.days}</td>
+                        <td className='center' class="sorting_1">
+                          {/* <input type="datetime-local" name="" id="" /> */}
+                          <Datetime timeFormat={moment().format('L')} value={"9:00 AM"} input />
+
+
+                        </td>
+                        <td className='center' class="sorting_1">
+                          {/* <input type="datetime-local" name="" id="" /> */}
+                          <Datetime timeFormat={moment().format('L')} value={"9:00 PM"} input />
+
+
+                        </td>
+                        <td className='center' class="sorting_1">
+                          <input onClick={(e) => this.handleDays(e, index)} type="checkbox" defaultChecked={item.checked} name="" id="" />
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" onClick={() => this.allDays()} class="btn btn-primary">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div >
     )
 
   }
