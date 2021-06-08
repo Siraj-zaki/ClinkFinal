@@ -1,16 +1,16 @@
 import React from 'react'
 
 
-export default class Logo extends React.Component {
-    state = { matches: window.matchMedia("(max-width: 1288px)").matches };
+export default  class Logo extends React.Component {
+    state = { matches: window.matchMedia("(max-width: 768px)").matches };
     componentDidMount() {
         const handler = e => this.setState({ matches: e.matches });
-        window.matchMedia("(max-width: 1288px)").addListener(handler);
+        window.matchMedia("(max-width: 768px)").addListener(handler);
     }
     render() {
         return (
-            <div style={{cursor:'pointer'}} onClick={() => window.location.href = "/Home"} >
-                <svg xmlns="http://www.w3.org/2000/svg" width={this.props.mainpage & this.state.matches ? "73px" : '15rem '} height={this.props.mainpage & this.state.matches ? "75px" : '15rem'} viewBox="0 0 200 73.955">
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width={this.props.mainpage & this.state.matches ? "63px" : '150px '} height={this.props.mainpage & this.state.matches ? "65px" : '150px'} viewBox="0 0 200 73.955">
                     <g id="Group_6" data-name="Group 6" transform="translate(-1117.891 -532.654)">
                         <g id="Group_4" data-name="Group 4" transform="translate(1117.891 532.654)">
                             <g id="Group_1" data-name="Group 1">

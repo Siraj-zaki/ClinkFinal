@@ -1269,8 +1269,8 @@ class Navbar extends React.Component {
                                     : 'suggestion-item-1';
                                   // inline style for demonstration purpose
                                   const style = suggestion.active
-                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                                    : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                                    ? { backgroundColor: 'transperent', cursor: 'pointer' }
+                                    : { backgroundColor: 'transperent', cursor: 'pointer' };
                                   return (
                                     <div
                                       {...getSuggestionItemProps(suggestion, {
@@ -1278,7 +1278,7 @@ class Navbar extends React.Component {
                                         style,
                                       })}
                                     >
-                                      <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: 'white', fontSize: 15 }} >{suggestion.description}</span>
+                                      <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: '#a10948', fontSize: 15 }} >{suggestion.description}</span>
                                     </div>
                                   );
                                 })}
@@ -1391,8 +1391,8 @@ class Navbar extends React.Component {
                             : 'suggestion-item-1';
                           // inline style for demonstration purpose
                           const style = suggestion.active
-                            ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                            : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                            ? { backgroundColor: 'transperent', cursor: 'pointer' }
+                            : { backgroundColor: 'transperent', cursor: 'pointer' };
                           return (
                             <div
                               {...getSuggestionItemProps(suggestion, {
@@ -1400,7 +1400,7 @@ class Navbar extends React.Component {
                                 style,
                               })}
                             >
-                              <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: 'white', fontSize: 15 }} >{suggestion.description}</span>
+                              <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: '#da236f', fontSize: 15 }} >{suggestion.description}</span>
                             </div>
                           );
                         })}
@@ -1431,35 +1431,28 @@ class Navbar extends React.Component {
                   position: 'relative',
                 }}
               ><div style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
-                  {/* <Link
-                    onClick={() => this.props.user === null ? this.setState({ toggler1: 1 }) : this.setState({ dropDown: !this.state.dropDown })}
-                    className="btn-nav"
-                  >
-                    {this.props.user === null ? "Sign In / Sign Up" : this.props.user.email + "+"}
-                  </Link>
-                  {
-                    this.state.dropDown ?
-                      <div className="dropdown-new" style={{ position: 'absolute', backgroundColor: 'white', zIndex: 1000, width: '100%', marginTop: 4 }}>
-                        <div>
-                          <h1 className="dropdown-new-heading">{this.props.user === null ? "" : this.props.user.email}</h1>
-                          <h1 className="dropdown-new-heading">Edit Profile</h1>
-                          <h1 onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
-                          <h1 onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
-                          <h1 onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
-                          <h1 className="dropdown-new-heading">Log Out</h1>
-
-                        </div>
-                      </div>
-                      : ""
-                  } */}
                   <Dropdown>
-                    <Dropdown.Toggle className="btn-nav"  id="dropdown-basic">
+                    {this.props.user === null ? <Dropdown.Toggle
+                      className="btn-nav"
+                      id="dropdown-basic"
+                      onClick={() => this.props.user === null ? this.setState({ toggler1: 1 })
+                        : null
+                      }
+                    >
                       {this.props.user === null ? "Sign In / Sign Up" : this.props.user.email}
                     </Dropdown.Toggle>
+                      :
+                      <Dropdown.Toggle
+                        className="btn-nav"
+                        id="dropdown-basic"
+                      //   onClick={() => this.props.user === null ? this.setState({ toggler1: 1 }) 
+                      //   : null
+                      // }
+                      >
+                        {this.props.user === null ? "Sign In / Sign Up" : this.props.user.email}
+                      </Dropdown.Toggle>
+                    }
                     <Dropdown.Menu>
-                      {/* <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
                       <h1 className="dropdown-new-heading">{this.props.user === null ? "" : this.props.user.email}</h1>
                       <h1 className="dropdown-new-heading">Edit Profile</h1>
                       <h1 onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
@@ -1467,6 +1460,7 @@ class Navbar extends React.Component {
                       <h1 onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
                       <h1 className="dropdown-new-heading">Log Out</h1>
                     </Dropdown.Menu>
+
                   </Dropdown>
                 </div>
                 <div className="icons-nav">

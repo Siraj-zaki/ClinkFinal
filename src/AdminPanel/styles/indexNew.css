@@ -1,0 +1,126 @@
+#root {
+  margin: 0px!important;
+  height: 100%;
+  padding: 0px!important;
+}
+::-webkit-scrollbar{
+  display: none!important;
+}
+
+body {
+  margin: 0!important;
+  padding: 0!important;
+}
+
+
+
+.navbar {
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+  padding-right: 38px;
+  width: 100%;
+  font-size: 18px;
+  line-height: 24px;
+  z-index: 1;
+}
+
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+
+@media only screen and (min-width: 992px) {
+  /* body {
+      background-color: yellow;
+    } */
+  .logo {
+    margin-left: 100px;
+    margin-top: 19px;
+  }
+  .text-div {
+    margin-left: 30px;
+    width: 400px;
+  }
+  .logo-div {
+    padding-left: 50px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+
+@media only screen and (min-width: 1200px) {
+  /* body {
+      background-color: black;
+    } */
+  .logo-div {
+    padding-left: 70px;
+  }
+}
+
+.hoverNav {
+  cursor: pointer;
+}
+
+.hoverX {
+  cursor: pointer;
+}
+
+.catHover {
+  cursor: pointer;
+  transition: all .4s;
+}
+
+.catHover:hover {
+  background-color: #a15150;
+  color: rgb(219, 216, 216)!important;
+}
+
+
+
+/* admin */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.content-admin {
+  width: 100%;
+}
+
+.makeStyles-drawerPaper-6 {
+  background: #000000!important;
+  opacity: 0.8;
+}
+
+.MuiTypography-body1 {
+  color: white!important;
+}
+
+.MuiListItemIcon-root {
+  color: white!important;
+}
+
+.jss6 {
+  background: #960200!important;
+}
+
+/* ali zain */
+
+.white {
+  color: #fff;
+}
+
+.black {
+  color: #000;
+}
+
+.center {
+  text-align: center;
+}

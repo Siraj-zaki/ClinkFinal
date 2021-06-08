@@ -8,6 +8,7 @@ import Products from '../components/Products'
 import CartPage from '../components/CartPage'
 import AddingToCart from '../components/AddingToCart'
 import Payment from '../components/Payment'
+
 import Devilvery from '../components/Devilvery'
 import Finished from '../components/Finished'
 import Navbar from '../components/Navbar'
@@ -16,7 +17,35 @@ import OrderPage from '../components/OrderPage'
 import RecentViewProducts from '../components/RecentViewProducts'
 import Favourite from '../components/Favourite'
 import OrderDetailPage from '../components/OrderDetailPage'
-import { ElementsConsumer, CardElement } from "@stripe/react-stripe-js";
+// import { ElementsConsumer, CardElement } from "@stripe/react-stripe-js";
+import Login from '../AdminPanel/auth/Login';
+
+import { connect } from "react-redux";
+
+// admin 
+import DashBoard from "../AdminPanel/admin/Dashboard";
+import User from "../AdminPanel/admin/Users";
+import Orders from "../AdminPanel/admin/Orders";
+import ViewStore from "../AdminPanel/admin/viewstore";
+import AddCoupon from "../AdminPanel/admin/AddCoupon";
+import ViewItem from "../AdminPanel/admin/ViewItem";
+import Slider from "../AdminPanel/admin/Slider";
+import AddCategory from "../AdminPanel/admin/AddCategory";
+import ViewCategory from "../AdminPanel/admin/ViewCategory";
+import ViewCoupon from "../AdminPanel/admin/ViewCoupon";
+import AddItem from "../AdminPanel/admin/AddItem";
+import AddStore from "../AdminPanel/admin/AddStore";
+// import ProtectedRoute from "./ProtectedRoute";
+import { SET_CITY } from "../AdminPanel/Store/actions/types";
+//store
+import AddProduct from "../AdminPanel/vendorstore/AddProduct";
+import GetProduct from "../AdminPanel/vendorstore/getProduct";
+import GetOrder from "../AdminPanel/vendorstore/getOrder";
+import AddUnit from "../AdminPanel/vendorstore/addUnit";
+import GetUnit from "../AdminPanel/vendorstore/getUnit";
+
+import { _getCategories, _getCoupon, _getFavourite, _getFeatured, _getItems } from "../AdminPanel/Store/middlewares/appMiddleware";
+
 
 class ReactRouter extends React.Component {
   render() {
@@ -24,6 +53,7 @@ class ReactRouter extends React.Component {
       <React.Fragment>
         <Route exact path="/" component={Home} />
         <Route path="/Home" component={Home} />
+        <Route path="/Admin" component={Login} />
         <Route path="/navbar" component={Navbar} />
         <Route path="/CartPage" component={CartPage} />
         <Route path="/BlogPage" component={BlogPage} />
