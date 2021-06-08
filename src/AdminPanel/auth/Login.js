@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import Logo from './../assets/Logo'
-import { _login } from '../Store/middlewares/authMiddleware';
+// import { _login } from '../Store/middlewares/authMiddleware';/services/Store/Actions/action
+import { LOGIN_USER, zipCode } from "./../../services/Store/Actions/action";
 import { Loading } from '../components//Icons'
 import '../styles/new.css'
-import { set_loading } from '../Store/actions/globalActions';
+import { set_loading } from './../../services/Store/Actions/globalActions';
 import api from '../services/api';
 
 class Login extends React.Component {
@@ -21,7 +22,7 @@ class Login extends React.Component {
         e.preventDefault()
 
         this.props.setLoading(true)
-        let res = await this.props._login(this.state.email.trim(), this.state.password.trim())
+        let res = await this.props.LOGIN_USER(this.state.email.trim(), this.state.password.trim())
         let res1 = await api.loginUser(this.state.email, this.state.password);
         console.log(res1.data.type);
         console.log(this.props.user.type);
@@ -84,14 +85,13 @@ class Login extends React.Component {
 
 const mapState = state => {
     return {
-        user: state.authReducer.user,
-        logged: state.authReducer.logged,
+        user: state.AuthReducer.user,
         loading: state.globalReducer.loading,
     }
 }
 const mapDispatch = dispatch => {
     return {
-        _login: (email, pass) => dispatch(_login(email, pass)),
+        LOGIN_USER: (email, pass) => dispatch(LOGIN_USER(email, pass)),
         setLoading: (bol) => dispatch(set_loading(bol)),
     }
 }
