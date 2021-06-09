@@ -384,7 +384,7 @@ else{
                             </div>
                             <Slider {...settings}>
                                 {
-                                    this.props.product.map((item, index) =>
+                                    this.props?.product?.map((item, index) =>
                                         <div>
                                             <CartProduct
                                                 img={item.imgUrl}

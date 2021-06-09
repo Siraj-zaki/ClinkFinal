@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { signUp,wish,recentitem,wishuser,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,ordermain,orderdetailcustomer,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
+import { signUp,wish,storetiming,recentitem,wishuser,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,ordermain,orderdetailcustomer,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
 
 export const customerSignUp = (data)=>
 {
@@ -99,6 +99,19 @@ export const customerwiseDetailOrder = (id)=>
     console.log("customersignup");
 return axios
   .get(orderdetailcustomer + '/' + id)
+  .then(response =>response)
+  .catch(error => {
+    if (error.response && error.response.status === 404) {
+      return `\u2014`;
+    }
+  });
+}
+
+export const StoreTiming = (id)=>
+{
+    console.log("customersignup");
+return axios
+  .get(storetiming + '/' + id)
   .then(response =>response)
   .catch(error => {
     if (error.response && error.response.status === 404) {
