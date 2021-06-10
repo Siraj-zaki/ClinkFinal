@@ -298,6 +298,37 @@ class Products extends React.Component {
             longitude: this.state.long,
             latitude: this.state.lat,
         }
+
+        if (this.props.user_area) {
+            this.setState({ toggler: 0 })
+
+            let area = {
+                longitude: this.props.user_area.longitude,
+                latitude: this.props.user_area.latitude
+            }
+            let res;
+
+
+
+            console.log(this.props);
+            try {
+
+                res = await addAreaProduct(area)
+                console.log(res.data.result);
+                this.setState({ product: res?.data.result })
+                this.setState({ productfilter: res?.data.result })
+                this.props.AreaProduct(this.state.product)
+
+            } catch (err) {
+                console.log(err);
+                console.log(err?.data?.message);
+            }
+
+
+
+
+
+        }
         let res;
         console.log(area);
         console.log(this.props.user_area);
@@ -320,7 +351,7 @@ class Products extends React.Component {
     }
 
     render() {
-        console.log("links", this.props.location.searchName);
+        console.log("links", this.props);
         function SamplePrevArrow(props) {
             const { className, style, onClick } = props;
             return (

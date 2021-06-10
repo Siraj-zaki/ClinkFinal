@@ -11,13 +11,14 @@ import { connect } from "react-redux";
 import Navbar from './Navbar'
 import { motion } from "framer-motion"
 import SelectedItem from './SelectedItem'
-import { addDelivery, getDeliverybycustomer, addOrder, addCustomerDetail } from "./../Service/service";
+import { addDelivery, getDeliverybycustomer, addOrder, addCustomerDetail,StoreTiming } from "./../Service/service";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from './Footer';
 import { customerAddres } from '../services/Store/Actions/cartActions';
 import { loadStripe } from '@stripe/stripe-js';
+import moment from 'moment'
 class Devilvery extends React.Component {
     constructor(props) {
         super(props);
@@ -64,10 +65,56 @@ class Devilvery extends React.Component {
 
     async componentDidMount() {
 
+        console.log(this.props.cartData.store_id)
+        this.props?.cartData.map(async(r8)=>{
+        
+            let store = await StoreTiming(r8.store_id)
+            console.log(store.data.result);
+            store.data?.result?.map(r6=>{
 
+                
+                if(r6.days == moment().format('dddd')){
+                    console.log('r6.sssss');
+                  
+           
+                var str1 = r6.startingTime;
+      var str2 = r6.endingTime;
+
+str1 =  str1.split(':');
+str2 =  str2.split(':');
+
+
+let totalSeconds1 = parseInt(str1[0] * 3600 + str1[1].slice(0,2) * 60 );
+let totalSeconds2 = parseInt(str2[0] * 3600 + str2[1].slice(0,2) * 60 );
+
+// compare them
+
+
+let customertime=moment().format('LT').slice(0,4).split(':');
+let customerSeconds2 = parseInt(customertime[0] * 3600 + customertime[1].slice(0,2) * 60 );
+               
+                
+if (totalSeconds1 > customerSeconds2 && totalSeconds2 > customerSeconds2 ) {
+console.log(customerSeconds2,'222222222222222222222222222222222');
+this.setState({storeClose:false})
+
+
+}
+
+
+
+                }
+
+            })
+            
+        })
         let customer = await getDeliverybycustomer(this.props?.user.user_ID)
         console.log(customer.data.result);
         this.setState({ customer_address: customer.data.result })
+
+
+        
+
     }
 
     async submituserRegistrationForm(e) {
