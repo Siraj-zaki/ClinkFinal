@@ -335,7 +335,7 @@ else{
                                         // halfIcon={<i className="fa fa-star-half-alt"></i>}
                                         fullIcon={<img src={starfill} alt='' />}
                                         activeColor="#a10948"
-                                    />,
+                                    />
                                 </div>
                                 <span className="div-right-side-p" >
                                     {this.state.product.description}
@@ -384,7 +384,7 @@ else{
                             </div>
                             <Slider {...settings}>
                                 {
-                                    this.props?.product?.map((item, index) =>
+                                    this.props.product.map((item, index) =>
                                         <div>
                                             <CartProduct
                                                 img={item.imgUrl}
@@ -396,7 +396,6 @@ else{
                                         </div>
                                     )
                                 }
-
                             </Slider>
                         </div>
                         <div className="rating-reviews">
