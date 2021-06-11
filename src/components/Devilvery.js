@@ -553,17 +553,19 @@ class Devilvery extends React.Component {
                                                 </Dropdown.Toggle>
                                                 {console.log(this.state.timeSlots)}
                                                     <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} >
+                                                    <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} >
                                                 {this.state.timeSlots.map((item, index) =>
-                                                    <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} key={index}>
-                                                        <span
+                                                        {
+                                                        return <span
                                                             onClick={() => this.setState({ devilveryTime: item })}
                                                             style={{ width: '200px' }}
-                                                            className="dropdown-new-heading">
+                                                            className="dropdown-new-heading" key={index}>
                                                             {item}
-                                                            {this.state.timeSlots[index + 1] ? '-' + this.state.timeSlots[index + 1] : ""}
+                                                            {this.state.timeSlots[index + 1] ? ' - ' + this.state.timeSlots[index + 1] : ""}
                                                         </span>
-                                                    </Dropdown.Menu>
+                                                    }
                                                 )}
+                                                    </Dropdown.Menu>
                                                     </Dropdown.Menu>
                                             </Dropdown>
                                         </div>
