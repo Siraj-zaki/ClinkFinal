@@ -7,22 +7,27 @@ import cart from '../assets/cart.png'
 import Dropdown from 'react-bootstrap/Dropdown'
 import "../css/devilvery.css"
 import { connect } from "react-redux";
-
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 import Navbar from './Navbar'
 import { motion } from "framer-motion"
 import SelectedItem from './SelectedItem'
-import { addDelivery, getDeliverybycustomer, addOrder, addCustomerDetail,StoreTiming } from "./../Service/service";
-
+import { addDelivery, getDeliverybycustomer, addOrder, addCustomerDetail, StoreTiming } from "./../Service/service";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from './Footer';
 import { customerAddres } from '../services/Store/Actions/cartActions';
 import { loadStripe } from '@stripe/stripe-js';
 import moment from 'moment'
+import { Tooltip } from 'bootstrap';
 class Devilvery extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            timeSlots: [],
+            startingTime: "",
+            endingTime: "",
             hearttoggler: false,
             counter: 0,
             toggler: 0,
@@ -43,12 +48,8 @@ class Devilvery extends React.Component {
             filterData: [],
             ani: 1,
             storeClose: true
-
         }
-
-
-
-        console.log(this.props.user);
+        // console.log(this.props.user);
         this.submituserRegistrationForm = this.submituserRegistrationForm.bind(
             this
         );
@@ -60,60 +61,66 @@ class Devilvery extends React.Component {
         this.handleChangeNumber = this.handleChangeNumber.bind(this);
         this.handleChangePostalCode = this.handleChangePostalCode.bind(this);
         this.handleSaveAddress = this.handleSaveAddress.bind(this);
-
     }
-
+    creatTimeSlots = (fromTime, toTime) => {
+        let startTime = moment(fromTime, "hh:mm A");
+        let endTime = moment(toTime, "hh:mm A")
+        if (endTime.isBefore(startTime)) {
+            endTime.add(1, 'day');
+        }
+        let arr = []
+        while (startTime <= endTime) {
+            arr.push(new moment(startTime).format('hh:mm A'))
+            startTime.add(30, 'minutes')
+        }
+        return arr
+    }
     async componentDidMount() {
-
-        console.log(this.props.cartData.store_id)
-        this.props?.cartData.map(async(r8)=>{
-        
+        this.props?.cartData.map(async (r8) => {
             let store = await StoreTiming(r8.store_id)
-            console.log(store.data.result);
-            store.data?.result?.map(r6=>{
+            // console.log(store.data.result);]
+            store.data?.result?.map(r6 => {
+                // console.log(store, "sada")
+                this.setState({ startingTime: r6.days })
+                this.setState({ endingTime: r6.days })
+              
+                console.log(r6.days, 'asdasd');
+                if (r6.days == moment().format('dddd')) {
+                    // console.log('r6.sssss');
+                    var str1 = r6.startingTime;
+                    var str2 = r6.endingTime;
+                    str1 = str1.split(':');
+                    str2 = str2.split(':');
+                    let totalSeconds1 = parseInt(str1[0] * 3600 + str1[1].slice(0, 2) * 60);
+                    let totalSeconds2 = parseInt(str2[0] * 3600 + str2[1].slice(0, 2) * 60);
 
-                
-                if(r6.days == moment().format('dddd')){
-                    console.log('r6.sssss');
-                  
-           
-                var str1 = r6.startingTime;
-      var str2 = r6.endingTime;
-
-str1 =  str1.split(':');
-str2 =  str2.split(':');
-
-
-let totalSeconds1 = parseInt(str1[0] * 3600 + str1[1].slice(0,2) * 60 );
-let totalSeconds2 = parseInt(str2[0] * 3600 + str2[1].slice(0,2) * 60 );
-
-// compare them
+                    // compare them
 
 
-let customertime=moment().format('LT').slice(0,4).split(':');
-let customerSeconds2 = parseInt(customertime[0] * 3600 + customertime[1].slice(0,2) * 60 );
-               
-                
-if (totalSeconds1 > customerSeconds2 && totalSeconds2 > customerSeconds2 ) {
-console.log(customerSeconds2,'222222222222222222222222222222222');
-this.setState({storeClose:false})
+                    let customertime = moment().format('LT').slice(0, 4).split(':');
+                    let customerSeconds2 = parseInt(customertime[0] * 3600 + customertime[1].slice(0, 2) * 60);
 
 
-}
+                    if (totalSeconds1 > customerSeconds2 && totalSeconds2 > customerSeconds2) {
+                        // console.log(customerSeconds2, '222222222222222222222222222222222');
+                        this.setState({ storeClose: false })
+
+
+                    }
 
 
 
                 }
 
             })
-            
+
         })
         let customer = await getDeliverybycustomer(this.props?.user.user_ID)
-        console.log(customer.data.result);
+        // console.log(customer.data.result);
         this.setState({ customer_address: customer.data.result })
 
 
-        
+        this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
 
     }
 
@@ -138,7 +145,7 @@ this.setState({storeClose:false})
         } else if (this.state.number === "") {
             return toast.dark("PLEASE ENTER TELEPHONE NUMBER")
         } else if (this.validateForm()) {
-            console.log(this.state);
+            // console.log(this.state);
             try {
                 let data = {
                     addressName: this.state.addressname,
@@ -154,18 +161,18 @@ this.setState({storeClose:false})
 
                 };
 
-                console.log("asdasdasdasd");
+                // console.log("asdasdasdasd");
                 e.preventDefault();
-                console.log("asdasdasdasd", this.validateForm());
+                // console.log("asdasdasdasd", this.validateForm());
 
-                console.log("data", data);
+                // console.log("data", data);
 
 
 
 
                 let customer = await addDelivery(data)
                     .then((re1) => {
-                        console.log(re1);
+                        // console.log(re1);
                         if (re1?.data?.success) {
                             return toast(re1.data.message, {
                                 position: "top-right",
@@ -181,7 +188,7 @@ this.setState({storeClose:false})
                                 }, 1000)
                             );
                         } else {
-                            console.log("errrrr", re1);
+                            // console.log("errrrr", re1);
                             return toast("Email Already Exists", {
                                 position: "top-right",
                                 autoClose: 5000,
@@ -196,11 +203,11 @@ this.setState({storeClose:false})
 
                     })
                     .catch(err => {
-                        console.log("er", err);
+                        // console.log("er", err);
                     })
             }
             catch (error) {
-                console.log(error);
+                // console.log(error);
             }
         }
     }
@@ -212,7 +219,7 @@ this.setState({storeClose:false})
 
         if (!this.state.addressname) {
             // formIsValid = false;
-            //   console.log("state empty");
+            console.log("state empty");
             return toast("🦄 Wow so easy!", {
                 position: "top-right",
                 autoClose: 5000,
@@ -238,39 +245,39 @@ this.setState({storeClose:false})
         this.setState({
             errors: errors,
         });
-        console.log("formIsValid", formIsValid);
+        // console.log("formIsValid", formIsValid);
         return formIsValid;
     }
     handleChangeAddress(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
         this.setState({ addressname: e.target.value });
     }
-    // handleChangeOpenAddress1(e) {
-    //     console.log(e.target.value);
-    //     this.setState({ openaddress: e.target.value });
-    // }
+    handleChangeOpenAddress1(e) {
+        // console.log(e.target.value);
+        this.setState({ openaddress: e.target.value });
+    }
     handleChangeName(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
 
         this.setState({ name: e.target.value });
     } handleChangeCity(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
 
         this.setState({ city: e.target.value });
     } handleChangeArea(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
 
         this.setState({ area: e.target.value });
     } handleChangeidCARD(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
 
         this.setState({ idcard: e.target.value });
     } handleChangeNumber(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
 
         this.setState({ number: e.target.value });
     } handleChangePostalCode(e) {
-        console.log(e.target.value);
+        // console.log(e.target.value);
 
         this.setState({ postalcode: e.target.value });
     }
@@ -282,7 +289,7 @@ this.setState({storeClose:false})
         setTimeout(() => {
 
             let filtercustomer = this.state?.customer_address?.filter(r1 => r1?.id == this.state?.customer_id)
-            console.log(filtercustomer);
+            // console.log(filtercustomer);
             this.props.customerAddres(filtercustomer)
         }, 200);
 
@@ -300,7 +307,7 @@ this.setState({storeClose:false})
 
     render() {
         let total_amount = 0
-        console.log(this.props);
+        // console.log(this.props);
 
 
 
@@ -426,7 +433,7 @@ this.setState({storeClose:false})
         }
 
         const ratingChanged = (newRating) => {
-            console.log(newRating);
+            // console.log(newRating);
         };
 
 
@@ -516,7 +523,7 @@ this.setState({storeClose:false})
                                     </div>
                                     <div className="left-side-form">
                                         <div className="form-selected-option">
-                                            <h1 style={{fontSize:17}} >See Secdule for more details</h1>
+                                            <h1 style={{ fontSize: 17 }} >See Secdule for more details</h1>
                                         </div>
                                         <div className="mt-5" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}  >
                                             <Dropdown>
@@ -526,10 +533,16 @@ this.setState({storeClose:false})
                                                 >
                                                     See Details
                                                 </Dropdown.Toggle>
-                                                <Dropdown.Menu>
-                                                    <h1 className="dropdown-new-heading">Coming Soon</h1>
-                                                </Dropdown.Menu>
-
+                                                {/*  */}
+                                                {this.state.timeSlots.map((item, index) =>
+                                                    <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} key={index}>
+                                                        <span 
+                                                        className="dropdown-new-heading">
+                                                            {item}
+                                                            {this.state.timeSlots[index + 1] ? '-' + this.state.timeSlots[index + 1] : ""}
+                                                        </span>
+                                                    </Dropdown.Menu>
+                                                )}
                                             </Dropdown>
                                         </div>
                                     </div>
