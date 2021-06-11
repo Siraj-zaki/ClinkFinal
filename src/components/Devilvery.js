@@ -28,6 +28,7 @@ class Devilvery extends React.Component {
             timeSlots: [],
             startingTime: "",
             endingTime: "",
+            devilveryTime: "",
             hearttoggler: false,
             counter: 0,
             toggler: 0,
@@ -89,7 +90,7 @@ class Devilvery extends React.Component {
                 // console.log(store, "sada")
                 this.setState({ startingTime: r6.days })
                 this.setState({ endingTime: r6.days })
-              
+
                 console.log(r6.days, 'asdasd');
                 if (r6.days == moment().format('dddd')) {
                     // console.log('r6.sssss');
@@ -497,6 +498,7 @@ class Devilvery extends React.Component {
                 }
             ]
         };
+        console.log(this.state.devilveryTime);
         return (
             <div className="Home bgimg-1 " style={{ position: 'relative', backgroundColor: 'white' }}>
                 {/* <img className="bgimg-1" src={bgimg1} alt="" /> */}
@@ -552,17 +554,15 @@ class Devilvery extends React.Component {
                                                 {console.log(this.state.timeSlots)}
                                                     <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} >
                                                 {this.state.timeSlots.map((item, index) =>
-                                                      <Dropdown.Item  key={index} value={item} > 
-                                                        <span  
-                                                        className="dropdown-new-heading">
-                                                            {/* {item} */}
-                                                            {console.log(index)}
-                                                            {this.state.timeSlots[index ] + ' - ' + this.state.timeSlots[index+1] }
-                                                          
-
-                                                            {/* {this.state.timeSlots[index ] + '-' + this.state.timeSlots[index+1] } */}
-                                                         </span> 
-                                                        </Dropdown.Item>
+                                                    <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} key={index}>
+                                                        <span
+                                                            onClick={() => this.setState({ devilveryTime: item })}
+                                                            style={{ width: '200px' }}
+                                                            className="dropdown-new-heading">
+                                                            {item}
+                                                            {this.state.timeSlots[index + 1] ? '-' + this.state.timeSlots[index + 1] : ""}
+                                                        </span>
+                                                    </Dropdown.Menu>
                                                 )}
                                                     </Dropdown.Menu>
                                             </Dropdown>
