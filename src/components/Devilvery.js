@@ -79,7 +79,7 @@ class Devilvery extends React.Component {
     }
     async componentDidMount() {
         // alert( this.creatTimeSlots('08:00 AM', '09:00 PM'))
-        this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
+        // this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
 
         // this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
         this.props?.cartData.map(async (r8) => {
@@ -122,10 +122,11 @@ class Devilvery extends React.Component {
                 } else {
                     this.setState({ startingTime: store.data?.result[0].startingTime })
                     this.setState({ endingTime: store.data?.result[0].endingTime })
+
                     console.log(this.state.startingTime);
                     console.log(this.state.endingTime);
-                    // alert(  this.creatTimeSlots(this.state.startingTime, this.state.endingTime))
-                    // this.setState({ timeSlots: this.creatTimeSlots(this.state.startingTime, this.state.endingTime) })
+                    alert(  this.creatTimeSlots(this.state.startingTime, this.state.endingTime))
+                    this.setState({ timeSlots: this.creatTimeSlots(this.state.startingTime, this.state.endingTime) })
                     console.log(this.state.timeSlots);
 
 
