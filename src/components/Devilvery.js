@@ -62,7 +62,7 @@ class Devilvery extends React.Component {
         this.handleChangeNumber = this.handleChangeNumber.bind(this);
         this.handleChangePostalCode = this.handleChangePostalCode.bind(this);
         this.handleSaveAddress = this.handleSaveAddress.bind(this);
-   
+
     }
     creatTimeSlots = (fromTime, toTime) => {
         let startTime = moment(fromTime, "hh:mm A");
@@ -79,13 +79,15 @@ class Devilvery extends React.Component {
     }
     async componentDidMount() {
         // alert( this.creatTimeSlots('08:00 AM', '09:00 PM'))
-        
+        this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
+
         // this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
         this.props?.cartData.map(async (r8) => {
             let store = await StoreTiming(r8.store_id)
             // console.log(store.data.result);]
-             
-        
+            // alert(store.data.result)
+
+
             store?.data?.result?.map(r6 => {
                 // console.log(store, "sada")
                 this.setState({ startingTime: r6.days })
@@ -107,7 +109,7 @@ class Devilvery extends React.Component {
                     let customertime = moment().format('LT').slice(0, 4).split(':');
                     let customerSeconds2 = parseInt(customertime[0] * 3600 + customertime[1].slice(0, 2) * 60);
 
-                   
+
                     if (totalSeconds1 > customerSeconds2 && totalSeconds2 > customerSeconds2) {
                         // console.log(customerSeconds2, '222222222222222222222222222222222');
                         this.setState({ storeClose: false })
@@ -117,15 +119,15 @@ class Devilvery extends React.Component {
 
 
 
-                }else{
-                    this.setState({startingTime:  store.data?.result[0].startingTime})  
-                    this.setState({endingTime:  store.data?.result[0].endingTime})  
+                } else {
+                    this.setState({ startingTime: store.data?.result[0].startingTime })
+                    this.setState({ endingTime: store.data?.result[0].endingTime })
                     console.log(this.state.startingTime);
                     console.log(this.state.endingTime);
                     // alert(  this.creatTimeSlots(this.state.startingTime, this.state.endingTime))
-                    this.setState({ timeSlots: this.creatTimeSlots(this.state.startingTime, this.state.endingTime) })
+                    // this.setState({ timeSlots: this.creatTimeSlots(this.state.startingTime, this.state.endingTime) })
                     console.log(this.state.timeSlots);
-        
+
 
                 }
 
@@ -137,9 +139,9 @@ class Devilvery extends React.Component {
         this.setState({ customer_address: customer.data.result })
 
 
-        
+
     }
-    
+
     async submituserRegistrationForm(e) {
         e.preventDefault();
         if (this.state.addressname === "") {
@@ -322,7 +324,7 @@ class Devilvery extends React.Component {
 
 
     render() {
-     
+
         let total_amount = 0
         // console.log(this.props);
 
@@ -543,30 +545,28 @@ class Devilvery extends React.Component {
                                         <div className="form-selected-option">
                                             <h1 style={{ fontSize: 17 }} >See Secdule for more details</h1>
                                         </div>
-                                        <div className="mt-5" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}  >
-                                            <Dropdown>
+                                        <div className="mt-5" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}  >
+                                            <Dropdown  >
                                                 <Dropdown.Toggle
                                                     className="btn-nav"
                                                     id="dropdown-basic"
                                                 >
-                                                    See Details
+                                                    See Schedule
                                                 </Dropdown.Toggle>
                                                 {console.log(this.state.timeSlots)}
-                                                    <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} >
-                                                    <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} >
-                                                {this.state.timeSlots.map((item, index) =>
-                                                        {
-                                                        return <span
-                                                            onClick={() => this.setState({ devilveryTime: item })}
-                                                            style={{ width: '200px' }}
-                                                            className="dropdown-new-heading" key={index}>
+                                                <Dropdown.Menu className="customer-scrollbar"  >
+                                                    {this.state.timeSlots.map((item, index) => {
+                                                        return <button
+                                                            onClick={() => this.setState({ devilveryTime: item + " " + this.state.timeSlots[index + 1] })}
+                                                            style={{ width: 'max-content', fontSize: '10px', textAlign: 'center' }}
+                                                            className=" new-btn-1" key={index}>
                                                             {item}
                                                             {this.state.timeSlots[index + 1] ? ' - ' + this.state.timeSlots[index + 1] : ""}
-                                                        </span>
+                                                        </button>
                                                     }
-                                                )}
-                                                    </Dropdown.Menu>
-                                                    </Dropdown.Menu>
+                                                    )}
+                                                    {/* </Dropdown.Menu> */}
+                                                </Dropdown.Menu>
                                             </Dropdown>
                                         </div>
                                     </div>
