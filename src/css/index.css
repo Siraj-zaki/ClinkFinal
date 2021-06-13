@@ -2,9 +2,9 @@
     --maincolor: #a10948
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
     display: none;
-} */
+}
 html::-webkit-scrollbar{
 display: none;
 }

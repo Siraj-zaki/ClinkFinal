@@ -86,8 +86,6 @@ class Devilvery extends React.Component {
             let store = await StoreTiming(r8.store_id)
             // console.log(store.data.result);]
             // alert(store.data.result)
-
-
             store?.data?.result?.map(r6 => {
                 // console.log(store, "sada")
                 this.setState({ startingTime: r6.days })
@@ -102,10 +100,7 @@ class Devilvery extends React.Component {
                     str2 = str2.split(':');
                     let totalSeconds1 = parseInt(str1[0] * 3600 + str1[1].slice(0, 2) * 60);
                     let totalSeconds2 = parseInt(str2[0] * 3600 + str2[1].slice(0, 2) * 60);
-
                     // compare them
-
-
                     let customertime = moment().format('LT').slice(0, 4).split(':');
                     let customerSeconds2 = parseInt(customertime[0] * 3600 + customertime[1].slice(0, 2) * 60);
 
@@ -113,19 +108,13 @@ class Devilvery extends React.Component {
                     if (totalSeconds1 > customerSeconds2 && totalSeconds2 > customerSeconds2) {
                         // console.log(customerSeconds2, '222222222222222222222222222222222');
                         this.setState({ storeClose: false })
-
-
                     }
-
-
-
                 } else {
                     this.setState({ startingTime: store.data?.result[0].startingTime })
                     this.setState({ endingTime: store.data?.result[0].endingTime })
-
                     console.log(this.state.startingTime);
                     console.log(this.state.endingTime);
-                    alert(  this.creatTimeSlots(this.state.startingTime, this.state.endingTime))
+                    // alert(this.creatTimeSlots(this.state.startingTime, this.state.endingTime))
                     this.setState({ timeSlots: this.creatTimeSlots(this.state.startingTime, this.state.endingTime) })
                     console.log(this.state.timeSlots);
 
@@ -319,6 +308,8 @@ class Devilvery extends React.Component {
             return toast.dark("Please Select Address")
         } else if (this.props?.cartData.length === 0) {
             return toast.dark("CART IS EMPTY")
+        } else if (this.state.devilveryTime === "") {
+            return toast.dark("Please Select Time ")
         } else window.location.href = "/Payment"
 
     }
