@@ -15,9 +15,12 @@ import { motion } from "framer-motion"
 import SelectedItem from './SelectedItem'
 import { addDelivery, getDeliverybycustomer, addOrder, addCustomerDetail, StoreTiming } from "./../Service/service";
 import { ToastContainer, toast } from "react-toastify";
+import { LOGIN_USER } from "./../services/Store/Actions/action";
+
 import "react-toastify/dist/ReactToastify.css";
 import Footer from './Footer';
 import { customerAddres } from '../services/Store/Actions/cartActions';
+import { deliveryTime } from '../services/Store/Actions/deliverytime';
 import { loadStripe } from '@stripe/stripe-js';
 import moment from 'moment'
 import { Tooltip } from 'bootstrap';
@@ -166,6 +169,8 @@ class Devilvery extends React.Component {
                     city: this.state.city,
                     area: this.state.area,
                     userID: this.props?.user?.user_ID,
+                    // deliverytime:this.state.devilveryTime?this.state.devilveryTime:moment().format() 
+
 
                 };
 
@@ -310,7 +315,14 @@ class Devilvery extends React.Component {
             return toast.dark("CART IS EMPTY")
         } else if (this.state.devilveryTime === "") {
             return toast.dark("Please Select Time ")
-        } else window.location.href = "/Payment"
+        } else{
+
+         
+            this.props.deliveryTime(this.state.devilveryTime)
+            console.log(this.props);
+            window.location.href = "/Payment"
+            
+        }
 
     }
 
@@ -318,7 +330,7 @@ class Devilvery extends React.Component {
     render() {
 
         let total_amount = 0
-        // console.log(this.props);
+        console.log(this.props);
 
 
 
@@ -738,6 +750,7 @@ const mapStateToProps = (state) => {
         user: state.AuthReducer.user,
         cartData: state.CartReducer.cartData,
         customerAddress: state.CartReducer.customerAddress,
+        delivery: state.DeliveryTime.delivery
 
     };
 };
@@ -745,7 +758,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        customerAddres: data => { dispatch(customerAddres(data)) }
+        customerAddres: data => { dispatch(customerAddres(data)) },
+        deliveryTime: data => { dispatch(deliveryTime(data)) },
+
+      
     };
 }
 

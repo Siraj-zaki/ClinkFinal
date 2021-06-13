@@ -18,6 +18,8 @@ import Footer from './Footer';
 import { loadStripe } from '@stripe/stripe-js';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import moment from 'moment'
+
 import { ElementsConsumer } from "@stripe/react-stripe-js";
 import {
     CardNumberElement,
@@ -201,7 +203,8 @@ class Payment extends React.Component {
                 unitId: this?.props?.cardData[0]?.productUnit[0].id,
                 product_id: this?.props?.cardData[0]?.id,
                 product_amount: (parseInt(this?.props?.cardData[0]?.productUnit[0].cvr) + parseInt(this?.props?.cardData[0]?.productUnit[0].itemPrice)) * this?.props?.cardData[0]?.quantity,
-                total_amount:this.state.total_amount
+                total_amount:this.state.total_amount,
+                deliverytime:this.props.delivery?this.props.delivery:moment().format() 
 
             };
 
@@ -235,7 +238,9 @@ class Payment extends React.Component {
                                                     product_id: item.id,
                                                     product_amount: (parseInt(item.productUnit[0].cvr) + parseInt(item.productUnit[0].itemPrice)) * item.quantity,
                                                     total_amount:this.state.total_amount,
-                                                    order_main:r3.data.id
+                                                    order_main:r3.data.id,
+                                                    deliverytime:this.props.delivery?this.props.delivery:moment().format() 
+
                             
                                                 };
                             
@@ -282,6 +287,7 @@ class Payment extends React.Component {
 
 
     render() {
+        console.log(this.props);
         let total_amount = 0
 
         setTimeout(() => {
@@ -626,7 +632,7 @@ const Devilvery = (props) => (
     <ElementsConsumer>
         {({ stripe, elements }) => (
 
-            <Payment stripe={stripe} elements={elements} cardData={props.cartData} customerAddress={props.customerAddress} AuthReducer={props.user} emptycard={props.emptyFromCart} />
+            <Payment stripe={stripe} elements={elements} cardData={props.cartData} customerAddress={props.customerAddress} AuthReducer={props.user} emptycard={props.emptyFromCart} delivery={props.delivery} />
         )}
     </ElementsConsumer>
 );
@@ -637,7 +643,7 @@ const mapStateToProps = (state) => {
         user: state.AuthReducer.user,
         cartData: state.CartReducer.cartData,
         customerAddress: state.CartReducer.customerAddress,
-
+        delivery: state.DeliveryTime.delivery
     };
 };
 const mapDispatchToProps = (dispatch) => {
