@@ -80,7 +80,7 @@ class OrderPage extends React.Component {
                                             price={parseInt(pro?.cvr) + parseInt(pro?.itemPrice)}
                                             quantity={pro.itemquantity}
                                             imgsrc={pro.imgUrl}
-                                            pending
+                                           pending={pro.status}
                                             ordernumber={`Order ${pro.id}`}
                                         />
                                         <div className="left-side-form" style={{ marginTop: '10rem', width: '100%' }}>
