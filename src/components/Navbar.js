@@ -15,6 +15,8 @@ import cross2 from "../assets/cross2.png";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import emailico from "../assets/email1.png";
 import eye from "../assets/eye.png";
+import ageico from '../assets/age.png'
+import userico from '../assets/user.png'
 import lock from "../assets/lock.png";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -44,7 +46,7 @@ class Navbar extends React.Component {
       code: '',
       passShow: false,
       passShow1: false,
-
+      username: "",
       email: "",
       password: "",
       checked: "",
@@ -74,6 +76,7 @@ class Navbar extends React.Component {
     // }
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeCode = this.handleChangeCode.bind(this);
+    this.handleChangeUserName = this.handleChangeUserName.bind(this);
     this.handleChangeforgotEmail = this.handleChangeforgotEmail.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleChangePassword2 = this.handleChangePassword2.bind(this);
@@ -155,6 +158,10 @@ class Navbar extends React.Component {
   handleChangeEmail(e) {
     console.log(e.target.value);
     this.setState({ email: e.target.value });
+  }
+  handleChangeUserName(e) {
+    console.log(e.target.value);
+    this.setState({ username: e.target.value });
   }
   handleChangeCode(e) {
     console.log(e.target.value);
@@ -624,6 +631,20 @@ class Navbar extends React.Component {
                         />
                       </div>
                       <div style={{ position: "relative", marginTop: 20 }}>
+                        <label className="email-label" htmlFor="UserName">
+                          <img src={emailico} alt="" />
+                        </label>
+                        <input
+                          className="input-1-new"
+                          type="text"
+                          onChange={this.handleChangeUserName}
+                          id="UserName"
+                          placeholder="User Name"
+                          value={this.state.username}
+                          required
+                        />
+                      </div>
+                      <div style={{ position: "relative", marginTop: 20 }}>
                         <label className="email-label" htmlFor="pass1">
                           <img src={lock} alt="" />
                         </label>
@@ -661,7 +682,7 @@ class Navbar extends React.Component {
                       </div>
                       <div style={{ position: "relative", marginTop: 20 }}>
                         <label className="email-label" htmlFor="pass1">
-                          <img src={lock} alt="" />
+                          <img src={emailico} alt="" />
                         </label>
                         <input
                           onChange={this.handleage}
@@ -1445,9 +1466,6 @@ class Navbar extends React.Component {
                       <Dropdown.Toggle
                         className="btn-nav"
                         id="dropdown-basic"
-                      //   onClick={() => this.props.user === null ? this.setState({ toggler1: 1 }) 
-                      //   : null
-                      // }
                       >
                         {this.props.user === null ? "Sign In / Sign Up" : this.props.user.email}
                       </Dropdown.Toggle>
@@ -1460,7 +1478,6 @@ class Navbar extends React.Component {
                       <h1 onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
                       <h1 className="dropdown-new-heading">Log Out</h1>
                     </Dropdown.Menu>
-
                   </Dropdown>
                 </div>
                 <div className="icons-nav">
