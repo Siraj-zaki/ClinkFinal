@@ -5,12 +5,68 @@
     padding: 3rem;
 }
 
+.customer-scrollbar {
+    scrollbar-width: thin!important;
+    scroll-behavior: smooth!important;
+    display: flex!important;
+    justify-content: flex-start!important;
+    align-items: center!important;
+    flex-direction: coloum!important;
+    height: 300px!important;
+    box-shadow: 1px 0px 25px rgba(0, 0, 0, 0.06)!important;
+    overflow: scroll!important;
+}
+
+.customer-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
 .form-selected-option {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     width: 100%;
+}
+
+.dropdown-new-heading:hover {
+    background-color: #a81c56;
+    color: white;
+}
+
+.new-btn-1:hover {
+    background-color: #a81c56;
+    color: white;
+}
+
+.new-btn-1:focus {
+    background-color: #a81c56;
+    color: white;
+    outline: none;
+    border: none;
+    /* background-color: transparent; */
+}
+
+.new-btn-1 {
+    padding: 10px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    transition: all .4s;
+    margin: 15px;
+    /* margin-top: 5px; */
+    font-size: 15px;
+    cursor: pointer;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    /* width: 100%; */
+    word-break: break-word;
+    color: var(--maincolor);
+}
+
+.dropdown-new-heading {
+    padding: 10px;
+    transition: all .4s;
 }
 
 .personal-radio {
@@ -21,6 +77,10 @@
     color: #233d3a;
 }
 
+#root>div.Home.bgimg-1>div.products.new-padding.new-class-product>div:nth-child(1)>div:nth-child(1)>div.left-side-form>div.mt-5>div>div {
+    flex-direction: column!important;
+}
+
 .adresses-input {
     width: 30rem;
     height: 5.5rem;
@@ -29,7 +89,7 @@
     font-family: Montserrat;
     min-height: 60px;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 2.6rem;
     text-align: left;
     padding-left: 2rem;
     color: #a81c56;

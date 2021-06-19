@@ -15,9 +15,12 @@ import { motion } from "framer-motion"
 import SelectedItem from './SelectedItem'
 import { addDelivery, getDeliverybycustomer, addOrder, addCustomerDetail, StoreTiming } from "./../Service/service";
 import { ToastContainer, toast } from "react-toastify";
+import { LOGIN_USER } from "./../services/Store/Actions/action";
+
 import "react-toastify/dist/ReactToastify.css";
 import Footer from './Footer';
 import { customerAddres } from '../services/Store/Actions/cartActions';
+import { deliveryTime } from '../services/Store/Actions/deliverytime';
 import { loadStripe } from '@stripe/stripe-js';
 import moment from 'moment'
 import { Tooltip } from 'bootstrap';
@@ -79,13 +82,13 @@ class Devilvery extends React.Component {
     }
     async componentDidMount() {
         // alert( this.creatTimeSlots('08:00 AM', '09:00 PM'))
+        // this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
 
         // this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
         this.props?.cartData.map(async (r8) => {
             let store = await StoreTiming(r8.store_id)
             // console.log(store.data.result);]
-
-
+            // alert(store.data.result)
             store?.data?.result?.map(r6 => {
                 // console.log(store, "sada")
                 this.setState({ startingTime: r6.days })
@@ -100,10 +103,7 @@ class Devilvery extends React.Component {
                     str2 = str2.split(':');
                     let totalSeconds1 = parseInt(str1[0] * 3600 + str1[1].slice(0, 2) * 60);
                     let totalSeconds2 = parseInt(str2[0] * 3600 + str2[1].slice(0, 2) * 60);
-
                     // compare them
-
-
                     let customertime = moment().format('LT').slice(0, 4).split(':');
                     let customerSeconds2 = parseInt(customertime[0] * 3600 + customertime[1].slice(0, 2) * 60);
 
@@ -111,18 +111,13 @@ class Devilvery extends React.Component {
                     if (totalSeconds1 > customerSeconds2 && totalSeconds2 > customerSeconds2) {
                         // console.log(customerSeconds2, '222222222222222222222222222222222');
                         this.setState({ storeClose: false })
-
-
                     }
-
-
-
                 } else {
                     this.setState({ startingTime: store.data?.result[0].startingTime })
                     this.setState({ endingTime: store.data?.result[0].endingTime })
                     console.log(this.state.startingTime);
                     console.log(this.state.endingTime);
-                    // alert(  this.creatTimeSlots(this.state.startingTime, this.state.endingTime))
+                    // alert(this.creatTimeSlots(this.state.startingTime, this.state.endingTime))
                     this.setState({ timeSlots: this.creatTimeSlots(this.state.startingTime, this.state.endingTime) })
                     console.log(this.state.timeSlots);
 
@@ -174,6 +169,8 @@ class Devilvery extends React.Component {
                     city: this.state.city,
                     area: this.state.area,
                     userID: this.props?.user?.user_ID,
+                    // deliverytime:this.state.devilveryTime?this.state.devilveryTime:moment().format() 
+
 
                 };
 
@@ -316,7 +313,16 @@ class Devilvery extends React.Component {
             return toast.dark("Please Select Address")
         } else if (this.props?.cartData.length === 0) {
             return toast.dark("CART IS EMPTY")
-        } else window.location.href = "/Payment"
+        } else if (this.state.devilveryTime === "") {
+            return toast.dark("Please Select Time ")
+        } else{
+
+         
+            this.props.deliveryTime(this.state.devilveryTime)
+            console.log(this.props);
+            window.location.href = "/Payment"
+            
+        }
 
     }
 
@@ -324,7 +330,7 @@ class Devilvery extends React.Component {
     render() {
 
         let total_amount = 0
-        // console.log(this.props);
+        console.log(this.props);
 
 
 
@@ -543,28 +549,27 @@ class Devilvery extends React.Component {
                                         <div className="form-selected-option">
                                             <h1 style={{ fontSize: 17 }} >See Secdule for more details</h1>
                                         </div>
-                                        <div className="mt-5" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}  >
-                                            <Dropdown>
+                                        <div className="mt-5" style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}  >
+                                            <Dropdown  >
                                                 <Dropdown.Toggle
                                                     className="btn-nav"
                                                     id="dropdown-basic"
                                                 >
-                                                    See Details
+                                                    See Schedule
                                                 </Dropdown.Toggle>
                                                 {console.log(this.state.timeSlots)}
-                                                <Dropdown.Menu style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "coloum" }} >
-
+                                                <Dropdown.Menu className="customer-scrollbar"  >
                                                     {this.state.timeSlots.map((item, index) => {
-                                                        return <span
-                                                            onClick={() => this.setState({ devilveryTime: item })}
-                                                            // style={{ width: '200px' }}
-                                                            className="dropdown-new-heading" key={index}>
+                                                        return <button
+                                                            onClick={() => this.setState({ devilveryTime: item + " " + this.state.timeSlots[index + 1] })}
+                                                            style={{ width: 'max-content', fontSize: '10px', textAlign: 'center' }}
+                                                            className=" new-btn-1" key={index}>
                                                             {item}
                                                             {this.state.timeSlots[index + 1] ? ' - ' + this.state.timeSlots[index + 1] : ""}
-                                                        </span>
+                                                        </button>
                                                     }
                                                     )}
-
+                                                    {/* </Dropdown.Menu> */}
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </div>
@@ -745,6 +750,7 @@ const mapStateToProps = (state) => {
         user: state.AuthReducer.user,
         cartData: state.CartReducer.cartData,
         customerAddress: state.CartReducer.customerAddress,
+        delivery: state.DeliveryTime.delivery
 
     };
 };
@@ -752,7 +758,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        customerAddres: data => { dispatch(customerAddres(data)) }
+        customerAddres: data => { dispatch(customerAddres(data)) },
+        deliveryTime: data => { dispatch(deliveryTime(data)) },
+
+      
     };
 }
 

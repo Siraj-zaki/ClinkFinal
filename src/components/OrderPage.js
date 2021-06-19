@@ -59,7 +59,7 @@ class OrderPage extends React.Component {
                 {/* <img className="bgimg-1" src={bgimg1} alt="" /> */}
                 <Navbar />
                 <div className="products new-padding new-class-product" style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }} >
-                    <div className="cart-right-side" style={{ zIndex: 1, width: '100%', paddingLeft: '4rem' }}>
+                    <div className="cart-right-side" style={{ zIndex: 1, width: '100%' }}>
                         <div className="selected-items-div">
                             <div className="cart-heading">
                                 <span className="cart-heading-heading">Orders</span>
@@ -80,7 +80,7 @@ class OrderPage extends React.Component {
                                             price={parseInt(pro?.cvr) + parseInt(pro?.itemPrice)}
                                             quantity={pro.itemquantity}
                                             imgsrc={pro.imgUrl}
-                                            pending
+                                           pending={pro.status}
                                             ordernumber={`Order ${pro.id}`}
                                         />
                                         <div className="left-side-form" style={{ marginTop: '10rem', width: '100%' }}>
