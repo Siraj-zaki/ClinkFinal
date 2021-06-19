@@ -236,6 +236,7 @@ class Navbar extends React.Component {
           email: this.state.email,
           password: this.state.password,
           age: this.state.age,
+          username: this.state.username,
           type: 'user'
         };
         console.log("data", data);
@@ -253,12 +254,7 @@ class Navbar extends React.Component {
 
             } else {
               console.log("errrrr", re1);
-              return toast.dark("Email Already Access", {
-                style: { fontSize: 13 },
-                className: 'dark-toast',
-                autoClose: 5000
-              }
-              );
+             
             }
 
 

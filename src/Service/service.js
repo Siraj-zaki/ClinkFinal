@@ -1,14 +1,24 @@
 import axios from 'axios';
 import { signUp,wish,storetiming,recentitem,wishuser,ordercustomer,login,getproduct,categoriesdist,checkareaporduct,adddelivery,getaddressbycustomer,addcustomerdetail,addorder,ordermain,orderdetailcustomer,getProductUnit ,verificationcode,forgetpassword,verifiedcode} from "./api";
+import { ToastContainer, toast } from "react-toastify";
 
 export const customerSignUp = (data)=>
 {
     console.log("customersignup",data);
 return axios
   .post(signUp,data)
-  .then(response =>response)
+  .then(response =>{console.log(response)})
   .catch(error => {
-    if (error.response && error.response.status === 404) {
+    
+    return toast.dark(error.response.data.message, {
+      style: { fontSize: 13 },
+      className: 'dark-toast',
+      autoClose: 5000
+    }
+    );
+
+    if (error.response && error.response.status ) {
+      console.log();
       return `\u2014`;
     }
   });
