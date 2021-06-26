@@ -1,4 +1,4 @@
-import { ADD_TO_CART ,LOGIN_USER1,ZipCode} from "../../constants";
+import { ADD_TO_CART ,LOGIN_USER1,ZipCode,EMPTY_TO_AUTH} from "../../constants";
 
  
 export const LOGIN_USER=(data)=>{
@@ -11,6 +11,18 @@ export const LOGIN_USER=(data)=>{
     }
 
 }  
+
+export const emptyFromAuth = () => {
+    console.log('empty');
+  
+    return async dispatch => {
+        dispatch({
+            type: EMPTY_TO_AUTH,
+         
+        })
+    }
+
+}
 
 export const zipCode=(data)=>{
     return async dispatch=>{

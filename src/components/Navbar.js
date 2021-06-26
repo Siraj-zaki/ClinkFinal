@@ -27,7 +27,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { customerSignUp, customerLogin, getVerification, getVerifiedCustomer, getforgetpassword } from "./../Service/service";
-import { LOGIN_USER, zipCode } from "./../services/Store/Actions/action";
+import { LOGIN_USER, zipCode,emptyFromAuth } from "./../services/Store/Actions/action";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -92,6 +92,7 @@ class Navbar extends React.Component {
     this.forgetpassword = this.forgetpassword.bind(this);
     this.codeSet = this.codeSet.bind(this);
     this.forgetPasswordhandler = this.forgetPasswordhandler.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   async componentDidMount() {
@@ -569,8 +570,17 @@ class Navbar extends React.Component {
     return formIsValid;
   }
 
+
+  logout(){
+
+
+    this.props.emptyFromAuth();
+    console.log('logout444444444444444444444444444444');
+  
+  }
+
   render() {
-    // console.log("LOGIN_USER1", this.props);
+    console.log("LOGIN_USER1", this.props.user);
     console.log(this.state.checked1, this.state.checked2);
 
     return (
@@ -1449,30 +1459,30 @@ class Navbar extends React.Component {
                 }}
               ><div style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
                   <Dropdown>
-                    {this.props.user === null ? <Dropdown.Toggle
+                    {this.props.user === null || this.props.user.length ==0 ? <Dropdown.Toggle
                       className="btn-nav"
                       id="dropdown-basic"
-                      onClick={() => this.props.user === null ? this.setState({ toggler1: 1 })
+                      onClick={() => this.props.user === null ||this.props.user.length==0 ? this.setState({ toggler1: 1 })
                         : null
                       }
                     >
-                      {this.props.user === null ? "Sign In / Sign Up" : this.props.user.email}
+                      {this.props.user === null || this.props.user.length==0 ? "Sign In / Sign Up" : this.props.user.email}
                     </Dropdown.Toggle>
                       :
                       <Dropdown.Toggle
                         className="btn-nav"
                         id="dropdown-basic"
                       >
-                        {this.props.user === null ? "Sign In / Sign Up" : this.props.user.email}
+                        {this.props.user === null || this.props.user.length==0? "Sign In / Sign Up" : this.props.user.email}
                       </Dropdown.Toggle>
                     }
                     <Dropdown.Menu>
-                      <h1 className="dropdown-new-heading">{this.props.user === null ? "" : this.props.user.email}</h1>
+                      <h1 className="dropdown-new-heading">{this.props.user === null  || this.props.user || this.props.user.length==0? "" : this.props.user.email}</h1>
                       <h1 className="dropdown-new-heading">Edit Profile</h1>
                       <h1 onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
                       <h1 onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
                       <h1 onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
-                      <h1 className="dropdown-new-heading">Log Out</h1>
+                      <h1 className="dropdown-new-heading" onClick={(e)=> this.logout(e)}>Log Out</h1>
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
@@ -1564,7 +1574,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     LOGIN_USER: data => { dispatch(LOGIN_USER(data)) },
-    zipCode: data => { dispatch(zipCode(data)) }
+    zipCode: data => { dispatch(zipCode(data)) },
+    emptyFromAuth: data => { dispatch(emptyFromAuth()) }
 
   };
 }
