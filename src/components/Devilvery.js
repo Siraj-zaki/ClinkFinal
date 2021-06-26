@@ -128,7 +128,7 @@ class Devilvery extends React.Component {
             })
 
         })
-        let customer = await getDeliverybycustomer(this.props?.user.user_ID)
+        let customer = await getDeliverybycustomer(this.props?.user.id)
         // console.log(customer.data.result);
         this.setState({ customer_address: customer.data.result })
 
