@@ -81,6 +81,7 @@ class Devilvery extends React.Component {
         return arr
     }
     async componentDidMount() {
+     
         // alert( this.creatTimeSlots('08:00 AM', '09:00 PM'))
         // this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
 
@@ -168,10 +169,12 @@ class Devilvery extends React.Component {
                     address: this.state.openaddress,
                     city: this.state.city,
                     area: this.state.area,
-                    userID: this.props?.user?.user_ID,
+                    userID: this.props?.user?.id,
                     // deliverytime:this.state.devilveryTime?this.state.devilveryTime:moment().format() 
                 };
-                // console.log("asdasdasdasd");
+
+                console.log("asdasdasdasd",data);
+                console.log("asdasdasdasd",this.props);
                 e.preventDefault();
                 // console.log("asdasdasdasd", this.validateForm());
                 // console.log("data", data);
