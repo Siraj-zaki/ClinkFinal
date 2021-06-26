@@ -250,8 +250,8 @@ class Payment extends React.Component {
     
                                                 let customer = await addOrder(data)
                                                     .then((re1) => {
-                                                        console.log(re1);
-                                                        console.log(this.props);
+                                                        console.log(re1,'');
+                                                        // console.log(this.props);
                                                        
                                                         setTimeout(() => {
                                                             window.location.href = "/Finished"
@@ -287,7 +287,7 @@ class Payment extends React.Component {
 
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         let total_amount = 0
 
         setTimeout(() => {
