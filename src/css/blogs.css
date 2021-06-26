@@ -58,12 +58,19 @@ height: 110.91px; */
     border: 2px solid var(--maincolor);
     opacity: 0.92;
     font-family: Montserrat;
+    transition: .4s;
     font-weight: normal;
     font-size: 15px;
+    cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
     color: var(--maincolor);
+}
+
+.blog-btn:hover {
+    color: #fff;
+    background: var(--maincolor);
 }
 
 .all-blogs-btn {

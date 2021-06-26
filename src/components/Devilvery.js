@@ -81,7 +81,7 @@ class Devilvery extends React.Component {
         return arr
     }
     async componentDidMount() {
-     
+
         // alert( this.creatTimeSlots('08:00 AM', '09:00 PM'))
         // this.setState({ timeSlots: this.creatTimeSlots('08:00 AM', '09:00 PM') })
 
@@ -173,8 +173,8 @@ class Devilvery extends React.Component {
                     // deliverytime:this.state.devilveryTime?this.state.devilveryTime:moment().format() 
                 };
 
-                console.log("asdasdasdasd",data);
-                console.log("asdasdasdasd",this.props);
+                console.log("asdasdasdasd", data);
+                console.log("asdasdasdasd", this.props);
                 e.preventDefault();
                 // console.log("asdasdasdasd", this.validateForm());
                 // console.log("data", data);
@@ -308,7 +308,7 @@ class Devilvery extends React.Component {
             return toast.dark("Please Select Address")
         } else if (this.props?.cartData.length === 0) {
             return toast.dark("CART IS EMPTY")
-        } else if (this.state.devilveryTime === "") {
+        } else if (this.state.devilveryTime === "" && this.state.storeClose === true) {
             return toast.dark("Please Select Time ")
         } else {
 
