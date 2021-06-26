@@ -7,6 +7,7 @@ export const LOGIN_USER1="LOGIN_USER";
 export const ZipCode="Zip_Code";
 export const areaProduct="Area_Product";
 export const delivery_time="Deliverytime";
+export const EMPTY_TO_AUTH="EMPTY_TO_AUTH";
 
 
 

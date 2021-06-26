@@ -27,7 +27,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { customerSignUp, customerLogin, getVerification, getVerifiedCustomer, getforgetpassword } from "./../Service/service";
-import { LOGIN_USER, zipCode } from "./../services/Store/Actions/action";
+import { LOGIN_USER, zipCode,emptyFromAuth } from "./../services/Store/Actions/action";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -92,6 +92,7 @@ class Navbar extends React.Component {
     this.forgetpassword = this.forgetpassword.bind(this);
     this.codeSet = this.codeSet.bind(this);
     this.forgetPasswordhandler = this.forgetPasswordhandler.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   async componentDidMount() {
@@ -567,6 +568,19 @@ class Navbar extends React.Component {
     });
     console.log("formIsValid", formIsValid);
     return formIsValid;
+  }
+
+
+  logout(){
+    console.log('logout444444444444444444444444444444');
+    console.log('logout444444444444444444444444444444');
+    console.log('logout444444444444444444444444444444');
+    console.log('logout444444444444444444444444444444');
+    console.log('logout444444444444444444444444444444');
+    console.log('logout444444444444444444444444444444');
+    console.log('logout444444444444444444444444444444');
+    console.log('logout444444444444444444444444444444');
+    console.log('logout444444444444444444444444444444');
   }
 
   render() {
@@ -1472,7 +1486,7 @@ class Navbar extends React.Component {
                       <h1 onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
                       <h1 onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
                       <h1 onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
-                      <h1 className="dropdown-new-heading">Log Out</h1>
+                      <h1 className="dropdown-new-heading" onClick={()=> this.logout}>Log Out</h1>
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
@@ -1564,7 +1578,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     LOGIN_USER: data => { dispatch(LOGIN_USER(data)) },
-    zipCode: data => { dispatch(zipCode(data)) }
+    zipCode: data => { dispatch(zipCode(data)) },
+    emptyFromAuth: data => { dispatch(emptyFromAuth()) }
 
   };
 }
