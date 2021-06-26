@@ -403,7 +403,10 @@ else{
                                 <span className="rating-heading" >
                                     Rating and Reviews
                                 </span>
-                                <span className="rating-about">
+                                <span style={{fontSize:15,margin:10}} className="rating-heading" >
+                                    No Reviews and Ratings
+                                </span>
+                                {/* <span className="rating-about">
                                     <div>
                                         <span className="rating-about-point" >
                                             5,0
@@ -420,12 +423,17 @@ else{
                                             <span className="rating-about-point" style={{ fontSize: 20 }}  >5 Reviews</span>
                                         </div>
                                     </div>
-                                </span>
-                                {
+                                </span> */}
+                                 <div>
+                                            <span className="rating-about-point" style={{ fontSize: 15 }}  >No Reviews</span>
+                                        </div>
+                                {/* {
                                     Array(6).fill().map((item, index) =>
                                         <User />
                                     )
-                                }
+                                } */}
+                               
+
 
                             </div>
                         </div>
