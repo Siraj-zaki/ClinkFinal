@@ -267,7 +267,7 @@ class Payment extends React.Component {
                 })
                 setTimeout(() => {
                     toast.dark("PAYMENT PAID")
-                    // this.props.emptycard();
+                    this.props.emptycard();
                 }, 2000);
                
 
