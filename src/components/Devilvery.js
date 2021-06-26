@@ -170,19 +170,11 @@ class Devilvery extends React.Component {
                     area: this.state.area,
                     userID: this.props?.user?.user_ID,
                     // deliverytime:this.state.devilveryTime?this.state.devilveryTime:moment().format() 
-
-
                 };
-
                 // console.log("asdasdasdasd");
                 e.preventDefault();
                 // console.log("asdasdasdasd", this.validateForm());
-
                 // console.log("data", data);
-
-
-
-
                 let customer = await addDelivery(data)
                     .then((re1) => {
                         // console.log(re1);
@@ -315,13 +307,13 @@ class Devilvery extends React.Component {
             return toast.dark("CART IS EMPTY")
         } else if (this.state.devilveryTime === "") {
             return toast.dark("Please Select Time ")
-        } else{
+        } else {
 
-         
+
             this.props.deliveryTime(this.state.devilveryTime)
             console.log(this.props);
             window.location.href = "/Payment"
-            
+
         }
 
     }
@@ -761,7 +753,7 @@ const mapDispatchToProps = (dispatch) => {
         customerAddres: data => { dispatch(customerAddres(data)) },
         deliveryTime: data => { dispatch(deliveryTime(data)) },
 
-      
+
     };
 }
 
