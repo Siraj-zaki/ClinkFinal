@@ -47,7 +47,7 @@ class Navbar extends React.Component {
       code: '',
       passShow: false,
       passShow1: false,
-      username: "",
+      username: "User",
       email: "",
       password: "",
       checked: "",
@@ -97,7 +97,7 @@ class Navbar extends React.Component {
   }
 
   async componentDidMount() {
-console.log(this.state.userlogin,'userlogin');
+    console.log(this.state.userlogin, 'userlogin');
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 1024px)").addListener(handler);
     console.log(this.props.user);
@@ -456,7 +456,7 @@ console.log(this.state.userlogin,'userlogin');
 
     }
     console.log(this.state.userlogin);
-    if (this.state.userlogin.length == 0    ) {
+    if (this.state.userlogin.length == 0) {
       e.preventDefault()
       console.log("state", this.state.email);
       let data = {
@@ -1377,7 +1377,7 @@ console.log(this.state.userlogin,'userlogin');
                 style={{ height: '100%' }}
               >
                 {/* <Logo mainpage /> */}
-                <img onClick={() => window.location.href = "/Home"} style={{ objectFit: 'contain', width: '13rem',cursor:'pointer' }} src={mainlogo} alt="" srcset="" />
+                <img onClick={() => window.location.href = "/Home"} style={{ objectFit: 'contain', width: '13rem', cursor: 'pointer' }} src={mainlogo} alt="" srcset="" />
               </div>
             </div>
             <div
@@ -1484,14 +1484,14 @@ console.log(this.state.userlogin,'userlogin');
                         : null
                       }
                     >
-                      {this.props.user === null || this.props.user.length == 0 ? "Sign In / Sign Up" : this.props.user.email}
+                      {this.props.user === null || this.props.user.length == 0 ? "Sign In / Sign Up" : this.props.user.username}
                     </Dropdown.Toggle>
                       :
                       <Dropdown.Toggle
                         className="btn-nav"
                         id="dropdown-basic"
                       >
-                        {this.props.user === null || this.props.user.length == 0 ? "Sign In / Sign Up" : this.props.user.email}
+                        {this.props.user === null || this.props.user.length == 0 ? "Sign In / Sign Up" : this.props.user.username}
                       </Dropdown.Toggle>
                     }
                     <Dropdown.Menu>
@@ -1501,7 +1501,7 @@ console.log(this.state.userlogin,'userlogin');
                       <h1 style={{ cursor: 'pointer' }} onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
                       <h1 style={{ cursor: 'pointer' }} onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
                       <h1 className="dropdown-new-heading"
-                       onClick={(e) => this.logout(e)}>Log Out</h1>
+                        onClick={(e) => this.logout(e)}>Log Out</h1>
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
