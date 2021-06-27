@@ -244,19 +244,19 @@ console.log(this.state.userlogin,'userlogin');
         let customer = await customerSignUp(data)
           .then((re1) => {
             console.log(re1);
-            if (re1?.data?.success) {
-              return toast.dark("User Registered", {
-                style: { fontSize: 13 },
-                className: 'dark-toast',
-                autoClose: 5000
-              },
-                this.setState({ toggler2: 0 })
-              );
+            // if (re1?.data?.success) {
+            //   return toast.dark("User Registered", {
+            //     style: { fontSize: 13 },
+            //     className: 'dark-toast',
+            //     autoClose: 5000
+            //   },
+            //     this.setState({ toggler2: 0 })
+            //   );
 
-            } else {
-              console.log("errrrr", re1);
+            // } else {
+            //   console.log("errrrr", re1);
              
-            }
+            // }
 
 
           })
@@ -1466,14 +1466,14 @@ console.log(this.state.userlogin,'userlogin');
                         : null
                       }
                     >
-                      {this.props.user === null || this.props.user.length==0 ? "Sign In / Sign Up" : this.props.user.email}
+                      {this.props.user === null || this.props.user.length==0 ? "Sign In / Sign Up" : this.props.user.username}
                     </Dropdown.Toggle>
                       :
                       <Dropdown.Toggle
                         className="btn-nav"
                         id="dropdown-basic"
                       >
-                        {this.props.user === null || this.props.user.length==0? "Sign In / Sign Up" : this.props.user.email}
+                        {this.props.user === null || this.props.user.length==0? "Sign In / Sign Up" : this.props.user.username}
                       </Dropdown.Toggle>
                     }
                     <Dropdown.Menu>
