@@ -97,7 +97,7 @@ class Navbar extends React.Component {
   }
 
   async componentDidMount() {
-
+console.log(this.state.userlogin,'userlogin');
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 1024px)").addListener(handler);
     console.log(this.props.user);
@@ -456,7 +456,7 @@ class Navbar extends React.Component {
 
     }
     console.log(this.state.userlogin);
-    if (!this.state.userlogin) {
+    if (this.state.userlogin.length == 0    ) {
       e.preventDefault()
       console.log("state", this.state.email);
       let data = {
