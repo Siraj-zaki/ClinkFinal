@@ -7,7 +7,17 @@ export const customerSignUp = (data)=>
     console.log("customersignup",data);
 return axios
   .post(signUp,data)
-  .then(response =>{console.log(response)})
+  .then(response =>{console.log(response)
+  if(response.data.success){
+    console.log(response.data.message,'ressssssssssssssssssssssss')
+    return toast.dark(response.data.message, {
+      style: { fontSize: 13 },
+      className: 'dark-toast',
+      autoClose: 5000
+    })
+
+  }
+  })
   .catch(error => {
     
     return toast.dark(error.response.data.message, {
