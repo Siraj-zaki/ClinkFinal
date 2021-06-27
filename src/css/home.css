@@ -93,10 +93,17 @@
     font-family: Montserrat;
     font-weight: 500;
     font-size: 2rem;
+    transition: .4s;
     text-align: center;
-    border: none;
+    border: 1px solid var(--maincolor);
     outline: none;
     color: #fff;
+}
+
+.section-left-side-btn:hover {
+    color: var(--maincolor);
+    background: transparent;
+    border: 1px solid var(--maincolor);
 }
 
 .section-1 {

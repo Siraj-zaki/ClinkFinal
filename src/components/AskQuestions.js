@@ -23,8 +23,8 @@ class AskQuestions extends React.Component {
                         <div className="section-ask-right-side" style={{ width: '100%' }}>
                             <Accordion style={{ width: '100%' }} defaultActiveKey={false}>
                                 <div className="section-ask-right-side" >
-                                    <Accordion.Toggle class="li li-1" variant="link" eventKey="0">
-                                        <span style={{ paddingRight: 20, paddingLeft: 20 }}><img src={dot} alt="" /></span>  How Can I place an order ?
+                                    <Accordion.Toggle class="li li-1" style={{cursor:'pointer'}} variant="link" eventKey="0">
+                                        <span style={{ paddingRight: 20, paddingLeft: 20,cursor:'pointer' }}><img src={dot} alt="" /></span>  How Can I place an order ?
                                       </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="0">
                                         <div className="li-data" style={{ width: '100%' }}>1. Enter your location. <br />
@@ -36,30 +36,30 @@ class AskQuestions extends React.Component {
                                     </Accordion.Collapse>
 
 
-                                    <Accordion.Toggle class="li li-3" variant="link" eventKey="1">
-                                        <span style={{ paddingRight: 20, paddingLeft: 20 }} ><img src={dot} alt="" /></span>  How much is the delivery fee ?
+                                    <Accordion.Toggle class="li li-3" style={{cursor:'pointer'}} variant="link" eventKey="1">
+                                        <span style={{ paddingRight: 20, paddingLeft: 20,cursor:'pointer' }} ><img src={dot} alt="" /></span>  How much is the delivery fee ?
       </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="1">
                                         <div className="li-data" style={{ width: '100%' }}>Clink Delivery does not charge a delivery fee. Don’t forget to tip your driver!
 
                                         </div>
                                     </Accordion.Collapse>
-                                    <Accordion.Toggle class="li li-3" variant="link" eventKey="2">
-                                        <span style={{ paddingRight: 20, paddingLeft: 20 }} ><img src={dot} alt="" /></span>  There is a mistake on my order, how can I fix it ?
+                                    <Accordion.Toggle class="li li-3" style={{cursor:'pointer'}} variant="link" eventKey="2">
+                                        <span style={{ paddingRight: 20, paddingLeft: 20,cursor:'pointer' }} ><img src={dot} alt="" /></span>  There is a mistake on my order, how can I fix it ?
       </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="2">
                                         <div className="li-data" style={{ width: '100%' }}>Please contact our customer support Group at (818) 646-8026. You can also contact us using the Contact page <a href="/Shops" >here</a>.
                                         </div>
                                     </Accordion.Collapse>
-                                    <Accordion.Toggle class="li li-3" variant="link" eventKey="3">
-                                        <span style={{ paddingRight: 20, paddingLeft: 20 }} ><img src={dot} alt="" /></span>  No products are available in my area, what can I do ?
+                                    <Accordion.Toggle class="li li-3" style={{cursor:'pointer'}} variant="link" eventKey="3">
+                                        <span style={{ paddingRight: 20, paddingLeft: 20,cursor:'pointer' }} ><img src={dot} alt="" /></span>  No products are available in my area, what can I do ?
       </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="3">
                                         <div className="li-data" style={{ width: '100%' }}>If no products are available in your area hang tight! We are constantly increasing  our local partners and expanding our serviceable territory all over Los Angeles
                                         </div>
                                     </Accordion.Collapse>
-                                    {/* <Accordion.Toggle class="li li-3" variant="link" eventKey="4">
-                                        <span style={{ paddingRight: 20, paddingLeft: 20 }} ><img src={dot} alt="" /></span>  Do I need to be 21 to order alcohol from Saucey?
+                                    {/* <Accordion.Toggle class="li li-3" style={{cursor:'pointer'}} variant="link" eventKey="4">
+                                        <span style={{ paddingRight: 20, paddingLeft: 20,cursor:'pointer' }} ><img src={dot} alt="" /></span>  Do I need to be 21 to order alcohol from Saucey?
       </Accordion.Toggle>
                                     <Accordion.Collapse eventKey="4">
                                         <div className="li-data" style={{ width: '100%' }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed

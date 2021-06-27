@@ -41,11 +41,11 @@ class Blogs extends React.Component {
     render() {
         return (
             <div style={{ width: '100%', padding: '6rem', paddingTop: this.props.blogpage ? "0px" : '6rem', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: "column" }}>
-                <span className="section-products-h1 mt-5" style={{ zIndex: 20, position: 'relative',fontWeight:200 ,marginBottom:20}}>Blogs and News</span>
+                <span className="section-products-h1 mt-5" style={{ zIndex: 20, position: 'relative', fontWeight: 200, marginBottom: 20 }}>Blogs and News</span>
                 <div className="css-grid-2" style={{ marginTop: this.props.blogpage ? "0px " : "10rem" }}>
                     {
                         this.state.blogs.map((blog, index) =>
-                            <div onClick={() => window.location.href = "/BlogDetail"} className="inner-blog" key={index}>
+                            <div className="inner-blog" key={index}>
                                 <div className="blog-pic" style={{ width: '100%' }}>
                                     <img src={blog.img} alt="" width="100%" />
                                 </div>
@@ -56,7 +56,7 @@ class Blogs extends React.Component {
                                     {blog.blogP}
                                 </div>
 
-                                <button className="blog-btn">Read more</button>
+                                <button onClick={() => window.location.href = "/BlogDetail"} className="blog-btn">Read more</button>
                             </div>
                         )
                     }

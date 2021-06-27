@@ -8,6 +8,7 @@ import facebook from "../assets/facebook.png";
 import tele from "../assets/tele.png";
 import whatsapp from "../assets/whatsapp.png";
 import "../css/Navbar.css";
+import mainlogo from '../assets/mainlogo.png'
 import Loader from "react-loader-spinner";
 import Dropdown from 'react-bootstrap/Dropdown'
 import cross from "../assets/cross.png";
@@ -27,7 +28,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from 'react-places-autocomplete';
 import { customerSignUp, customerLogin, getVerification, getVerifiedCustomer, getforgetpassword } from "./../Service/service";
-import { LOGIN_USER, zipCode,emptyFromAuth } from "./../services/Store/Actions/action";
+import { LOGIN_USER, zipCode, emptyFromAuth } from "./../services/Store/Actions/action";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class Navbar extends React.Component {
       code: '',
       passShow: false,
       passShow1: false,
-      username: "",
+      username: "User",
       email: "",
       password: "",
       checked: "",
@@ -96,7 +97,7 @@ class Navbar extends React.Component {
   }
 
   async componentDidMount() {
-console.log(this.state.userlogin,'userlogin');
+    console.log(this.state.userlogin, 'userlogin');
     const handler = e => this.setState({ matches: e.matches });
     window.matchMedia("(max-width: 1024px)").addListener(handler);
     console.log(this.props.user);
@@ -455,7 +456,7 @@ console.log(this.state.userlogin,'userlogin');
 
     }
     console.log(this.state.userlogin);
-    if (this.state.userlogin.length == 0    ) {
+    if (this.state.userlogin.length == 0) {
       e.preventDefault()
       console.log("state", this.state.email);
       let data = {
@@ -571,12 +572,11 @@ console.log(this.state.userlogin,'userlogin');
   }
 
 
-  logout(){
+  logout() {
 
 
     this.props.emptyFromAuth();
     console.log('logout444444444444444444444444444444');
-  
   }
 
   render() {
@@ -589,7 +589,7 @@ console.log(this.state.userlogin,'userlogin');
           {this.state.toggler2 === 1 ? (
             <>
               <div
-                style={{ zIndex: 30 }}
+                style={{ zIndex: 30, cursor: 'pointer' }}
                 onClick={() => this.setState({ toggler2: 0, toggler1: 0 })}
                 ani={this.state.toggler1}
                 className="signup-menu-back"
@@ -784,6 +784,7 @@ console.log(this.state.userlogin,'userlogin');
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
+                            cursor: 'pointer'
                           }}
                           onClick={() =>
                             this.setState({ toggler1: 1, toggler2: 0 })
@@ -815,6 +816,7 @@ console.log(this.state.userlogin,'userlogin');
 
                 <div
                   onClick={() => this.setState({ toggler2: 0, toggler1: 0 })}
+                  style={{ cursor: 'pointer' }}
                   className="cross"
                 >
                   <img width="100%" height="100%" src={cross2} alt="" />
@@ -827,6 +829,7 @@ console.log(this.state.userlogin,'userlogin');
               <div
                 onClick={() => this.setState({ toggler1: 0 })}
                 ani={this.state.toggler1}
+                style={{ cursor: 'pointer' }}
                 className="signup-menu-back"
               ></div>
               <form
@@ -936,6 +939,7 @@ console.log(this.state.userlogin,'userlogin');
                         }
                       </button>
                       <button
+                        style={{ cursor: 'pointer' }}
                         onClick={() =>
                           this.setState({ toggler2: 1, toggler1: 0 })
                         }
@@ -965,6 +969,7 @@ console.log(this.state.userlogin,'userlogin');
                 </div>
                 <div
                   onClick={() => this.setState({ toggler1: 0 })}
+                  style={{ cursor: 'pointer' }}
                   className="cross"
                 >
                   <img width="100%" height="100%" src={cross2} alt="" />
@@ -976,6 +981,7 @@ console.log(this.state.userlogin,'userlogin');
             <>
               <div
                 onClick={() => this.setState({ toggler1: 0 })}
+                style={{ cursor: 'pointer' }}
                 ani={this.state.toggler1}
                 className="signup-menu-back"
               ></div>
@@ -1033,6 +1039,7 @@ console.log(this.state.userlogin,'userlogin');
                 </div>
                 <div
                   onClick={() => this.setState({ toggler3: 0 })}
+                  style={{ cursor: 'pointer' }}
                   className="cross"
                 >
                   <img width="100%" height="100%" src={cross2} alt="" />
@@ -1044,6 +1051,7 @@ console.log(this.state.userlogin,'userlogin');
             <>
               <div
                 onClick={() => this.setState({ toggler1: 0 })}
+                style={{ cursor: 'pointer' }}
                 ani={this.state.toggler1}
                 className="signup-menu-back"
               ></div>
@@ -1102,6 +1110,7 @@ console.log(this.state.userlogin,'userlogin');
                 </div>
                 <div
                   onClick={() => this.setState({ toggler4: 0 })}
+                  style={{ cursor: 'pointer' }}
                   className="cross"
                 >
                   <img width="100%" height="100%" src={cross2} alt="" />
@@ -1113,6 +1122,7 @@ console.log(this.state.userlogin,'userlogin');
             <>
               <div
                 onClick={() => this.setState({ toggler1: 0 })}
+                style={{ cursor: 'pointer' }}
                 // onClick={ this.forgetPasswordhandler}
 
                 ani={this.state.toggler1}
@@ -1194,6 +1204,7 @@ console.log(this.state.userlogin,'userlogin');
                 </div>
                 <div
                   onClick={() => this.setState({ toggler5: 0 })}
+                  style={{ cursor: 'pointer' }}
                   className="cross"
                 >
                   <img width="100%" height="100%" src={cross2} alt="" />
@@ -1305,7 +1316,7 @@ console.log(this.state.userlogin,'userlogin');
                                         style,
                                       })}
                                     >
-                                      <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: '#a10948', fontSize: 15 }} >{suggestion.description}</span>
+                                      <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: '#a10948', fontSize: 15, cursor: 'pointer' }} >{suggestion.description}</span>
                                     </div>
                                   );
                                 })}
@@ -1337,6 +1348,7 @@ console.log(this.state.userlogin,'userlogin');
                 </div>
                 <div
                   onClick={() => this.setState({ toggler: 0 })}
+                  style={{ cursor: 'pointer' }}
                   className="cross"
                 >
                   <img width="100%" height="100%" src={cross} alt="" />
@@ -1349,6 +1361,7 @@ console.log(this.state.userlogin,'userlogin');
               </div>
               <div
                 onClick={() => this.setState({ toggler: 0 })}
+                style={{ cursor: 'pointer' }}
                 ani={this.state.toggler}
                 className="menu-back"
               ></div>
@@ -1359,8 +1372,12 @@ console.log(this.state.userlogin,'userlogin');
               className="left-side-nav"
               style={{ width: this.state.matches ? "100%" : "33%" }}
             >
-              <div className="new-nav" style={{ height: this.state.matches ? "50px" : "100px" }}>
-                <Logo mainpage />
+              <div className="new-nav"
+                // style={{ height: this.state.matches ? "50px" : "100px" }}
+                style={{ height: '100%' }}
+              >
+                {/* <Logo mainpage /> */}
+                <img onClick={() => window.location.href = "/Home"} style={{ objectFit: 'contain', width: '13rem', cursor: 'pointer' }} src={mainlogo} alt="" srcset="" />
               </div>
             </div>
             <div
@@ -1427,7 +1444,7 @@ console.log(this.state.userlogin,'userlogin');
                                 style,
                               })}
                             >
-                              <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: '#da236f', fontSize: 15 }} >{suggestion.description}</span>
+                              <span onClick={() => this.locationHandler} style={{ marginTop: 20, color: '#da236f', fontSize: 15, cursor: 'pointer' }} >{suggestion.description}</span>
                             </div>
                           );
                         })}
@@ -1458,11 +1475,12 @@ console.log(this.state.userlogin,'userlogin');
                   position: 'relative',
                 }}
               ><div style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
-                  <Dropdown>
-                    {this.props.user === null || this.props.user.length ==0 ? <Dropdown.Toggle
+                  <Dropdown> 
+                    {this.props.user === null || this.props.user.length == 0 ? <Dropdown.Toggle
+                      style={{ cursor: 'pointer' }}
                       className="btn-nav"
                       id="dropdown-basic"
-                      onClick={() => this.props.user === null ||this.props.user.length==0 ? this.setState({ toggler1: 1 })
+                      onClick={() => this.props.user === null || this.props.user.length == 0 ? this.setState({ toggler1: 1 })
                         : null
                       }
                     >
@@ -1477,17 +1495,18 @@ console.log(this.state.userlogin,'userlogin');
                       </Dropdown.Toggle>
                     }
                     <Dropdown.Menu>
-                      <h1 className="dropdown-new-heading">{this.props.user === null  || this.props.user || this.props.user.length==0? "" : this.props.user.email}</h1>
-                      <h1 className="dropdown-new-heading">Edit Profile</h1>
-                      <h1 onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
-                      <h1 onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
-                      <h1 onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
-                      <h1 className="dropdown-new-heading" onClick={(e)=> this.logout(e)}>Log Out</h1>
+                      <h1 style={{ cursor: 'pointer' }} className="dropdown-new-heading">{this.props.user === null || this.props.user || this.props.user.length == 0 ? "" : this.props.user.email}</h1>
+                      <h1 style={{ cursor: 'pointer' }} className="dropdown-new-heading">Edit Profile</h1>
+                      <h1 style={{ cursor: 'pointer' }} onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
+                      <h1 style={{ cursor: 'pointer' }} onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
+                      <h1 style={{ cursor: 'pointer' }} onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
+                      <h1 className="dropdown-new-heading"
+                        onClick={(e) => this.logout(e)}>Log Out</h1>
                     </Dropdown.Menu>
                   </Dropdown>
                 </div>
                 <div className="icons-nav">
-                  <i onClick={() => (window.location.href = "/CartPage")}>
+                  <i className="icons-nav-main" style={{ cursor: 'pointer' }} onClick={() => (window.location.href = "/CartPage")}>
                     <svg
                       className="icon-nav"
                       xmlns="http://www.w3.org/2000/svg"
@@ -1496,6 +1515,7 @@ console.log(this.state.userlogin,'userlogin');
                       viewBox="0 0 30.393 33.804"
                     >
                       <path
+                        className="icon-nav-main-main"
                         id="Path_30"
                         data-name="Path 30"
                         d="M33.888,23.947a5.065,5.065,0,0,0-3.208-4.693L33.838,7.436A1.618,1.618,0,0,0,32.2,5.376H9.071L8.514,3.249A1.688,1.688,0,0,0,6.876,2H3.5V5.376H5.577L9.763,21.01a1.688,1.688,0,0,0,1.688,1.249H28.824a1.688,1.688,0,0,1,0,3.376H6.876a1.688,1.688,0,1,0,0,3.376H8.869a5.065,5.065,0,1,0,9.522,0h3.984A5.065,5.065,0,1,0,32.2,30.7a4.963,4.963,0,0,0-.675-2.482A5.065,5.065,0,0,0,33.888,23.947Zm-6.6-5.065h-14.5L9.983,8.753H30.005ZM13.629,32.388A1.688,1.688,0,1,1,15.318,30.7,1.688,1.688,0,0,1,13.629,32.388Zm13.506,0A1.688,1.688,0,1,1,28.824,30.7,1.688,1.688,0,0,1,27.135,32.388Z"
@@ -1504,7 +1524,7 @@ console.log(this.state.userlogin,'userlogin');
                       />
                     </svg>
                   </i>
-                  <i onClick={() => this.setState({ toggler: 1 })}>
+                  <i className="icons-nav-main" style={{ cursor: 'pointer' }} onClick={() => this.setState({ toggler: 1 })}>
                     <svg
                       className="icon-nav"
                       xmlns="http://www.w3.org/2000/svg"
@@ -1520,6 +1540,7 @@ console.log(this.state.userlogin,'userlogin');
                         <circle
                           id="Ellipse_1"
                           data-name="Ellipse 1"
+                          className="icon-nav-main-main"
                           cx="1.668"
                           cy="1.668"
                           r="1.668"
@@ -1527,6 +1548,7 @@ console.log(this.state.userlogin,'userlogin');
                           fill="#a10948"
                         />
                         <rect
+                          className="icon-nav-main-main"
                           id="Rectangle_2"
                           data-name="Rectangle 2"
                           width="30.292"
@@ -1536,6 +1558,7 @@ console.log(this.state.userlogin,'userlogin');
                           fill="#a10948"
                         />
                         <rect
+                          className="icon-nav-main-main"
                           id="Rectangle_3"
                           data-name="Rectangle 3"
                           width="38.375"
@@ -1545,6 +1568,7 @@ console.log(this.state.userlogin,'userlogin');
                           fill="#a10948"
                         />
                         <rect
+                          className="icon-nav-main-main"
                           id="Rectangle_4"
                           data-name="Rectangle 4"
                           width="38"
