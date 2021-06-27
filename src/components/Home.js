@@ -82,7 +82,10 @@ class Home extends React.Component {
         <AskQuestions />
         <Blogs />
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <button className="all-blogs-btn" onClick={() => window.location.href = "/BlogPage"}  >All Blogs  <img src={blogarrow} height="10px" width="10px" alt="" /> </button>
+          <button className="all-blogs-btn" onClick={() => window.location.href = "/BlogPage"} >
+            All Blogs 
+          {/* <img src={blogarrow} height="10px" width="10px" alt="" /> */}
+           </button>
 
         </div>
         <Footer />

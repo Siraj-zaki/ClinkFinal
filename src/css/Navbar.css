@@ -27,6 +27,28 @@
     text-align: left;
     color: #233d3a;
 }
+.icons-nav-main{
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 1.5rem;
+    margin-left: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .6s;
+}
+.icons-nav-main:hover{
+    background-color: var(--maincolor);
+    transform: rotate(360deg);
+}
+.icons-nav-main:hover .icon-nav-main-main{
+    fill: white;
+}
+.icon-nav-main-main{
+    transition: .4s;
+}
 
 .signup-p {
     font-family: Montserrat;
@@ -494,10 +516,14 @@ li {
 
 @media(max-width:768px) {
     .btn-nav {
-        min-width: 135px!important;
+        /* min-width: 135px!important; */
         padding: 5px!important;
         height: 6rem!important;
         font-size: 8px!important;
+    }
+    .icons-nav-main{
+        width: auto!important;
+        height: auto!important;
     }
 }
 
@@ -520,11 +546,11 @@ li {
 }
 
 .icons-nav {
-    width: 100px;
+    /* width: 140px; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-left: 30px;
+    margin-left: 3rem;
 }
 
 .suggestion-item-1 {

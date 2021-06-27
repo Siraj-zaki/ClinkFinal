@@ -78,6 +78,7 @@ height: 110.91px; */
     height: 54px;
     border-radius: 8px;
     background: #233d3a;
+    border: 1px solid #233d3a;
     margin-bottom: 8rem;
     margin-top: 8rem;
     font-family: Montserrat;
@@ -86,10 +87,17 @@ height: 110.91px; */
     letter-spacing: 0.06em;
     /* line-height: 15px; */
     display: flex;
+    cursor: pointer;
     justify-content: space-evenly;
     padding: 10px;
     align-items: center;
     color: #fff;
-    border: none;
+    transition: .4s;
+    /* border: none; */
     outline: none;
+}
+.all-blogs-btn:hover{
+    background: transparent;
+    color: #233d3a;
+    
 }

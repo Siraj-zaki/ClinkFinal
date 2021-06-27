@@ -120,9 +120,9 @@ html {
     .right-side-nav {
         justify-content: flex-end!important;
     }
-    .new-nav {
+    /* .new-nav {
         height: 60px!important;
-    }
+    } */
     #root>div.Home.bgimg-1>div.products.bgimg-2 {
         padding: 2rem!important;
     }
@@ -189,7 +189,7 @@ height: 100%!important;
         /* width: 220px!important; */
     }
     .icons-nav {
-        width: 50px!important;
+        /* width: 50px!important; */
         margin-left: 10px!important;
     }
     /* .bgimg-1 {
