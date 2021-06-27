@@ -27,7 +27,8 @@
     text-align: left;
     color: #233d3a;
 }
-.icons-nav-main{
+
+.icons-nav-main {
     width: 50px;
     height: 50px;
     background-color: transparent;
@@ -39,14 +40,17 @@
     align-items: center;
     transition: .6s;
 }
-.icons-nav-main:hover{
+
+.icons-nav-main:hover {
     background-color: var(--maincolor);
     transform: rotate(360deg);
 }
-.icons-nav-main:hover .icon-nav-main-main{
+
+.icons-nav-main:hover .icon-nav-main-main {
     fill: white;
 }
-.icon-nav-main-main{
+
+.icon-nav-main-main {
     transition: .4s;
 }
 
@@ -481,7 +485,7 @@ li {
 .dropdown-new-heading {
     margin: 15px;
     /* margin-top: 5px; */
-    font-size: 15px;
+    font-size: min(max(3rem, 3rem), 10px);
     cursor: pointer;
     padding-bottom: 10px;
     border-bottom: 1px solid rgb(218, 218, 218);
@@ -521,7 +525,7 @@ li {
         height: 6rem!important;
         font-size: 8px!important;
     }
-    .icons-nav-main{
+    .icons-nav-main {
         width: auto!important;
         height: auto!important;
     }

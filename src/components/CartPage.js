@@ -236,24 +236,6 @@ class AddingToCart extends React.Component {
 
 
                 <div className="products new-padding new-class-product" style={{ justifyContent: 'space-between', alignItems: 'flex-start', flexDirection: 'row' }} >
-                    {/* <div className="cart-left-side " style={{ width: '40rem', zIndex: 40 }} >
-                        <div className="w-100 mt-5 slider-div ">
-                            <div style={{ margin: 30 }} >
-                                <span className="slider-heading" >Products you may like</span>
-                            </div>
-                            <Slider {...settings}>
-                                {
-                                    Array(10).fill().map((item, index) =>
-                                        <div>
-                                            <CartProduct />
-                                        </div>
-                                    )
-                                }
-                            </Slider>
-                            <button className="li-size  addtocart " style={{ minHeight: 70, border: 'none', width: 270 }} >Add to Cart</button>
-                            <button className="li-size  addtocart " style={{ backgroundColor: 'transparent', minHeight: 70, border: '1px solid  #a10948 ', color: '#a10948', width: 270, marginTop: 160 }} >Explore More</button>
-                        </div>
-                    </div> */}
                     <div className="slider-div" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: "450px" }} >
                         <div style={{ margin: 30 }} >
                             <span className="slider-heading" >Products you may like</span>
@@ -268,7 +250,7 @@ class AddingToCart extends React.Component {
                                 onSlideChange={(swiper) => console.log(swiper)}
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
-                                {
+                                {this.props.product !== null ?
                                     this.props.product.map((item, index) =>
 
                                         <SwiperSlide>
@@ -282,10 +264,12 @@ class AddingToCart extends React.Component {
                                                     StoreName={item.storeName}
                                                     id={item.id}
                                                 />
-                                                <button onClick={() => window.location.href = `/AddingToCart/${item.id}`} className="li-size  addtocart " style={{ minHeight: 70, border: 'none', width: 270,marginTop:20 }} >Add to Cart</button>
+                                                <button onClick={() => window.location.href = `/AddingToCart/${item.id}`} className="li-size  addtocart " style={{ minHeight: 70, border: 'none', width: 270, marginTop: 20 }} >Add to Cart</button>
                                             </div>
                                         </SwiperSlide>
                                     )
+                                    :
+                                    ""
                                 }
                             </Swiper>
                         </div>

@@ -256,7 +256,7 @@ class Navbar extends React.Component {
 
             // } else {
             //   console.log("errrrr", re1);
-             
+
             // }
 
 
@@ -1475,7 +1475,7 @@ class Navbar extends React.Component {
                   position: 'relative',
                 }}
               ><div style={{ position: 'relative', alignItems: 'center', justifyContent: 'center' }}>
-                  <Dropdown> 
+                  <Dropdown>
                     {this.props.user === null || this.props.user.length == 0 ? <Dropdown.Toggle
                       style={{ cursor: 'pointer' }}
                       className="btn-nav"
@@ -1484,22 +1484,26 @@ class Navbar extends React.Component {
                         : null
                       }
                     >
-                      {this.props.user === null || this.props.user.length==0 ? "Sign In / Sign Up" : this.props.user.username}
+                      {this.props.user === null || this.props.user.length == 0 ? "Sign In / Sign Up" : this.props.user.username}
                     </Dropdown.Toggle>
                       :
                       <Dropdown.Toggle
                         className="btn-nav"
                         id="dropdown-basic"
                       >
-                        {this.props.user === null || this.props.user.length==0? "Sign In / Sign Up" : this.props.user.username}
+                        {this.props.user === null || this.props.user.length == 0 ? "Sign In / Sign Up" : this.props.user.username}
                       </Dropdown.Toggle>
                     }
-                    <Dropdown.Menu>
-                      <h1 style={{ cursor: 'pointer' }} className="dropdown-new-heading">{this.props.user === null || this.props.user || this.props.user.length == 0 ? "" : this.props.user.email}</h1>
-                      <h1 style={{ cursor: 'pointer' }} className="dropdown-new-heading">Edit Profile</h1>
-                      <h1 style={{ cursor: 'pointer' }} onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
-                      <h1 style={{ cursor: 'pointer' }} onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
-                      <h1 style={{ cursor: 'pointer' }} onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
+                    <Dropdown.Menu style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+                      {/* <h1 style={{ cursor: 'pointer' }} className="dropdown-new-heading">{
+                        // this.props.user === null || this.props.user || this.props.user.length == 0 ? "" : this.props.user.username
+                        this.props.user.username
+                      }
+                      </h1> */}
+                      {/* <h1 style={{ cursor: 'pointer',textAlign:'center' }} className="dropdown-new-heading">Edit Profile</h1> */}
+                      <h1 style={{ cursor: 'pointer',textAlign:'center' }} onClick={() => window.location.href = "/OrderPage"} className="dropdown-new-heading">Orders</h1>
+                      <h1 style={{ cursor: 'pointer',textAlign:'center' }} onClick={() => window.location.href = "/Favourite"} className="dropdown-new-heading">Favourites</h1>
+                      <h1 style={{ cursor: 'pointer',textAlign:'center' }} onClick={() => window.location.href = "/RecentViewProducts"} className="dropdown-new-heading">Recent Viewed Products</h1>
                       <h1 className="dropdown-new-heading"
                         onClick={(e) => this.logout(e)}>Log Out</h1>
                     </Dropdown.Menu>

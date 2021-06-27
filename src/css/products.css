@@ -211,7 +211,7 @@ a {
     border-radius: 10px;
     background: #fff;
     box-shadow: 1px 0px 25px rgba(0, 0, 0, 0.06);
-    min-height: 900px!important;
+    min-height: 200px!important;
     /* overflow-x: hidden; */
 }
 
