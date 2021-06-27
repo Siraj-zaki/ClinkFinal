@@ -269,7 +269,7 @@ class AddingToCart extends React.Component {
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
                                 {
-                                    this.props.product.map((item, index) =>
+                                    this.props?.product?.map((item, index) =>
 
                                         <SwiperSlide>
                                             <div >
