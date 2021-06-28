@@ -250,8 +250,8 @@ class AddingToCart extends React.Component {
                                 onSlideChange={(swiper) => console.log(swiper)}
                                 onSwiper={(swiper) => console.log(swiper)}
                             >
-                                {this.props.product !== null ?
-                                    this.props.product.map((item, index) =>
+                                {
+                                    this.props?.product?.map((item, index) =>
 
                                         <SwiperSlide>
                                             <div >
@@ -268,8 +268,7 @@ class AddingToCart extends React.Component {
                                             </div>
                                         </SwiperSlide>
                                     )
-                                    :
-                                    ""
+                                    
                                 }
                             </Swiper>
                         </div>

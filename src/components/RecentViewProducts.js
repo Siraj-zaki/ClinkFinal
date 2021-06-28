@@ -13,7 +13,7 @@ import '../css/products.css'
 import Navbar from './Navbar'
 import CartProduct from '../components/CartProduct'
 import Footer from './Footer';
-import { getProduct, addAreaProduct, getCategories ,recentProductuser} from "./../Service/service";
+import { getProduct, addAreaProduct, getCategories, recentProductuser } from "./../Service/service";
 import { ToastContainer, toast } from "react-toastify";
 import { zipCode } from "./../services/Store/Actions/action";
 
@@ -292,8 +292,8 @@ class RecentViewProducts extends React.Component {
                 <div className="cart-heading">
                     <span className="cart-heading-heading">Recent View Products</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'column',padding:"10rem",paddingBottom:0,paddingTop:0 }}>
-                    <div className="products" style={{backgroundColor:'transperent',borderRadius:20,border:"1px solid whitesmoke"}}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flexDirection: 'column', padding: "10rem", paddingBottom: 0, paddingTop: 0 }}>
+                    <div className="products" style={{ backgroundColor: 'transperent', borderRadius: 20, border: "1px solid whitesmoke" }}>
                         <div className="products-cart">
                             {
                                 this.state.product.map((item, index) =>
@@ -309,8 +309,8 @@ class RecentViewProducts extends React.Component {
                             }
                         </div>
                     </div>
-                    <Footer />
                 </div>
+                <Footer />
             </div>
         )
     }
